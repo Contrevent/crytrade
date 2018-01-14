@@ -1,0 +1,22 @@
+<h1>Currencies</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Score</th>
+    <th>Symbol</th>
+    <th>Name</th>
+    <th>Price USD</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @currencies.each do |currency| -%>
+    <tr>
+      <td><%= currency.score %></td>
+      <td><%= currency.symbol %></td>
+      <td><%= currency.currency_name %></td>
+      <td><%= currency.price_usd %></td>
+    </tr>
+  <% end -%>
+  </tbody>
+</table>

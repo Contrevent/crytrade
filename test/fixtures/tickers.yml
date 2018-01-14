@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  currency_id: MyString
+  currency_name: MyString
+  symbol: MyString
+  rank: 1
+  price_usd: 9.99
+  price_btc: 9.99
+  24h_volume_usd: 9.99
+  market_cap_usd: 9.99
+  available_supply: 9.99
+  total_supply: 9.99
+  max_supply: 9.99
+  percent_change_1h: 9.99
+  percent_change_24h: 9.99
+  percent_change_7d: 9.99
+  last_updated: 1
+
+two:
+  currency_id: MyString
+  currency_name: MyString
+  symbol: MyString
+  rank: 1
+  price_usd: 9.99
+  price_btc: 9.99
+  24h_volume_usd: 9.99
+  market_cap_usd: 9.99
+  available_supply: 9.99
+  total_supply: 9.99
+  max_supply: 9.99
+  percent_change_1h: 9.99
+  percent_change_24h: 9.99
+  percent_change_7d: 9.99
+  last_updated: 1
