@@ -13,3 +13,42 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+    font-size: 0.9rem;
+    background-color: black;
+}
+
+.ct-chip {
+    padding: .25rem;
+    text-align:center;
+    margin: 0;
+    position:relative;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+.ct-table td {
+    padding: .25rem;
+}
+
+.ct-btn {
+    padding: .25rem 1.25rem;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.align-left {
+    text-align: left;
+}
+
+#error_explanation h2 {
+    font-size: 0.9rem;
+    color: red;
+}

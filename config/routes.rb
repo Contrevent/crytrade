@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: {
+      sessions: 'users/sessions',
+      registrations: 'users/registrations'
+  }
+
   get 'application/index'
 
   root 'application#index'

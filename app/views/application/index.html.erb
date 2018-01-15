@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <br/>
-    <table class="table table-dark">
+    <table class="table table-dark ct-table">
       <thead>
       <tr>
         <% @columns.each do |col| -%>
@@ -19,9 +19,9 @@
               %>
 
               <% if col.key?(:link) %>
-                <a class='btn btn-outline-light' target="_blank" href='<%= col[:link].call(currency) %>'>&#10174;</a>
+                <a class='btn btn-outline-light ct-btn' target="_blank" href='<%= col[:link].call(currency) %>'>&#10174;</a>
               <% else %>
-                <div class="alert alert-<%= kind %> alert-<%= align %>">
+                <div class="ct-chip alert-<%= kind %> alert-<%= align %>">
                   <%= col.key?(:get_value) ? col[:get_value].call(currency) : currency[col[:name]] %>
                 </div>
               <% end %>
