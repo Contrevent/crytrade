@@ -1,0 +1,74 @@
+<div class="card">
+  <div class="card-body">
+    <div class="align-left">
+      <a class="btn btn-info btn-sm" data-toggle="collapse" href="#tradeClose" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Close
+      </a>
+      <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#tradeEdit" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Edit
+      </a>
+      <%= link_to 'Delete', trade_destroy_path(id: @trade.id), class: 'btn btn-sm btn-danger' %>
+      <%= link_to 'Cancel', trade_list_url, class: 'btn btn-sm btn-secondary' %>
+
+    </div>
+    <div class="collapse" id="tradeEdit">
+      <br/>
+      <div class="alert alert-secondary">Edit Trade</div>
+      <%= form_with scope: :trade, url: trade_update_post_url, method: "post" do |form| %>
+
+        <div class="field form-group row">
+          <%= label_tag(:symbol, "Coin", class: 'col-sm-4 col-form-label') %>
+          <div class="col-sm-8">
+            <input class="form-control" type="text" placeholder="<%= @trade.symbol %>" readonly>
+          </div>
+        </div>
+
+        <div class="field form-group row">
+          <%= label_tag(:count, "Amount", class: 'col-sm-4 col-form-label') %>
+          <div class="col-sm-8">
+            <%= form.text_field(:count, class: 'form-control') %>
+          </div>
+        </div>
+
+        <div class="field form-group row">
+          <%= label_tag(:start_usd, "Start Price ($)", class: 'col-sm-4 col-form-label') %>
+          <div class="col-sm-8">
+            <%= form.text_field(:start_usd, class: 'form-control') %>
+          </div>
+        </div>
+
+        <div class="field form-group row">
+          <%= label_tag(:init_stop_usd, "Initial Stop ($)", class: 'col-sm-4 col-form-label') %>
+          <div class="col-sm-8">
+            <%= form.text_field(:init_stop_usd, class: 'form-control') %>
+          </div>
+        </div>
+
+        <div class="field form-group row">
+          <%= label_tag(:trailing_stop_usd, "Trailing Stop ($)", class: 'col-sm-4 col-form-label') %>
+          <div class="col-sm-8">
+            <%= form.text_field(:trailing_stop_usd, class: 'form-control') %>
+          </div>
+        </div>
+        <%= form.hidden_field(:id) %>
+        <%= submit_tag("Save", class: 'btn btn-sm btn-primary') %>
+
+      <% end %>
+    </div>
+    <div class="collapse show" id="tradeClose">
+      <br/>
+      <div class="alert alert-secondary">Close Trade</div>
+      <%= form_with scope: :trade, url: trade_close_url, method: "post" do |form| %>
+
+        <div class="field form-group row">
+          <%= label_tag(:stop_usd, "Stop Price($)", class: 'col-sm-6 col-form-label') %>
+          <div class="col-sm-6">
+            <%= form.text_field(:stop_usd, class: 'form-control') %>
+          </div>
+        </div>
+        <%= form.hidden_field(:id) %>
+        <%= submit_tag("Close Trade", class: 'btn btn-sm btn-info') %>
+      <% end %>
+    </div>
+  </div>
+</div>

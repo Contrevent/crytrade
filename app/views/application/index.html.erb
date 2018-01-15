@@ -5,7 +5,7 @@
       <thead>
       <tr>
         <% @columns.each do |col| -%>
-          <th><%= col.key?(:label) ? col[:label].html_safe : col[:name].capitalize %></th>
+          <th class="align-center index-col-width"><%= col.key?(:label) ? col[:label].html_safe : col[:name].capitalize %></th>
         <% end %>
       </tr>
       </thead>
@@ -19,8 +19,10 @@
               %>
 
               <% if col.key?(:link) %>
-                <a class='btn btn-outline-light ct-btn' target="_blank" href='<%= col[:link].call(currency) %>'>&#10174;</a>
-              <% else %>
+                <div class="d-flex justify-content-center">
+                  <a class='btn btn-sm btn-outline-light ct-btn' target="_blank" href='<%= col[:link].call(currency) %>'>&#128279;</a>
+                </div>
+                <% else %>
                 <div class="ct-chip alert-<%= kind %> alert-<%= align %>">
                   <%= col.key?(:get_value) ? col[:get_value].call(currency) : currency[col[:name]] %>
                 </div>

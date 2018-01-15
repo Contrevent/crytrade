@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180115082419) do
+ActiveRecord::Schema.define(version: 20180115132749) do
 
   create_table "tickers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "currency_id"
@@ -32,6 +32,21 @@ ActiveRecord::Schema.define(version: 20180115082419) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "trades", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "symbol"
+    t.decimal "count", precision: 15, scale: 7
+    t.decimal "start_usd", precision: 15, scale: 7
+    t.decimal "init_stop_usd", precision: 15, scale: 7
+    t.decimal "trailing_stop_usd", precision: 15, scale: 7
+    t.decimal "stop_usd", precision: 15, scale: 7
+    t.boolean "closed", default: false
+    t.datetime "closed_at"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_trades_on_user_id"
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -49,4 +64,5 @@ ActiveRecord::Schema.define(version: 20180115082419) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "trades", "users"
 end

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status: 1
+  count: 9.99
+  start_usd: 9.99
+  init_stop_usd: 9.99
+  trailing_stop_usd: 9.99
+  stop_usd: 9.99
+  user: one
+
+two:
+  status: 1
+  count: 9.99
+  start_usd: 9.99
+  init_stop_usd: 9.99
+  trailing_stop_usd: 9.99
+  stop_usd: 9.99
+  user: two

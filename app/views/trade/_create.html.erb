@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-body">
+    <div class="alert alert-secondary">New Trade</div>
+    <%= form_with scope: :trade, url: trade_create_url, local: true do |form| %>
+
+      <div class="field form-group">
+        <%= label_tag(:symbol, "Coin") %>
+        <%= form.select(:symbol, options_for_select(@symbols, 'BTC'), {}, {:class => 'form-control'}) %>
+      </div>
+
+      <div class="field form-group">
+        <%= label_tag(:count, "Amount") %>
+        <%= form.text_field(:count, class: 'form-control') %>
+      </div>
+
+      <div class="field form-group">
+        <%= label_tag(:start_usd, "Start Price ($)") %>
+        <%= form.text_field(:start_usd, class: 'form-control') %>
+      </div>
+
+      <div class="field form-group">
+        <%= label_tag(:init_stop_usd, "Initial Stop ($)") %>
+        <%= form.text_field(:init_stop_usd, class: 'form-control') %>
+      </div>
+
+      <%= submit_tag("Create", class: 'btn btn-sm btn-primary') %>
+
+      <%= link_to 'Reset', trade_list_url, class:'btn btn-sm btn-secondary' %>
+    <% end %>
+  </div>
+</div>
+</div>
+<h4></h4>

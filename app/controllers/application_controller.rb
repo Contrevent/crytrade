@@ -4,18 +4,18 @@ class ApplicationController < ActionController::Base
   def index
     latest = Ticker.select('MAX(last_updated) as last_updated, symbol').group(:symbol).all
     ids = latest.map {|currency| Ticker.find_by(:last_updated => currency.last_updated, :symbol => currency.symbol).id}
-    @currencies = Ticker.find(ids).sort_by {|currency| -currency.score}.select {|currency| currency.score > 0}
+    @currencies = Ticker.where(id: ids).order('volume_usd_24h DESC').limit(20)
+    p @currencies
 
     kind = lambda {|value| (
-    if value == 0 then
+    if value == 0
       "info"
-    elsif value < 0 then
+    elsif value < 0
       "danger"
     else
       "success"
     end)}
     @columns = [
-        {name: 'score', align: 'center', get_value: lambda {|currency| currency.score}},
         {name: 'symbol', align: 'left'},
         {name: 'currency_name', align: 'left', label: 'Name'},
         {name: 'rank', align: 'center'},
