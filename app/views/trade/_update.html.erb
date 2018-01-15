@@ -13,40 +13,40 @@
     </div>
     <div class="collapse" id="tradeEdit">
       <br/>
-      <div class="alert alert-secondary">Edit Trade</div>
+      <div class="alert alert-secondary ct-card-title">Edit Trade</div>
       <%= form_with scope: :trade, url: trade_update_post_url, method: "post" do |form| %>
 
         <div class="field form-group row">
-          <%= label_tag(:symbol, "Coin", class: 'col-sm-4 col-form-label') %>
-          <div class="col-sm-8">
+          <%= label_tag(:symbol, "Coin", class: 'col-sm-6 col-form-label') %>
+          <div class="col-sm-6">
             <input class="form-control" type="text" placeholder="<%= @trade.symbol %>" readonly>
           </div>
         </div>
 
         <div class="field form-group row">
-          <%= label_tag(:count, "Amount", class: 'col-sm-4 col-form-label') %>
-          <div class="col-sm-8">
+          <%= label_tag(:count, "Amount", class: 'col-sm-6 col-form-label') %>
+          <div class="col-sm-6">
             <%= form.text_field(:count, class: 'form-control') %>
           </div>
         </div>
 
         <div class="field form-group row">
-          <%= label_tag(:start_usd, "Start Price ($)", class: 'col-sm-4 col-form-label') %>
-          <div class="col-sm-8">
+          <%= label_tag(:start_usd, "Start Price ($)", class: 'col-sm-6 col-form-label') %>
+          <div class="col-sm-6">
             <%= form.text_field(:start_usd, class: 'form-control') %>
           </div>
         </div>
 
         <div class="field form-group row">
-          <%= label_tag(:init_stop_usd, "Initial Stop ($)", class: 'col-sm-4 col-form-label') %>
-          <div class="col-sm-8">
+          <%= label_tag(:init_stop_usd, "Initial Stop ($)", class: 'col-sm-6 col-form-label') %>
+          <div class="col-sm-6">
             <%= form.text_field(:init_stop_usd, class: 'form-control') %>
           </div>
         </div>
 
         <div class="field form-group row">
-          <%= label_tag(:trailing_stop_usd, "Trailing Stop ($)", class: 'col-sm-4 col-form-label') %>
-          <div class="col-sm-8">
+          <%= label_tag(:trailing_stop_usd, "Trailing Stop ($)", class: 'col-sm-6 col-form-label') %>
+          <div class="col-sm-6">
             <%= form.text_field(:trailing_stop_usd, class: 'form-control') %>
           </div>
         </div>
@@ -57,7 +57,7 @@
     </div>
     <div class="collapse show" id="tradeClose">
       <br/>
-      <div class="alert alert-secondary">Close Trade</div>
+      <div class="alert alert-secondary ct-card-title">Close Trade</div>
       <%= form_with scope: :trade, url: trade_close_url, method: "post" do |form| %>
 
         <div class="field form-group row">
