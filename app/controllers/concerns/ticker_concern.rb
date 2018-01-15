@@ -17,5 +17,10 @@ module TickerConcern
     -1
   end
 
+  def self.symbols
+    Ticker.select(:symbol, :currency_name).distinct(:symbol)
+        .order(:currency_name).map {|sym| ["#{sym.currency_name} (#{sym.symbol})", sym.symbol]}
+  end
+
 
 end

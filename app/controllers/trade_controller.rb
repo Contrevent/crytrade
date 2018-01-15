@@ -1,8 +1,9 @@
 class TradeController < ApplicationController
+  include TickerConcern
 
   def list
     @trades = Trade.where(:user => current_user)
-    @symbols = Ticker.select(:symbol).distinct.map {|sym| [sym.symbol, sym.symbol]}
+    @symbols = TickerConcern.symbols
     @trade = Trade.new
   end
 
@@ -22,7 +23,6 @@ class TradeController < ApplicationController
 
   def update
     @trades = Trade.where(:user => current_user)
-    @symbols = Ticker.select(:symbol).distinct.map {|sym| [sym.symbol, sym.symbol]}
     @trade = Trade.find(params[:id])
     @trade.stop_usd = @trade.trailing_stop_usd
   end

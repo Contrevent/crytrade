@@ -1,6 +1,6 @@
-<div class="card">
-  <div class="card-body">
-    <div class="alert alert-secondary ct-card-title">New Trade</div>
+<div class="card border-dark ct-card">
+  <div class="card-body text-light bg-dark">
+    <div class="alert alert-success ct-card-title">New Trade</div>
     <%= form_with scope: :trade, url: trade_create_url, local: true do |form| %>
 
       <div class="field form-group">
@@ -23,7 +23,7 @@
         <%= form.text_field(:init_stop_usd, class: 'form-control') %>
       </div>
 
-      <%= submit_tag("Create", class: 'btn btn-sm btn-primary') %>
+      <%= submit_tag("Create", class: 'btn btn-sm btn-success') %>
 
       <%= link_to 'Reset', trade_list_url, class:'btn btn-sm btn-secondary' %>
     <% end %>

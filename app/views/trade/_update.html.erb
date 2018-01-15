@@ -1,5 +1,5 @@
-<div class="card">
-  <div class="card-body">
+<div class="card border-dark ct-card">
+  <div class="card-body text-light bg-dark">
     <div class="align-left">
       <a class="btn btn-info btn-sm" data-toggle="collapse" href="#tradeClose" role="button" aria-expanded="false" aria-controls="collapseExample">
         Close
@@ -13,7 +13,7 @@
     </div>
     <div class="collapse" id="tradeEdit">
       <br/>
-      <div class="alert alert-secondary ct-card-title">Edit Trade</div>
+      <div class="alert alert-primary ct-card-title">Edit Trade</div>
       <%= form_with scope: :trade, url: trade_update_post_url, method: "post" do |form| %>
 
         <div class="field form-group row">
@@ -57,7 +57,7 @@
     </div>
     <div class="collapse show" id="tradeClose">
       <br/>
-      <div class="alert alert-secondary ct-card-title">Close Trade</div>
+      <div class="alert alert-info ct-card-title">Close Trade</div>
       <%= form_with scope: :trade, url: trade_close_url, method: "post" do |form| %>
 
         <div class="field form-group row">
