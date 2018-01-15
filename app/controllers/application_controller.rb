@@ -19,12 +19,13 @@ class ApplicationController < ActionController::Base
         {name: 'symbol', align: 'left'},
         {name: 'currency_name', align: 'left', label: 'Name'},
         {name: 'rank', align: 'center'},
-        {name: 'price_usd', align: 'center', label: 'Price ($)'},
+        {name: 'price_usd', align: 'center', label: 'Price ($)',
+         get_value: lambda {|currency| present(currency.price_usd, 3)} },
         {name: 'price_btc', align: 'center', label: 'Price (BTC)'},
         {name: 'volume_usd_24h', align: 'center', label: '24h Volume (M$)',
-         get_value: lambda {|currency| (currency.volume_usd_24h / 1000000).round}},
+         get_value: lambda {|currency| present((currency.volume_usd_24h / 1000000).round)}},
         {name: 'market_cap_usd', align: 'center', label: 'Market Cap (M$)',
-         get_value: lambda {|currency| (currency.market_cap_usd / 1000000).round}},
+         get_value: lambda {|currency| present((currency.market_cap_usd / 1000000).round)}},
         {name: 'percent_change_1h', label: '1h &Delta; (%)',align: 'center',
          get_value: lambda {|currency| arrow(currency.percent_change_1h)},
          kind: lambda {|currency| kind.call(currency.percent_change_1h)}
@@ -44,6 +45,16 @@ class ApplicationController < ActionController::Base
 
 
   private
+
+  def helper
+    @helper ||= Class.new do
+      include ActionView::Helpers::NumberHelper
+    end.new
+  end
+
+  def present(value, precision = 0)
+    helper.number_with_delimiter(value, precision: precision, delimiter: ' ')
+  end
 
   def arrow(value)
     code = value == 0 ? "=" : (value > 0 ? "&#9650;" : "&#9660;")
