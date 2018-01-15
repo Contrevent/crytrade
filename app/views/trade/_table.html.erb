@@ -1,14 +1,14 @@
-<table class="table table-dark ct-table">
+<table class="table table-striped table-dark ct-table">
   <thead>
   <tr>
-    <th>Symbol</th>
-    <th>Amount</th>
-    <th>Start ($)</th>
-    <th>Current ($)</th>
-    <th>&Delta; ($)</th>
-    <th>Trailing stop ($)</th>
-    <th>Init stop ($)</th>
-    <th>Risk</th>
+    <th class="trade-col-width text-center">Symbol</th>
+    <th class="trade-col-width text-center">Amount</th>
+    <th class="trade-col-width text-center">Start ($)</th>
+    <th class="trade-col-width text-center">Current ($)</th>
+    <th class="trade-col-width text-center">&Delta; ($)</th>
+    <th class="trade-col-width text-center">Trailing ($)</th>
+    <th class="trade-col-width text-center">Init ($)</th>
+    <th class="trade-col-width text-center">Risk</th>
   </tr>
   </thead>
   <tbody>
@@ -49,7 +49,9 @@
         </div>
       </td>
       <td>
-        <%= link_to "&#x2699".html_safe, trade_update_path(id: trade.id), class: 'btn btn-sm btn-warning ct-btn' %>
+        <div class="d-flex justify-content-center">
+          <%= link_to "&#x2699".html_safe, trade_update_path(id: trade.id), class: 'btn btn-sm btn-outline-light ct-btn' %>
+        </div>
       </td>
     </tr>
   <% end -%>

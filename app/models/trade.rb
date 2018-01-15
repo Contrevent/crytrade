@@ -1,5 +1,6 @@
 class Trade < ApplicationRecord
   belongs_to :user
+  include TickerConcern
 
   validates :symbol, presence: true
   validates :count, numericality: true, presence: true
@@ -7,16 +8,11 @@ class Trade < ApplicationRecord
   validates :init_stop_usd, numericality: true, presence: true
 
   def current_usd
-    last_update = Ticker.select(:symbol).maximum(:last_updated)
-    if last_update > 0
-      ticker = Ticker.find_by(:symbol => symbol, :last_updated => last_update)
-      if ticker != nil
-        return ticker.price_usd
-      else
-        Rails.logger.warn("Can't resolve ticker price for #{symbol}")
-      end
+    result = TickerConcern::last_price_usd(symbol)
+    if result == -1
+      Rails.logger.warn("Can't resolve ticker price for #{symbol}")
     end
-    -1
+    result
   end
 
 end
