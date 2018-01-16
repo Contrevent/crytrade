@@ -1,24 +1,9 @@
-# README
+# Crytrade
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* The application purpose is to allow its users to support a proper trade journal while dealing with crypto-currencies
 
-Things you may want to cover:
 
-* Ruby version
+## Dev setup
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Check _config/database.yml_ for the proper password and configuration
+- bin/rake db:create db:migrate db:seed
