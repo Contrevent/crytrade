@@ -13,4 +13,4 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # folder are already added.
 Rails.application.config.assets.precompile += %w( jquery3.js )
 Rails.application.config.assets.precompile += %w( application.js )
-Rails.application.config.assets.precompile += %w( create_trade.js )
+Rails.application.config.assets.precompile += %w( create_trade.js update_trade.js )

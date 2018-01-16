@@ -2,7 +2,7 @@ class TradeController < ApplicationController
   include TickerConcern
 
   def list
-    @trades = Trade.where(:user => current_user)
+    @trades = Trade.where(:user => current_user, :closed => false)
     @symbols = TickerConcern.symbols
     @trade = Trade.new
   end
@@ -22,7 +22,7 @@ class TradeController < ApplicationController
   end
 
   def update
-    @trades = Trade.where(:user => current_user)
+    @trades = Trade.where(:user => current_user, :closed => false)
     @trade = Trade.find(params[:id])
     @trade.stop_usd = @trade.trailing_stop_usd
   end
@@ -40,11 +40,13 @@ class TradeController < ApplicationController
   end
 
   def close
-    trade = Trade.find(params[:id])
+    trade = Trade.find(params[:trade][:id])
     if trade != nil
       trade.closed = true
-      trade.closed_at= DateTime.now
-      trade.stop_usd = params[:stop_usd]
+      trade.closed_at = DateTime.now
+      trade.stop_usd = params[:trade][:stop_usd]
+      trade.fees_usd = params[:trade][:fees_usd]
+      trade.gain_loss_usd = (trade.stop_usd - trade.start_usd) * trade.count - trade.fees_usd
       trade.save
       flash[:notice] = "Trade closed."
     end

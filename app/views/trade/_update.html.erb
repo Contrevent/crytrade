@@ -27,32 +27,32 @@
         <div class="field form-group row">
           <%= label_tag(:count, "Amount", class: 'col-sm-6 col-form-label') %>
           <div class="col-sm-6">
-            <%= form.text_field(:count, class: 'form-control') %>
+            <%= form.text_field(:count, class: 'form-control', id: 'ct-edit-count') %>
           </div>
         </div>
 
         <div class="field form-group row">
           <%= label_tag(:start_usd, "Start Price ($)", class: 'col-sm-6 col-form-label') %>
           <div class="col-sm-6">
-            <%= form.text_field(:start_usd, class: 'form-control') %>
+            <%= form.text_field(:start_usd, class: 'form-control', id: 'ct-start-usd') %>
           </div>
         </div>
 
         <div class="field form-group row">
           <%= label_tag(:init_stop_usd, "Initial Stop ($)", class: 'col-sm-6 col-form-label') %>
           <div class="col-sm-6">
-            <%= form.text_field(:init_stop_usd, class: 'form-control') %>
+            <%= form.text_field(:init_stop_usd, class: 'form-control', id: 'ct-init-usd') %>
           </div>
         </div>
 
         <div class="field form-group row">
           <%= label_tag(:trailing_stop_usd, "Trailing Stop ($)", class: 'col-sm-6 col-form-label') %>
           <div class="col-sm-6">
-            <%= form.text_field(:trailing_stop_usd, class: 'form-control') %>
+            <%= form.text_field(:trailing_stop_usd, class: 'form-control', id: 'ct-trailing-usd') %>
           </div>
         </div>
         <%= form.hidden_field(:id) %>
-        <%= submit_tag("Save", class: 'btn btn-sm btn-primary') %>
+        <%= submit_tag("Save", class: 'btn btn-sm btn-primary', id: 'ct-save-btn') %>
 
       <% end %>
     </div>
@@ -62,13 +62,28 @@
       <%= form_with scope: :trade, url: trade_close_url, method: "post" do |form| %>
 
         <div class="field form-group row">
-          <%= label_tag(:stop_usd, "Stop Price($)", class: 'col-sm-6 col-form-label') %>
+          <%= label_tag(:stop_usd, "Stop Price ($)", class: 'col-sm-6 col-form-label') %>
           <div class="col-sm-6">
-            <%= form.text_field(:stop_usd, class: 'form-control') %>
+            <%= form.text_field(:stop_usd, class: 'form-control', id: 'ct-stop-usd') %>
           </div>
         </div>
+
+        <div class="field form-group row">
+          <%= label_tag(:fees_usd, "Fees ($)", class: 'col-sm-6 col-form-label') %>
+          <div class="col-sm-6">
+            <%= form.text_field(:fees_usd, class: 'form-control', id: 'ct-fees-usd') %>
+          </div>
+        </div>
+
+        <div class="field form-group row">
+          <%= label_tag(:gain_loss_usd, "Gain/Loss ($)", class: 'col-sm-6 col-form-label') %>
+          <div class='col-sm-6'>
+            <input class="form-control" name="trade[gain_loss_usd]" type="text" id="ct-gain-loss-usd" readonly>
+          </div>
+        </div>
+
         <%= form.hidden_field(:id) %>
-        <%= submit_tag("Close Trade", class: 'btn btn-sm btn-info') %>
+        <%= submit_tag("Close Trade", class: 'btn btn-sm btn-info', id: 'ct-close-btn') %>
       <% end %>
     </div>
   </div>

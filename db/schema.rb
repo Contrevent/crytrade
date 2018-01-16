@@ -34,11 +34,13 @@ ActiveRecord::Schema.define(version: 20180115132749) do
 
   create_table "trades", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "symbol"
-    t.decimal "count", precision: 15, scale: 7
+    t.decimal "count", precision: 15, scale: 7, default: "0.0"
     t.decimal "start_usd", precision: 15, scale: 7
     t.decimal "init_stop_usd", precision: 15, scale: 7
     t.decimal "trailing_stop_usd", precision: 15, scale: 7
     t.decimal "stop_usd", precision: 15, scale: 7
+    t.decimal "fees_usd", precision: 15, scale: 7, default: "0.0"
+    t.decimal "gain_loss_usd", precision: 15, scale: 7, default: "0.0"
     t.boolean "closed", default: false
     t.datetime "closed_at"
     t.bigint "user_id"
