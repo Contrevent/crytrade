@@ -1,6 +1,5 @@
-<div class="container-fluid">
-  <div class="row">
-    <br/>
+<div class="row">
+  <div class="col">
     <table class="table table-striped table-dark ct-table">
       <thead>
       <tr>
@@ -9,29 +8,33 @@
         <% end %>
       </tr>
       </thead>
-      <tbody>
-      <% @currencies.each do |currency| -%>
-        <tr>
-          <% @columns.each do |col| -%>
-            <td>
-              <% kind = col.key?(:kind) ? col[:kind].call(currency) : 'empty'
-                 align = col.key?(:align) ? col[:align] : 'right'
-              %>
-
-              <% if col.key?(:link) %>
-                <div class="d-flex justify-content-center">
-                  <a class='btn btn-sm btn-outline-light ct-btn' target="_blank" href='<%= col[:link].call(currency) %>'>&#128279;</a>
-                </div>
-                <% else %>
-                <div class="ct-chip alert-<%= kind %> alert-<%= align %>">
-                  <%= col.key?(:get_value) ? col[:get_value].call(currency) : currency[col[:name]] %>
-                </div>
-              <% end %>
-            </td>
-          <% end %>
-        </tr>
-      <% end -%>
-      </tbody>
     </table>
+    <div class="ct-coins">
+      <table class="table table-striped table-dark ct-table">
+        <tbody>
+        <% @currencies.each do |currency| -%>
+          <tr>
+            <% @columns.each do |col| -%>
+              <td>
+                <% kind = col.key?(:kind) ? col[:kind].call(currency) : 'empty'
+                   align = col.key?(:align) ? col[:align] : 'right'
+                %>
+
+                <% if col.key?(:link) %>
+                  <div class="d-flex justify-content-center">
+                    <a class='btn btn-sm btn-outline-light ct-btn' target="_blank" href='<%= col[:link].call(currency) %>'>&#128279;</a>
+                  </div>
+                <% else %>
+                  <div class="ct-chip alert-<%= kind %> alert-<%= align %>">
+                    <%= col.key?(:get_value) ? col[:get_value].call(currency) : currency[col[:name]] %>
+                  </div>
+                <% end %>
+              </td>
+            <% end %>
+          </tr>
+        <% end -%>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

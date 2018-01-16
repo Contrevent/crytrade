@@ -40,6 +40,15 @@ class ApplicationController < ActionController::Base
     ]
   end
 
+  def ticker
+    if params.key?(:symbol)
+      price = TickerConcern::last_price_usd(params[:symbol])
+      render json: {'price': price}
+    else
+      render text: "Bad Request", status: 400
+    end
+  end
+
 
   private
 
@@ -54,7 +63,11 @@ class ApplicationController < ActionController::Base
   end
 
   def arrow(value)
-    code = value == 0 ? "=" : (value > 0 ? "&#9650;" : "&#9660;")
+    code = if value == 0 then
+             "="
+           else
+             value > 0 ? "&#9650;" : "&#9660;"
+           end
     "#{value} #{code}".html_safe
   end
 end

@@ -7,7 +7,8 @@
       <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#tradeEdit" role="button" aria-expanded="false" aria-controls="collapseExample">
         Edit
       </a>
-      <%= link_to 'Delete', trade_destroy_path(id: @trade.id), class: 'btn btn-sm btn-danger' %>
+      <%= link_to 'Delete', trade_destroy_path(id: @trade.id), class: 'btn btn-sm btn-danger',
+                  data: { confirm: 'Are you sure?' } %>
       <%= link_to 'Cancel', trade_list_url, class: 'btn btn-sm btn-secondary' %>
 
     </div>

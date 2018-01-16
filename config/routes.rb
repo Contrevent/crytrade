@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   }
 
   get 'application/index'
+  get 'application/ticker'
 
   root 'application#index'
 

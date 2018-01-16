@@ -17,6 +17,7 @@
 body {
     font-size: 0.9rem;
     background-color: black;
+    overflow: hidden;
 }
 
 .ct-chip {
@@ -71,4 +72,14 @@ body {
 
 .ct-card {
     font-size: .875rem;
+}
+
+.ct-coins {
+    max-height: calc(100vh - 9rem);
+    overflow-y: auto;
+}
+
+.ct-table {
+    margin-bottom: 0;
+    table-layout: fixed;
 }
