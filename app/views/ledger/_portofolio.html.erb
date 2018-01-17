@@ -11,7 +11,7 @@
   <%
     total_usd = 0
   %>
-  <% @port.each do |entry| %>
+  <% @balance.each do |entry| %>
     <% price_usd = entry.current_usd
       balance_usd = 'n.a.'
        if price_usd != -1

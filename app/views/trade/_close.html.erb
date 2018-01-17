@@ -1,0 +1,15 @@
+<%= form_with scope: :trade, url: trade_close_url, method: "post" do |form| %>
+
+  <%= render 'shared/text_row', parent: form, id: 'ct-stop-usd', symbol: :stop_usd, label: 'Stop Price ($)' %>
+  <%= render 'shared/text_row', parent: form, id: 'ct-fees-usd', symbol: :fees_usd, label: 'Fees ($)' %>
+
+  <div class="field form-group row">
+    <%= label_tag(:gain_loss_usd, "Gain/Loss ($)", class: 'col-sm-6 col-form-label') %>
+    <div class='col-sm-6'>
+      <input class="form-control" name="trade[gain_loss_usd]" type="text" id="ct-gain-loss-usd" readonly>
+    </div>
+  </div>
+
+  <%= form.hidden_field(:id) %>
+  <%= submit_tag("Close Trade", class: 'btn btn-sm btn-info', id: 'ct-close-btn') %>
+<% end %>

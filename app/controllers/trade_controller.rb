@@ -1,10 +1,12 @@
 class TradeController < ApplicationController
   include TickerConcern
+  include LedgerConcern
 
-  def list
+  def index
     @trades = Trade.where(:user => current_user, :closed => false)
     @symbols = TickerConcern.symbols
     @trade = Trade.new
+    @balance = balance
   end
 
   def create
@@ -15,7 +17,7 @@ class TradeController < ApplicationController
       trade.user = current_user
       trade.save
       flash[:notice] = "Trade created."
-      redirect_to action: 'list'
+      redirect_to action: 'index'
     else
       flash[:error] = "Invalid values."
     end
@@ -33,7 +35,7 @@ class TradeController < ApplicationController
       trade = Trade.find(params[:trade][:id])
       trade.update(permitted)
       flash[:notice] = "Trade updated."
-      redirect_to action: 'list'
+      redirect_to action: 'index'
     else
       flash[:error] = "Invalid values."
     end
@@ -50,7 +52,7 @@ class TradeController < ApplicationController
       trade.save
       flash[:notice] = "Trade closed."
     end
-    redirect_to action: 'list'
+    redirect_to action: 'index'
   end
 
   def destroy
@@ -59,7 +61,7 @@ class TradeController < ApplicationController
       trade.destroy
       flash[:notice] = "Trade deleted."
     end
-    redirect_to action: 'list'
+    redirect_to action: 'index'
   end
 
   private

@@ -1,46 +1,30 @@
-<div class="card border-dark ct-card">
-  <div class="card-body text-light bg-dark">
-    <div class="alert alert-success ct-card-title">New Trade</div>
-    <%= form_with scope: :trade, url: trade_create_url, local: true do |form| %>
+<div>
+  <div class="card border-dark ct-card">
+    <div class="card-body text-light bg-dark">
 
-      <div class="field form-group">
-        <%= label_tag(:symbol, "Coin") %>
-        <%= form.select(:symbol, options_for_select(@symbols, 'BTC'), {}, {:id => 'ct-select-symbol', :class => 'form-control'}) %>
-      </div>
+      <ul class="nav nav-pills nav-fill" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link text-white active" data-toggle="tab" href="#tabFun" role="tab">
+            Funds
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" data-toggle="tab" href="#tabNew" role="tab">
+            New Trade
+          </a>
+        </li>
+      </ul>
 
-      <div class="field form-group row">
-        <%= label_tag(:count, "Amount", class: 'col-sm-6 col-form-label') %>
-        <div class='col-sm-6'>
-        <%= form.text_field(:count, class: 'form-control', id: 'ct-new-count') %>
-        </div>
-      </div>
+      <br/>
+      <div class="tab-content">
+        <% port_content = render 'ledger/portofolio' %>
+        <%= render 'shared/tab', active: true, label: 'Funds', id: 'tabFun', kind: 'secondary', content: port_content %>
 
-      <div class="field form-group row">
-        <%= label_tag(:start_usd, "Start Price ($)", class: 'col-sm-6 col-form-label') %>
-        <div class='col-sm-6'>
-          <%= form.text_field(:start_usd, class: 'form-control', id: 'ct-start-usd') %>
-        </div>
-      </div>
+        <% dep_content = render 'trade/create_trade' %>
+        <%= render 'shared/tab', label: 'New trade', id: 'tabNew', kind: 'success', content: dep_content %>
 
-      <div class="field form-group row">
-        <%= label_tag(:init_stop_usd, "Initial Stop ($)", class: 'col-sm-6 col-form-label') %>
-        <div class='col-sm-6'>
-          <%= form.text_field(:init_stop_usd, class: 'form-control', id: 'ct-stop-usd') %>
-        </div>
-      </div>
+       </div>
 
-      <div class="field form-group row">
-        <%= label_tag(:risk, "Risk", class: 'col-sm-6 col-form-label') %>
-        <div class='col-sm-6'>
-        <input class="form-control" type="text" id="ct-risk" readonly>
-        </div>
-      </div>
-
-      <%= submit_tag("Create", id:'ct-create', class: 'btn btn-sm btn-success') %>
-
-      <%= link_to 'Reset', trade_list_url, class:'btn btn-sm btn-secondary' %>
-    <% end %>
+    </div>
   </div>
 </div>
-</div>
-<h4></h4>

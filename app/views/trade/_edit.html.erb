@@ -1,0 +1,18 @@
+<%= form_with scope: :trade, url: trade_update_post_url, method: "post" do |form| %>
+
+  <div class="field form-group row">
+    <%= label_tag(:symbol, "Coin", class: 'col-sm-6 col-form-label') %>
+    <div class="col-sm-6">
+      <input class="form-control" type="text" placeholder="<%= @trade.symbol %>" readonly>
+    </div>
+  </div>
+
+  <%= render 'shared/text_row', parent: form, id: 'ct-edit-count', symbol: :count, label: 'Amount' %>
+  <%= render 'shared/text_row', parent: form, id: 'ct-start-usd', symbol: :start_usd, label: 'Start Price ($)' %>
+  <%= render 'shared/text_row', parent: form, id: 'ct-init-usd', symbol: :init_stop_usd, label: 'Initial Stop ($)' %>
+  <%= render 'shared/text_row', parent: form, id: 'ct-trailing-usd', symbol: :trailing_stop_usd, label: 'Trailing Stop ($)' %>
+
+  <%= form.hidden_field(:id) %>
+  <%= submit_tag("Save", class: 'btn btn-sm btn-primary', id: 'ct-save-btn') %>
+
+<% end %>

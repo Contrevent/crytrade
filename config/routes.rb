@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'ledger/update'
   get 'ledger/destroy'
 
-  get 'trade/list'
+  get 'trade/index'
 
   post 'trade/create'
   post 'trade/update_post'

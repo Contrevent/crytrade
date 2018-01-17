@@ -1,56 +1,41 @@
-<div class="card border-dark ct-card">
-  <div class="card-body text-light bg-dark">
-    <div class="text-left">
-      <a class="btn btn-info btn-sm" data-toggle="collapse" href="#tradeClose" role="button" aria-expanded="false" aria-controls="collapseExample">
-        Close
-      </a>
-      <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#tradeEdit" role="button" aria-expanded="false" aria-controls="collapseExample">
-        Edit
-      </a>
-      <%= link_to 'Delete', trade_destroy_path(id: @trade.id), class: 'btn btn-sm btn-danger' %>
-      <%= link_to 'Cancel', trade_list_url, class: 'btn btn-sm btn-secondary' %>
+<div>
+  <div class="card border-dark ct-card">
+    <div class="card-body text-light bg-dark">
 
-    </div>
-    <div class="collapse" id="tradeEdit">
+      <ul class="nav nav-pills nav-fill" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link text-white active" data-toggle="tab" href="#tabEdit" role="tab">
+            Edit
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" data-toggle="tab" href="#tabClose" role="tab">
+            Close
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" data-toggle="tab" href="#tabDel" role="tab">
+            Delete
+          </a>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Cancel', trade_index_url, class: 'nav-link text-light' %>
+        </li>
+      </ul>
+
       <br/>
-      <div class="alert alert-primary ct-card-title">Edit Trade</div>
-      <%= form_with scope: :trade, url: trade_update_post_url, method: "post" do |form| %>
+      <div class="tab-content">
+        <% edit_content = render 'trade/edit' %>
+        <%= render 'shared/tab', active: true, label: 'Edit Trade', id: 'tabEdit', kind: 'secondary', content: edit_content %>
 
-        <div class="field form-group row">
-          <%= label_tag(:symbol, "Coin", class: 'col-sm-6 col-form-label') %>
-          <div class="col-sm-6">
-            <input class="form-control" type="text" placeholder="<%= @trade.symbol %>" readonly>
-          </div>
-        </div>
+        <% close_content = render 'trade/close' %>
+        <%= render 'shared/tab', label: 'Close trade', id: 'tabClose', kind: 'success', content: close_content %>
 
-        <%= render 'shared/text_row', parent: form, id: 'ct-edit-count', symbol: :count, label: 'Amount' %>
-        <%= render 'shared/text_row', parent: form, id: 'ct-start-usd', symbol: :start_usd, label: 'Start Price ($)' %>
-        <%= render 'shared/text_row', parent: form, id: 'ct-init-usd', symbol: :init_stop_usd, label: 'Initial Stop ($)' %>
-        <%= render 'shared/text_row', parent: form, id: 'ct-trailing-usd', symbol: :trailing_stop_usd, label: 'Trailing Stop ($)' %>
+        <% del_content = render 'shared/delete', url: trade_destroy_path(id: @trade.id) %>
+        <%= render 'shared/tab', label: 'Delete trade', id: 'tabDel', kind: 'danger', content: del_content %>
 
-        <%= form.hidden_field(:id) %>
-        <%= submit_tag("Save", class: 'btn btn-sm btn-primary', id: 'ct-save-btn') %>
+      </div>
 
-      <% end %>
-    </div>
-    <div class="collapse show" id="tradeClose">
-      <br/>
-      <div class="alert alert-info ct-card-title">Close Trade</div>
-      <%= form_with scope: :trade, url: trade_close_url, method: "post" do |form| %>
-
-        <%= render 'shared/text_row', parent: form, id: 'ct-stop-usd', symbol: :stop_usd, label: 'Stop Price ($)' %>
-        <%= render 'shared/text_row', parent: form, id: 'ct-fees-usd', symbol: :fees_usd, label: 'Fees ($)' %>
-
-        <div class="field form-group row">
-          <%= label_tag(:gain_loss_usd, "Gain/Loss ($)", class: 'col-sm-6 col-form-label') %>
-          <div class='col-sm-6'>
-            <input class="form-control" name="trade[gain_loss_usd]" type="text" id="ct-gain-loss-usd" readonly>
-          </div>
-        </div>
-
-        <%= form.hidden_field(:id) %>
-        <%= submit_tag("Close Trade", class: 'btn btn-sm btn-info', id: 'ct-close-btn') %>
-      <% end %>
     </div>
   </div>
 </div>

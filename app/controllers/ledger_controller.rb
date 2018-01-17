@@ -1,15 +1,16 @@
 class LedgerController < ApplicationController
+  include LedgerConcern
+
   def index
     @entries = Ledger.where(:user => current_user)
     @symbols = TickerConcern.symbols
     @entry = Ledger.new
-    @port = Ledger.select('symbol, sum(count) as count').group(:symbol).where(:user => current_user)
+    @balance = balance
   end
 
   def update
     @entries = Ledger.where(:user => current_user)
     @entry = Ledger.find(params[:id])
-    @port = Ledger.select('symbol, sum(count) as count').group(:symbol).where(:user => current_user)
   end
 
   def deposit

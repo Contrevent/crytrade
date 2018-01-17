@@ -29,11 +29,11 @@
         <%= link_to "Coins", application_index_path, :class => "nav-link" %>
       </li>
       <% if user_signed_in? %>
-        <li class="nav-item<%= ' active' if current_page?('/trade/list') or current_page?('/trade/update') %>">
-          <%= link_to "Trades", trade_list_path, :class => "nav-link" %>
+        <li class="nav-item<%= ' active' if current_page?('/trade/index') or current_page?('/trade/update') %>">
+          <%= link_to "Trades", trade_index_path, :class => "nav-link" %>
         </li>
 
-        <li class="nav-item<%= ' active' if current_page?('/ledger/index') %>">
+        <li class="nav-item<%= ' active' if current_page?('/ledger/index') or current_page?('/ledger/update') %>">
           <%= link_to "Ledger", ledger_index_url, :class => "nav-link" %>
         </li>
       <% end %>
