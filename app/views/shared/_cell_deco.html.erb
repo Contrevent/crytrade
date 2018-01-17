@@ -1,0 +1,23 @@
+<% value = local_assigns.fetch(:value)
+   red = local_assigns.key?(:red) ? local_assigns.fetch(:red) : -10
+   green = local_assigns.key?(:green) ? local_assigns.fetch(:green) : 10
+
+   up_code = "&#9650;"
+   down_code = "&#9660;"
+
+   code = up_code
+   kind = 'info'
+   if value >= green
+     code += up_code
+     kind = 'success'
+   elsif value <= red
+     code = down_code + down_code
+     kind = 'danger'
+   elsif value < 0 && value > red
+     kind = 'warning'
+     code = down_code
+   end
+%>
+<div class="ct-chip alert-<%= kind %> text-center">
+  <%= "#{value} #{code}".html_safe %>
+</div>

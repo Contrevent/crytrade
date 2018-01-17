@@ -17,7 +17,7 @@
        if price_usd != -1
          balance_usd = entry.count * price_usd
          total_usd += balance_usd
-         next if balance_usd.abs < 0.1
+         next if balance_usd.abs < 0.1 || entry.count < 0.0001
        end
 
     %>

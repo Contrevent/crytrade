@@ -24,6 +24,8 @@
                   <div class="d-flex justify-content-center">
                     <a class='btn btn-sm btn-outline-light ct-btn' target="_blank" href='<%= col[:link].call(currency) %>'>&#128279;</a>
                   </div>
+                <% elsif col.key?(:deco) && col[:deco] %>
+                  <%= render 'shared/cell_deco', value: col[:get_value].call(currency) %>
                 <% else %>
                   <div class="ct-chip alert-<%= kind %> alert-<%= align %>">
                     <%= col.key?(:get_value) ? col[:get_value].call(currency) : currency[col[:name]] %>

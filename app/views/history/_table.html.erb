@@ -33,18 +33,17 @@
         <%= render 'shared/cell', content: "#{trade.count} #{trade.buy_symbol}" %>
       </td>
       <td>
-        <%= render 'shared/cell', content: trade.start_usd*trade.count %>
+        <%= render 'shared/cell', content: trade.start_usd * trade.count %>
       </td>
       <td>
-        <%= render 'shared/cell', content: trade.stop_usd*trade.count %>
+        <%= render 'shared/cell', content: trade.stop_usd * trade.count %>
       </td>
       <td>
         <%= render 'shared/cell', content: trade.fees_usd %>
       </td>
       <td>
-        <% current_total = (trade.stop_usd - trade.start_usd) * trade.count - trade.fees_usd
-        %>
-          <%= render 'shared/cell', content: current_total, kind: current_total > 0 ? 'success' : 'warning' %>
+        <% current_total = (trade.stop_usd - trade.start_usd) * trade.count - trade.fees_usd %>
+        <%= render 'shared/cell_deco', value: current_total, red: -100, green: 100 %>
       </td>
       <td>
         <div class="d-flex justify-content-center">
