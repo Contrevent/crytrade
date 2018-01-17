@@ -16,37 +16,33 @@
   <% @trades.each do |trade| -%>
     <tr>
       <td>
-        <div class="ct-chip"><%= trade.symbol %></div>
+        <%= render 'shared/cell', content: trade.symbol %>
       </td>
       <td>
-        <div class="ct-chip"><%= trade.count %></div>
+        <%= render 'shared/cell', content: trade.count %>
       </td>
       <td>
-        <div class="ct-chip"><%= trade.start_usd %></div>
+        <%= render 'shared/cell', content: trade.start_usd %>
       </td>
       <td>
-        <div class="ct-chip"><%= trade.current_usd == -1 ? 'n.a.' : trade.current_usd %></div>
+        <%= render 'shared/cell', content: trade.current_usd == -1 ? 'n.a.' : trade.current_usd %>
       </td>
       <td>
         <% if trade.current_usd != -1
              current_total = (trade.current_usd - trade.start_usd) * trade.count
         %>
-          <div class="ct-chip alert-<%= current_total > 0 ? 'success' : 'warning' %> ">
-            <%= current_total %>
-          </div>
+          <%= render 'shared/cell', content: current_total, kind: current_total > 0 ? 'success' : 'warning' %>
         <% end %>
       </td>
       <td>
-        <div class="ct-chip"><%= trade.trailing_stop_usd %></div>
+        <%= render 'shared/cell', content: trade.trailing_stop_usd %>
       </td>
       <td>
-        <div class="ct-chip"><%= trade.init_stop_usd %></div>
+        <%= render 'shared/cell', content: trade.init_stop_usd %>
       </td>
       <td>
         <% risk = (trade.trailing_stop_usd - trade.start_usd) * trade.count %>
-        <div class="ct-chip alert-<%= risk > 0 ? 'success' : 'warning' %> ">
-          <%= risk %>
-        </div>
+        <%= render 'shared/cell', content: risk, kind: risk > 0 ? 'success' : 'warning' %>
       </td>
       <td>
         <div class="d-flex justify-content-center">
@@ -55,11 +51,8 @@
       </td>
     </tr>
   <% end -%>
-
   </tbody>
 </table>
 <% if @trades.empty? %>
-
   <div class="alert alert-secondary" role="alert">No trades to display</div>
-
 <% end %>

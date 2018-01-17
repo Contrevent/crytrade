@@ -1,0 +1,36 @@
+<table class="table table-striped table-dark ct-table">
+  <thead>
+  <tr>
+    <th class="ledger-col-width text-center">Symbol</th>
+    <th class="ledger-col-width text-center">Balance</th>
+    <th class="ledger-col-width text-center">Balance ($)</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <%
+    total_usd = 0
+  %>
+  <% @port.each do |entry| %>
+    <% price_usd = entry.current_usd
+      balance_usd = 'n.a.'
+       if price_usd != -1
+         balance_usd = entry.count * price_usd if price_usd != -1
+         total_usd += balance_usd
+       end
+    %>
+    <tr>
+      <td><%= render 'shared/cell', content: entry.symbol %></td>
+      <td><%= render 'shared/cell', content: entry.count %></td>
+      <td><%= render 'shared/cell', content: balance_usd %></td>
+    </tr>
+  <% end %>
+  </tbody>
+  <tfoot>
+  <tr>
+    <td><%= render 'shared/cell', content:'Total ($)'%></td>
+    <td></td>
+    <td><%= render 'shared/cell', content:total_usd %></td>
+  </tr>
+  </tfoot>
+</table>

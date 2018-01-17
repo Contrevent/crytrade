@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180115132749) do
+ActiveRecord::Schema.define(version: 20180116112622) do
+
+  create_table "ledgers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.decimal "count", precision: 15, scale: 7, default: "0.0"
+    t.string "symbol"
+    t.bigint "trade_id"
+    t.bigint "user_id"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trade_id"], name: "index_ledgers_on_trade_id"
+    t.index ["user_id"], name: "index_ledgers_on_user_id"
+  end
 
   create_table "tickers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "currency_id"
@@ -66,5 +78,7 @@ ActiveRecord::Schema.define(version: 20180115132749) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "ledgers", "trades"
+  add_foreign_key "ledgers", "users"
   add_foreign_key "trades", "users"
 end

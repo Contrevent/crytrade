@@ -1,0 +1,45 @@
+<table class="table table-striped table-dark ct-table">
+  <thead>
+  <tr>
+    <th class="ledger-col-width text-center">Date</th>
+    <th class="ledger-col-width text-center">Label</th>
+    <th class="ledger-col-width text-center">Symbol</th>
+    <th class="ledger-col-width text-center">Debit</th>
+    <th class="ledger-col-width text-center">Credit</th>
+    <th class="ledger-col-width text-center">Dev/$</th>
+    <th class="ledger-col-width text-center">Debit ($)</th>
+    <th class="ledger-col-width text-center">Credit ($)</th>
+    <th class="ledger-col-width text-center"></th>
+
+  </tr>
+  </thead>
+</table>
+<div class="ct-coins">
+  <table class="table table-striped table-dark ct-table">
+    <tbody>
+    <% @entries.each do |ledger|
+      current_usd = ledger.current_usd
+      amount_usd = ledger.current_usd*ledger.count
+      -%>
+      <tr>
+        <td><%= render 'shared/cell', content: ledger.created_at.strftime('%b-%d') %></td>
+        <td><%= render 'shared/cell', content: ledger.description %></td>
+        <td><%= render 'shared/cell', content: ledger.symbol %></td>
+        <td><%= render 'shared/cell', content: -ledger.count if ledger.count < 0 %></td>
+        <td><%= render 'shared/cell', content: ledger.count if ledger.count > 0 %></td>
+        <td><%= render 'shared/cell', content: current_usd %></td>
+        <td><%= render 'shared/cell', content: -amount_usd if amount_usd < 0 %></td>
+        <td><%= render 'shared/cell', content: amount_usd if amount_usd > 0 %></td>
+        <td>
+          <div class="d-flex justify-content-center">
+            <%= link_to "&#x2699".html_safe, ledger_update_path(id: ledger.id), class: 'btn btn-sm btn-outline-light ct-btn' %>
+          </div>
+        </td>
+      </tr>
+    <% end -%>
+    </tbody>
+  </table>
+</div>
+<% if @entries.empty? %>
+  <div class="alert alert-secondary" role="alert">No entries to display</div>
+<% end %>

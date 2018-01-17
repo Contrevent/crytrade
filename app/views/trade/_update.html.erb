@@ -1,14 +1,13 @@
 <div class="card border-dark ct-card">
   <div class="card-body text-light bg-dark">
-    <div class="align-left">
+    <div class="text-left">
       <a class="btn btn-info btn-sm" data-toggle="collapse" href="#tradeClose" role="button" aria-expanded="false" aria-controls="collapseExample">
         Close
       </a>
       <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#tradeEdit" role="button" aria-expanded="false" aria-controls="collapseExample">
         Edit
       </a>
-      <%= link_to 'Delete', trade_destroy_path(id: @trade.id), class: 'btn btn-sm btn-danger',
-                  data: { confirm: 'Are you sure?' } %>
+      <%= link_to 'Delete', trade_destroy_path(id: @trade.id), class: 'btn btn-sm btn-danger' %>
       <%= link_to 'Cancel', trade_list_url, class: 'btn btn-sm btn-secondary' %>
 
     </div>
@@ -24,33 +23,11 @@
           </div>
         </div>
 
-        <div class="field form-group row">
-          <%= label_tag(:count, "Amount", class: 'col-sm-6 col-form-label') %>
-          <div class="col-sm-6">
-            <%= form.text_field(:count, class: 'form-control', id: 'ct-edit-count') %>
-          </div>
-        </div>
+        <%= render 'shared/text_row', parent: form, id: 'ct-edit-count', symbol: :count, label: 'Amount' %>
+        <%= render 'shared/text_row', parent: form, id: 'ct-start-usd', symbol: :start_usd, label: 'Start Price ($)' %>
+        <%= render 'shared/text_row', parent: form, id: 'ct-init-usd', symbol: :init_stop_usd, label: 'Initial Stop ($)' %>
+        <%= render 'shared/text_row', parent: form, id: 'ct-trailing-usd', symbol: :trailing_stop_usd, label: 'Trailing Stop ($)' %>
 
-        <div class="field form-group row">
-          <%= label_tag(:start_usd, "Start Price ($)", class: 'col-sm-6 col-form-label') %>
-          <div class="col-sm-6">
-            <%= form.text_field(:start_usd, class: 'form-control', id: 'ct-start-usd') %>
-          </div>
-        </div>
-
-        <div class="field form-group row">
-          <%= label_tag(:init_stop_usd, "Initial Stop ($)", class: 'col-sm-6 col-form-label') %>
-          <div class="col-sm-6">
-            <%= form.text_field(:init_stop_usd, class: 'form-control', id: 'ct-init-usd') %>
-          </div>
-        </div>
-
-        <div class="field form-group row">
-          <%= label_tag(:trailing_stop_usd, "Trailing Stop ($)", class: 'col-sm-6 col-form-label') %>
-          <div class="col-sm-6">
-            <%= form.text_field(:trailing_stop_usd, class: 'form-control', id: 'ct-trailing-usd') %>
-          </div>
-        </div>
         <%= form.hidden_field(:id) %>
         <%= submit_tag("Save", class: 'btn btn-sm btn-primary', id: 'ct-save-btn') %>
 
@@ -61,19 +38,8 @@
       <div class="alert alert-info ct-card-title">Close Trade</div>
       <%= form_with scope: :trade, url: trade_close_url, method: "post" do |form| %>
 
-        <div class="field form-group row">
-          <%= label_tag(:stop_usd, "Stop Price ($)", class: 'col-sm-6 col-form-label') %>
-          <div class="col-sm-6">
-            <%= form.text_field(:stop_usd, class: 'form-control', id: 'ct-stop-usd') %>
-          </div>
-        </div>
-
-        <div class="field form-group row">
-          <%= label_tag(:fees_usd, "Fees ($)", class: 'col-sm-6 col-form-label') %>
-          <div class="col-sm-6">
-            <%= form.text_field(:fees_usd, class: 'form-control', id: 'ct-fees-usd') %>
-          </div>
-        </div>
+        <%= render 'shared/text_row', parent: form, id: 'ct-stop-usd', symbol: :stop_usd, label: 'Stop Price ($)' %>
+        <%= render 'shared/text_row', parent: form, id: 'ct-fees-usd', symbol: :fees_usd, label: 'Fees ($)' %>
 
         <div class="field form-group row">
           <%= label_tag(:gain_loss_usd, "Gain/Loss ($)", class: 'col-sm-6 col-form-label') %>

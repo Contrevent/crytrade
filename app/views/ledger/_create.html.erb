@@ -1,0 +1,37 @@
+<div id="ledger">
+  <div class="card border-dark ct-card">
+    <div class="card-body text-light bg-dark">
+
+      <ul class="nav nav-pills nav-fill" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link text-white active" data-toggle="tab" href="#tabFun" role="tab">
+            Funds
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" data-toggle="tab" href="#tabDep" role="tab">
+            Deposit
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" data-toggle="tab" href="#tabWit" role="tab">
+            Withdraw
+          </a>
+        </li>
+      </ul>
+
+      <br/>
+      <div class="tab-content">
+        <% port_content = render 'ledger/portofolio' %>
+        <%= render 'shared/tab', active: true, label: 'Funds', id: 'tabFun', kind: 'secondary', content: port_content %>
+
+        <% dep_content = render 'ledger/create_transac', prefix: 'ct-dep', kind: 'success', url: ledger_deposit_url, label: 'Deposit' %>
+        <%= render 'shared/tab', label: 'Deposit', id: 'tabDep', kind: 'success', content: dep_content %>
+
+        <% wit_content = render 'ledger/create_transac', prefix: 'ct-dep', kind: 'danger', url: ledger_withdraw_url, label: 'Withdraw' %>
+        <%= render 'shared/tab', label: 'Withdraw', id: 'tabWit', kind: 'danger', content: wit_content %>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<% content = local_assigns.fetch(:content)
+kind = local_assigns.key?(:kind) ? local_assigns.fetch(:kind) : nil
+%>
+<div class="ct-chip<%= kind != nil ? ' alert-' + kind: ''%>">
+  <%= content %>
+</div>

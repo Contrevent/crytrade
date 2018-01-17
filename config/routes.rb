@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'ledger/index'
+  post 'ledger/deposit'
+  post 'ledger/withdraw'
+  get 'ledger/update'
+  get 'ledger/destroy'
+
   get 'trade/list'
 
   post 'trade/create'
@@ -15,6 +21,7 @@ Rails.application.routes.draw do
   }
 
   get 'application/index'
+  get 'application/refresh'
   get 'application/ticker'
 
   root 'application#index'

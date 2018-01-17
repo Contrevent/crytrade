@@ -1,0 +1,11 @@
+<% label = local_assigns.fetch(:label)
+   symbol = local_assigns.fetch(:symbol)
+   id = local_assigns.fetch(:id)
+  form = local_assigns.fetch(:parent)
+%>
+<div class="field form-group row">
+  <%= label_tag(symbol, label, class: 'col-sm-6 col-form-label') %>
+  <div class='col-sm-6'>
+    <%= form.text_field(symbol, class: 'form-control', id: id) %>
+  </div>
+</div>

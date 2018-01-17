@@ -4,7 +4,7 @@
       <thead>
       <tr>
         <% @columns.each do |col| -%>
-          <th class="align-center index-col-width"><%= col.key?(:label) ? col[:label].html_safe : col[:name].capitalize %></th>
+          <th class="text-center index-col-width"><%= col.key?(:label) ? col[:label].html_safe : col[:name].capitalize %></th>
         <% end %>
       </tr>
       </thead>

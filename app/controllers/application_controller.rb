@@ -49,6 +49,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def refresh
+    CmcTickerJob.perform_now
+    redirect_to action: 'index'
+  end
+
 
   private
 
