@@ -1,6 +1,7 @@
 <table class="table table-striped table-dark ct-table">
   <thead>
   <tr>
+    <th class="trade-col-width text-center">Created at</th>
     <th class="trade-col-width text-center">Pair</th>
     <th class="trade-col-width text-center">Buy</th>
     <th class="trade-col-width text-center">Start ($)</th>
@@ -15,6 +16,7 @@
 
   <% @trades.each do |trade| -%>
     <tr>
+      <td><%= render 'shared/cell', content: trade.created_at.strftime('%b-%d %H:%M') %></td>
       <td>
         <%= render 'shared/cell', content: "#{trade.sell_symbol}/#{trade.buy_symbol}" %>
       </td>

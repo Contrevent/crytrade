@@ -23,7 +23,7 @@
       amount_dev = ledger.count.round(3)
        -%>
       <tr>
-        <td><%= render 'shared/cell', content: ledger.created_at.strftime('%b-%d') %></td>
+        <td><%= render 'shared/cell', content: ledger.created_at.strftime('%b-%d %H:%M') %></td>
         <td class="ledger-lg-col-width"><%= render 'shared/cell', content: ledger.description %></td>
         <td><%= render 'shared/cell', content: ledger.symbol %></td>
         <td><%= render 'shared/cell', content: -amount_dev if ledger.count < 0 %></td>
