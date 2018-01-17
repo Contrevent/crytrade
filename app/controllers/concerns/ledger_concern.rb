@@ -7,12 +7,8 @@ module LedgerConcern
   end
 
   def start_trade(trade)
-    sell_rate = trade.sell_start_usd
-    buy_rate = trade.start_usd
-    buy_amount_usd = -trade.count * buy_rate
-    sell_count =  buy_amount_usd / sell_rate
     label = "Start trade #{trade.count} #{trade.buy_symbol}"
-    Ledger.create(user: current_user, symbol: trade.sell_symbol, description:label, trade: trade, count: sell_count, created_at: trade.created_at)
+    Ledger.create(user: current_user, symbol: trade.sell_symbol, description:label, trade: trade, count: trade.sell_count, created_at: trade.created_at)
     Ledger.create(user: current_user, symbol: trade.buy_symbol, description:label, trade: trade, count: trade.count, created_at: trade.created_at)
   end
 

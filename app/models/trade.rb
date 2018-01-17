@@ -18,4 +18,8 @@ class Trade < ApplicationRecord
     result
   end
 
+  def sell_count
+     -count * start_usd / sell_start_usd
+  end
+
 end

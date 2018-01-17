@@ -62,8 +62,10 @@ class TradeController < ApplicationController
       trade.save
       close_trade(trade)
       flash[:notice] = "Trade closed."
+      redirect_to controller: 'history', action: 'update', id: trade.id
+    else
+      redirect_to action: 'index'
     end
-    redirect_to action: 'index'
   end
 
   def destroy

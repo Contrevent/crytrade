@@ -1,0 +1,52 @@
+<table class="table table-striped table-dark ct-table">
+  <thead>
+  <tr>
+    <th class="trade-col-width text-center">Pair</th>
+    <th class="trade-col-width text-center">Sell</th>
+    <th class="trade-col-width text-center">Buy</th>
+    <th class="trade-col-width text-center">Start ($)</th>
+    <th class="trade-col-width text-center">Stop ($)</th>
+    <th class="trade-col-width text-center">Fee ($)</th>
+    <th class="trade-col-width text-center">&Delta; ($)</th>
+    <th class="trade-col-width text-center"></th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <% @trades.each do |trade| -%>
+    <tr>
+      <td>
+        <%= render 'shared/cell', content: "#{trade.sell_symbol}/#{trade.buy_symbol}" %>
+      </td>
+      <td>
+        <%= render 'shared/cell', content: "#{trade.sell_count.abs.round(3)} #{trade.sell_symbol}" %>
+      </td>
+      <td>
+        <%= render 'shared/cell', content: "#{trade.count} #{trade.buy_symbol}" %>
+      </td>
+      <td>
+        <%= render 'shared/cell', content: trade.start_usd*trade.count %>
+      </td>
+      <td>
+        <%= render 'shared/cell', content: trade.stop_usd*trade.count %>
+      </td>
+      <td>
+        <%= render 'shared/cell', content: trade.fees_usd %>
+      </td>
+      <td>
+        <% current_total = (trade.stop_usd - trade.start_usd) * trade.count - trade.fees_usd
+        %>
+          <%= render 'shared/cell', content: current_total, kind: current_total > 0 ? 'success' : 'warning' %>
+      </td>
+      <td>
+        <div class="d-flex justify-content-center">
+          <%= link_to "&#x2699".html_safe, history_update_path(id: trade.id), class: 'btn btn-sm btn-outline-light ct-btn' %>
+        </div>
+      </td>
+    </tr>
+  <% end -%>
+  </tbody>
+</table>
+<% if @trades.empty? %>
+  <div class="alert alert-secondary" role="alert">No trades to display</div>
+<% end %>

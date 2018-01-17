@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  count: 9.99
+  trade: one
+  description: MyString
+
+two:
+  count: 9.99
+  trade: two
+  description: MyString

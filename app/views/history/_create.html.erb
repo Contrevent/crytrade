@@ -1,0 +1,11 @@
+<div>
+  <div class="card border-dark ct-card">
+    <div class="card-body text-light bg-dark">
+      <div class="tab-content">
+        <% port_content = render 'ledger/portofolio' %>
+        <%= render 'shared/tab', active: true, label: 'Funds', id: 'tabFun', kind: 'secondary', content: port_content %>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'history/index'
+
+  get 'history/update'
+  post 'history/open'
+
   get 'ledger/index'
   post 'ledger/deposit'
   post 'ledger/withdraw'
