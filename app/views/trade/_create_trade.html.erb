@@ -1,12 +1,24 @@
 <%= form_with scope: :trade, url: trade_create_url, local: true do |form| %>
 
   <div class="field form-group">
-    <%= label_tag(:symbol, "Coin") %>
-    <%= form.select(:symbol, options_for_select(@symbols, 'BTC'), {}, {:id => 'ct-select-symbol', :class => 'form-control'}) %>
+    <%= label_tag(:sell_symbol, "Sell") %>
+    <%= form.select(:sell_symbol, options_for_select(@symbols, 'USDT'), {}, {:id => 'ct-sell-select-symbol', :class => 'form-control'}) %>
   </div>
 
   <div class="field form-group row">
-    <%= label_tag(:count, "Amount", class: 'col-sm-6 col-form-label') %>
+    <%= label_tag(:sell_start_usd, "Sell Price ($)", class: 'col-sm-6 col-form-label') %>
+    <div class='col-sm-6'>
+      <%= form.text_field(:sell_start_usd, class: 'form-control', id: 'ct-start-sell-usd') %>
+    </div>
+  </div>
+
+  <div class="field form-group">
+    <%= label_tag(:buy_symbol, "Buy") %>
+    <%= form.select(:buy_symbol, options_for_select(@symbols, 'BTC'), {}, {:id => 'ct-select-symbol', :class => 'form-control'}) %>
+  </div>
+
+  <div class="field form-group row">
+    <%= label_tag(:count, "Buy Amount", class: 'col-sm-6 col-form-label') %>
     <div class='col-sm-6'>
       <%= form.text_field(:count, class: 'form-control', id: 'ct-new-count') %>
     </div>

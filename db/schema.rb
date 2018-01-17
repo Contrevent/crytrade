@@ -45,11 +45,14 @@ ActiveRecord::Schema.define(version: 20180116112622) do
   end
 
   create_table "trades", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "symbol"
+    t.string "sell_symbol"
+    t.string "buy_symbol"
     t.decimal "count", precision: 15, scale: 7, default: "0.0"
+    t.decimal "sell_start_usd", precision: 15, scale: 7
     t.decimal "start_usd", precision: 15, scale: 7
     t.decimal "init_stop_usd", precision: 15, scale: 7
     t.decimal "trailing_stop_usd", precision: 15, scale: 7
+    t.decimal "sell_stop_usd", precision: 15, scale: 7
     t.decimal "stop_usd", precision: 15, scale: 7
     t.decimal "fees_usd", precision: 15, scale: 7, default: "0.0"
     t.decimal "gain_loss_usd", precision: 15, scale: 7, default: "0.0"

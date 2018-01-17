@@ -1,9 +1,9 @@
 <%= form_with scope: :trade, url: trade_update_post_url, method: "post" do |form| %>
 
   <div class="field form-group row">
-    <%= label_tag(:symbol, "Coin", class: 'col-sm-6 col-form-label') %>
+    <%= label_tag(:buy_symbol, "Buy", class: 'col-sm-6 col-form-label') %>
     <div class="col-sm-6">
-      <input class="form-control" type="text" placeholder="<%= @trade.symbol %>" readonly>
+      <input class="form-control" type="text" placeholder="<%= @trade.buy_symbol %>" readonly>
     </div>
   </div>
 

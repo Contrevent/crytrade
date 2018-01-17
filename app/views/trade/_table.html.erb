@@ -16,7 +16,7 @@
   <% @trades.each do |trade| -%>
     <tr>
       <td>
-        <%= render 'shared/cell', content: trade.symbol %>
+        <%= render 'shared/cell', content: trade.buy_symbol %>
       </td>
       <td>
         <%= render 'shared/cell', content: trade.count %>

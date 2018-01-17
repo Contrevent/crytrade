@@ -88,3 +88,7 @@ body {
 .ct-menu a {
     margin-right: 0.75rem;
 }
+
+.ledger-lg-col-width {
+    width: 15%;
+}

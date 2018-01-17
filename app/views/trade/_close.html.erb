@@ -1,6 +1,8 @@
 <%= form_with scope: :trade, url: trade_close_url, method: "post" do |form| %>
 
-  <%= render 'shared/text_row', parent: form, id: 'ct-stop-usd', symbol: :stop_usd, label: 'Stop Price ($)' %>
+  <%= render 'shared/text_row', parent: form, id: 'ct-sell-stop-usd', symbol: :sell_stop_usd, label: @trade.sell_symbol + ' Price ($)' %>
+
+  <%= render 'shared/text_row', parent: form, id: 'ct-stop-usd', symbol: :stop_usd, label:  @trade.buy_symbol + ' Price ($)' %>
   <%= render 'shared/text_row', parent: form, id: 'ct-fees-usd', symbol: :fees_usd, label: 'Fees ($)' %>
 
   <div class="field form-group row">

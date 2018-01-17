@@ -50,6 +50,21 @@ $(function () {
             }
         }
 
+        var sellStart = $('#ct-start-sell-usd');
+        var sellSymbol = $('#ct-sell-select-symbol');
+
+        function loadSellTicker() {
+            sellStart.val(0);
+            $.get( "/application/ticker?symbol=" + sellSymbol.val(), function( result ) {
+                var price = result && result.price;
+                if (price) {
+                    sellStart.val(price);
+                }
+            });
+        }
+        loadSellTicker();
+        sellSymbol.change(loadSellTicker);
+
         function loadTicker() {
             inputCount.val(0);
             $.get( "/application/ticker?symbol=" + selectSymbol.val(), function( result ) {
