@@ -4,4 +4,8 @@ namespace :crytrade do
     CmcTickerJob.perform_now
   end
 
+  task fiat: :environment do
+    FiatTickerJob.perform_now
+  end
+
 end

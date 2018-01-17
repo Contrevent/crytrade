@@ -26,5 +26,19 @@ class CmcTickerJob < ApplicationJob
     rescue Exception => e
         Rails.logger.warn("An exception occurred while retrieving coin market cap ticker: #{e.message}")
     end
+
+
+    Ticker.select(:symbol, :currency_name).distinct(:symbol).each do |ticker|
+      unless Currency.exists? symbol: ticker.symbol
+        Currency.create(symbol: ticker.symbol, name: ticker.currency_name)
+      end
+    end
+
+    Ticker.joins('INNER JOIN (select MAX(last_updated) as last_updated, symbol from tickers group by symbol) grouped_tk on tickers.symbol = grouped_tk.symbol and tickers.last_updated = grouped_tk.last_updated').each do |ticker|
+      currency = Currency.find_by_symbol(ticker.symbol)
+      currency.price_usd= ticker.price_usd
+      currency.save
+    end
+
   end
 end
