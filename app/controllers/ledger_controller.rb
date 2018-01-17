@@ -2,14 +2,14 @@ class LedgerController < ApplicationController
   include LedgerConcern
 
   def index
-    @entries = Ledger.where(:user => current_user)
+    @entries = Ledger.where(:user => current_user).order('created_at desc')
     @symbols = TickerConcern.symbols
     @entry = Ledger.new
     @balance = balance
   end
 
   def update
-    @entries = Ledger.where(:user => current_user)
+    @entries = Ledger.where(:user => current_user).order('created_at desc')
     @entry = Ledger.find(params[:id])
   end
 

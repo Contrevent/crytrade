@@ -18,6 +18,7 @@ class HistoryController < ApplicationController
     trade = Trade.find(params[:trade][:id])
     trade.closed = false
     trade.save
+    open_trade(trade)
     redirect_to controller: 'trade', action: 'update', id: trade.id
   end
 end

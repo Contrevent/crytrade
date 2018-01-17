@@ -19,3 +19,5 @@ unless Fiat.exists? symbol: 'EUR'
 end
 
 FiatTickerJob.perform_now
+
+CmcTickerJob.perform_now

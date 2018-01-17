@@ -4,13 +4,13 @@
 
       <ul class="nav nav-pills nav-fill" role="tablist">
         <li class="nav-item">
-          <a class="nav-link text-white active" data-toggle="tab" href="#tabEdit" role="tab">
-            Edit
+          <a class="nav-link text-white active" data-toggle="tab" href="#tabClose" role="tab">
+            Close
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" data-toggle="tab" href="#tabClose" role="tab">
-            Close
+          <a class="nav-link text-white" data-toggle="tab" href="#tabEdit" role="tab">
+            Edit
           </a>
         </li>
         <li class="nav-item">
@@ -26,10 +26,10 @@
       <br/>
       <div class="tab-content">
         <% edit_content = render 'trade/edit' %>
-        <%= render 'shared/tab', active: true, label: 'Edit Trade', id: 'tabEdit', kind: 'secondary', content: edit_content %>
+        <%= render 'shared/tab', label: 'Edit Trade', id: 'tabEdit', kind: 'secondary', content: edit_content %>
 
         <% close_content = render 'trade/close' %>
-        <%= render 'shared/tab', label: 'Close trade', id: 'tabClose', kind: 'success', content: close_content %>
+        <%= render 'shared/tab', active: true, label: 'Close trade', id: 'tabClose', kind: 'success', content: close_content %>
 
         <% del_content = render 'shared/delete', url: trade_destroy_path(id: @trade.id) %>
         <%= render 'shared/tab', label: 'Delete trade', id: 'tabDel', kind: 'danger', content: del_content %>

@@ -21,7 +21,7 @@
       current_usd = ledger.current_usd
       amount_usd = (ledger.current_usd*ledger.count).round(2)
       amount_dev = ledger.count.round(3)
-      -%>
+       -%>
       <tr>
         <td><%= render 'shared/cell', content: ledger.created_at.strftime('%b-%d') %></td>
         <td class="ledger-lg-col-width"><%= render 'shared/cell', content: ledger.description %></td>
@@ -33,7 +33,17 @@
         <td><%= render 'shared/cell', content: amount_usd if amount_usd > 0 %></td>
         <td>
           <div class="d-flex justify-content-center">
-            <% target_path = ledger.trade != nil ? trade_update_path(id: ledger.trade.id) : ledger_update_path(id: ledger.id) %>
+            <%
+              if ledger.trade != nil
+                if ledger.trade.closed
+                  target_path = history_update_path(id: ledger.trade.id)
+                else
+                  target_path = trade_update_path(id: ledger.trade.id)
+                end
+              else
+                target_path = ledger_update_path(id: ledger.id)
+              end
+            %>
             <%= link_to "&#x2699".html_safe, target_path, class: 'btn btn-sm btn-outline-light ct-btn' %>
           </div>
         </td>
