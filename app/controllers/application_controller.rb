@@ -5,14 +5,6 @@ class ApplicationController < ActionController::Base
   def index
     @currencies = TickerConcern::last_ticker.order('volume_usd_24h DESC').limit(30)
 
-    kind = lambda {|value| (
-    if value == 0
-      "info"
-    elsif value < 0
-      "danger"
-    else
-      "success"
-    end)}
     @columns = [
         {name: 'symbol', align: 'left'},
         {name: 'percent_change_1h', label: '1h &Delta; (%)', deco: true,
@@ -37,6 +29,9 @@ class ApplicationController < ActionController::Base
          link: lambda {|currency| "https://coinmarketcap.com/currencies/#{currency.currency_id}/"}}
 
     ]
+
+
+    @last_update = TickerConcern::last_ticker_update
   end
 
   def ticker

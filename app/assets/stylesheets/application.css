@@ -72,7 +72,7 @@ body {
 }
 
 .ct-coins {
-    max-height: calc(100vh - 9rem);
+    max-height: calc(100vh - 10rem);
     overflow-y: auto;
 }
 

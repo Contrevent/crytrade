@@ -7,6 +7,12 @@ module TickerConcern
     end
   end
 
+  def self.last_ticker_update
+    Rails.cache.fetch('#cry_trade/tickers_update', expires_in: 4.minute) do
+      Ticker.maximum(:updated_at)
+    end
+  end
+
   def self.last_price_usd(symbol)
     currency = TickerConcern::currencies[symbol]
     if currency != nil

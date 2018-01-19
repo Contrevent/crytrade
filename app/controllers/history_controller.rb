@@ -7,6 +7,7 @@ class HistoryController < ApplicationController
     @symbols = TickerConcern.symbols
     @trade = Trade.new
     @balance = balance
+
   end
 
   def update
