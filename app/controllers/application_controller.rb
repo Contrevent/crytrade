@@ -15,15 +15,6 @@ class ApplicationController < ActionController::Base
     end)}
     @columns = [
         {name: 'symbol', align: 'left'},
-        {name: 'currency_name', align: 'left', label: 'Name'},
-        {name: 'rank', align: 'center'},
-        {name: 'price_usd', align: 'center', label: 'Price ($)',
-         get_value: lambda {|currency| present(currency.price_usd, 3)}},
-        {name: 'price_btc', align: 'center', label: 'Price (BTC)'},
-        {name: 'volume_usd_24h', align: 'center', label: '24h Volume (M$)',
-         get_value: lambda {|currency| present((currency.volume_usd_24h / 1000000).round)}},
-        {name: 'market_cap_usd', align: 'center', label: 'Market Cap (M$)',
-         get_value: lambda {|currency| present((currency.market_cap_usd / 1000000).round)}},
         {name: 'percent_change_1h', label: '1h &Delta; (%)', deco: true,
          get_value: lambda {|currency| currency.percent_change_1h}
         },
@@ -33,6 +24,15 @@ class ApplicationController < ActionController::Base
         {name: 'percent_change_7d', label: '7d &Delta; (%)', deco: true,
          get_value: lambda {|currency| currency.percent_change_7d}
         },
+        {name: 'currency_name', align: 'left', label: 'Name'},
+        {name: 'price_usd', align: 'center', label: 'Price ($)',
+         get_value: lambda {|currency| present(currency.price_usd, 3)}},
+        {name: 'price_btc', align: 'center', label: 'Price (BTC)'},
+        {name: 'volume_usd_24h', align: 'center', label: '24h Volume (M$)',
+         get_value: lambda {|currency| present((currency.volume_usd_24h / 1000000).round)}},
+        {name: 'market_cap_usd', align: 'center', label: 'Market Cap (M$)',
+         get_value: lambda {|currency| present((currency.market_cap_usd / 1000000).round)}},
+        {name: 'rank', align: 'center'},
         {name: 'cmc_link', label: 'Cmc', align: 'center',
          link: lambda {|currency| "https://coinmarketcap.com/currencies/#{currency.currency_id}/"}}
 
