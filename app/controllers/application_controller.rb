@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include TickerConcern
 
   def index
-    @currencies = TickerConcern::last_ticker.order('volume_usd_24h DESC').limit(30)
+    @currencies = TickerConcern::last_ticker.order('volume_usd_24h DESC').limit(40)
 
     @columns = [
         {name: 'symbol', align: 'left'},
