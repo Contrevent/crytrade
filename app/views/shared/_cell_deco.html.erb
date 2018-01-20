@@ -7,15 +7,17 @@
 
    code = up_code
    kind = 'info'
-   if value >= green
-     code += up_code
-     kind = 'success'
-   elsif value <= red
-     code = down_code + down_code
-     kind = 'danger'
-   elsif value < 0 && value > red
-     kind = 'warning'
-     code = down_code
+   if value != nil
+     if value >= green
+       code += up_code
+       kind = 'success'
+     elsif value <= red
+       code = down_code + down_code
+       kind = 'danger'
+     elsif value < 0 && value > red
+       kind = 'warning'
+       code = down_code
+     end
    end
 %>
 <div class="ct-chip alert-<%= kind %> text-center">

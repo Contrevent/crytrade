@@ -3,7 +3,7 @@ class CmcTickerJob < ApplicationJob
 
   def perform(*args)
     begin
-      response = RestClient::Request.execute(url: 'https://api.coinmarketcap.com/v1/ticker/', method: :get,
+      response = RestClient::Request.execute(url: 'https://api.coinmarketcap.com/v1/ticker/?limit=0', method: :get,
                                              headers: {content_type: :json, accept: :json}, verify_ssl: false)
       parsed_json = JSON.parse response.body
       total_count = 0

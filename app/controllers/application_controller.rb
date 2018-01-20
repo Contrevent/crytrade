@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include TickerConcern
 
   def index
-    @currencies = TickerConcern::last_ticker.order('volume_usd_24h DESC').limit(40)
+    @currencies = TickerConcern::last_ticker.order('volume_usd_24h DESC').limit(100)
 
     @columns = [
         {name: 'symbol', align: 'left'},
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
         {name: 'volume_usd_24h', align: 'center', label: '24h Volume (M$)',
          get_value: lambda {|currency| present((currency.volume_usd_24h / 1000000).round)}},
         {name: 'market_cap_usd', align: 'center', label: 'Market Cap (M$)',
-         get_value: lambda {|currency| present((currency.market_cap_usd / 1000000).round)}},
+         get_value: lambda {|currency| currency.market_cap_usd != nil ? present((currency.market_cap_usd / 1000000).round) : 'n.a.'}},
         {name: 'rank', align: 'center'},
         {name: 'cmc_link', label: 'Cmc', align: 'center',
          link: lambda {|currency| "https://coinmarketcap.com/currencies/#{currency.currency_id}/"}}
