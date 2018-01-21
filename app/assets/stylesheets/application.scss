@@ -10,9 +10,19 @@ body {
   overflow: hidden;
 }
 
+.ct-notif {
+  z-index: $zindex-popover;
+  position: absolute;
+  top:0;
+  left: calc(50vw - 15rem);
+  width: 30rem;
+  padding: 0.25rem 1.5rem;
+}
+
 .alert ul {
   margin-bottom: 0;
 }
+
 
 @include media-breakpoint-up(sm) {
   body {

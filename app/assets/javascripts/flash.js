@@ -7,17 +7,17 @@ $(function () {
     var flashNotice = $('#flash-notice');
 
     if (flashNotice.exists()) {
-        flashNotice.fadeOut(1500);
+        flashNotice.delay(3000).fadeOut(200);
     }
 
     var flashAlert = $('#flash-alert');
     if (flashAlert.exists()) {
-        flashAlert.fadeOut(1500);
+        flashAlert.delay(3000).fadeOut(200);
     }
 
     var flashAlert = $('#flash-error');
     if (flashAlert.exists()) {
-        flashAlert.fadeOut(2500);
+        flashAlert.delay(3000).fadeOut(200);
     }
 
 });
