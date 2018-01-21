@@ -4,6 +4,7 @@
    prefix = local_assigns.fetch(:kind)
 %>
 <%= form_with scope: :entry, url: url, method: "post" do |form| %>
+  <%= render 'shared/form_errors', record: @entry %>
 
   <div class="field form-group">
     <%= label_tag(:symbol, "Coin") %>
@@ -11,7 +12,7 @@
   </div>
 
   <div class="field form-group">
-    <%= label_tag(:count, "Amount") %>
+    <%= label_tag(:count, "Count") %>
     <%= form.text_field(:count, class: 'form-control', id: prefix + '-count') %>
   </div>
   <div class="field form-group">

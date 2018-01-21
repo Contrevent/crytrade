@@ -6,6 +6,7 @@ class LedgerController < ApplicationController
     @symbols = TickerConcern.symbols
     @entry = Ledger.new
     @balance = balance
+    @tab = 'index'
   end
 
   def update
@@ -14,29 +15,33 @@ class LedgerController < ApplicationController
   end
 
   def deposit
-    dep_params = ledger_params
-    if dep_params.permitted?
-      entry = Ledger.create(dep_params)
-      entry.user = current_user
-      entry.save
+    @entry = Ledger.create(ledger_params)
+    @entry.user = current_user
+    if @entry.save
       flash[:notice] = "Deposit created."
       redirect_to action: 'index'
     else
-      flash[:error] = "Invalid values."
+      @entries = Ledger.where(:user => current_user).order('created_at desc')
+      @symbols = TickerConcern.symbols
+      @balance = balance
+      @tab = 'deposit'
+      render 'index'
     end
   end
 
   def withdraw
-    dep_params = ledger_params
-    if dep_params.permitted?
-      entry = Ledger.create(dep_params)
-      entry.count = -entry.count
-      entry.user = current_user
-      entry.save
-      flash[:notice] = "Withdraw created."
+    @entry = Ledger.create(ledger_params)
+    @entry.count = -@entry.count
+    @entry.user = current_user
+    if @entry.save
+      flash[:notice] = "Deposit created."
       redirect_to action: 'index'
     else
-      flash[:error] = "Invalid values."
+      @entries = Ledger.where(:user => current_user).order('created_at desc')
+      @symbols = TickerConcern.symbols
+      @balance = balance
+      @tab = 'withdraw'
+      render 'index'
     end
   end
 

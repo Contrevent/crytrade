@@ -23,7 +23,6 @@
   margin-bottom: 0.5rem;
 }
 
-
 .ct-table-cell-chip {
   padding: .25rem;
   text-align: center;
@@ -47,5 +46,11 @@
 @include media-breakpoint-up(sm) {
   .ct-table-cell-deco {
     display: inline-block;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  .ct-table-body-parent {
+    max-height: calc(100vh - 9rem);
   }
 }

@@ -4,17 +4,17 @@
 
       <ul class="nav nav-pills" role="tablist">
         <li class="nav-item">
-          <a class="nav-link text-white active" data-toggle="tab" href="#tabFun" role="tab">
+          <a class="nav-link text-white <%= ' active' if @tab == 'index' %>" data-toggle="tab" href="#tabFun" role="tab">
             Funds
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" data-toggle="tab" href="#tabDep" role="tab">
+          <a class="nav-link text-white <%= ' active' if @tab == 'deposit' %>" data-toggle="tab" href="#tabDep" role="tab">
             Deposit
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" data-toggle="tab" href="#tabWit" role="tab">
+          <a class="nav-link text-white <%= ' active' if @tab == 'withdraw' %>" data-toggle="tab" href="#tabWit" role="tab">
             Withdraw
           </a>
         </li>
@@ -23,13 +23,13 @@
       <br/>
       <div class="tab-content">
         <% port_content = render 'ledger/portofolio' %>
-        <%= render 'shared/tab', active: true, id: 'tabFun', content: port_content %>
+        <%= render 'shared/tab', active: @tab == 'index', id: 'tabFun', content: port_content %>
 
         <% dep_content = render 'ledger/create_transac', prefix: 'ct-dep', kind: 'success', url: ledger_deposit_url, label: 'Deposit' %>
-        <%= render 'shared/tab', id: 'tabDep', content: dep_content %>
+        <%= render 'shared/tab', active: @tab == 'deposit', id: 'tabDep', content: dep_content %>
 
         <% wit_content = render 'ledger/create_transac', prefix: 'ct-dep', kind: 'danger', url: ledger_withdraw_url, label: 'Withdraw' %>
-        <%= render 'shared/tab', id: 'tabWit', content: wit_content %>
+        <%= render 'shared/tab', active: @tab == 'withdraw', id: 'tabWit', content: wit_content %>
       </div>
 
     </div>
