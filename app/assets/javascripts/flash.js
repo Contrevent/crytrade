@@ -15,4 +15,9 @@ $(function () {
         flashAlert.fadeOut(1500);
     }
 
+    var flashAlert = $('#flash-error');
+    if (flashAlert.exists()) {
+        flashAlert.fadeOut(2500);
+    }
+
 });

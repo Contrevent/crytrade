@@ -10,23 +10,19 @@ class TradeController < ApplicationController
   end
 
   def create
-    permitted = create_params
-    if permitted.permitted?
-      trade = Trade.new
-      trade.sell_symbol = permitted[:sell_symbol]
-      trade.sell_start_usd = permitted[:sell_start_usd]
-      trade.buy_symbol = permitted[:buy_symbol]
-      trade.start_usd = permitted[:start_usd]
-      trade.count = permitted[:count]
-      trade.init_stop_usd = permitted[:init_stop_usd]
-      trade.trailing_stop_usd = trade.init_stop_usd
-      trade.user = current_user
-      trade.save
-      start_trade trade
+    @trade = Trade.new create_params
+    @trade.trailing_stop_usd = @trade.init_stop_usd
+    @trade.stop_usd = @trade.init_stop_usd
+    @trade.user = current_user
+    if @trade.save
+      start_trade @trade
       flash[:notice] = "Trade created."
       redirect_to action: 'index'
     else
-      flash[:error] = "Invalid values."
+      @trades = Trade.where(:user => current_user, :closed => false)
+      @symbols = TickerConcern.symbols
+      @balance = balance
+      render 'index'
     end
   end
 

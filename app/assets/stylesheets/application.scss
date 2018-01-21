@@ -10,9 +10,8 @@ body {
   overflow: hidden;
 }
 
-#error_explanation h2 {
-  font-size: 0.9rem;
-  color: red;
+.alert ul {
+  margin-bottom: 0;
 }
 
 @include media-breakpoint-up(sm) {

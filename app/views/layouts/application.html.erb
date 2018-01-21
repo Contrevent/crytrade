@@ -60,11 +60,14 @@
   <div class="row justify-content-center">
     <div class="col-4">
       <br/>
-      <% if notice != nil %>
-        <div id="flash-notice" class="alert alert-info"><%= notice %></div>
+      <% if flash[:notice] %>
+        <div id="flash-notice" class="alert alert-info"><%= flash[:notice] %></div>
       <% end %>
-      <% if alert != nil %>
-        <div id="flash-alert" class="alert alert-warning"><%= alert %></div>
+      <% if flash[:alert] %>
+        <div id="flash-alert" class="alert alert-warning"><%= flash[:alert] %></div>
+      <% end %>
+      <% if flash[:error] %>
+        <div id="flash-error" class="alert alert-danger"><%= flash[:error] %></div>
       <% end %>
     </div>
   </div>
