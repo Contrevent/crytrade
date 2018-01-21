@@ -1,7 +1,9 @@
 # Crytrade
 
-* The application purpose is to allow its users to support a proper trade journal while dealing with crypto-currencies
-
+* Purpose:
+   * Providing a proper trade journal while dealing with crypto-currencies
+   * Help out in finding trade opportunities
+* [A live instance is available on heroku](https://crytrade.herokuapp.com/)
 
 ## Prerequisites
 
