@@ -48,7 +48,7 @@
 
 @include media-breakpoint-up(lg) {
   .ct-table-coins-parent {
-    max-height: calc(100vh - 9.5rem);
+    max-height: calc(100vh - 10rem);
   }
 
   // Cmc link
@@ -59,6 +59,9 @@
 }
 
 @include media-breakpoint-up(xl) {
+  // Name
+  .ct-table-coins th:nth-child(5),
+  .ct-table-coins td:nth-child(5),
   // Rank
   .ct-table-coins th:nth-child(10),
   .ct-table-coins td:nth-child(10),
