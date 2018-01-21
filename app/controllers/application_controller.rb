@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
       order_direction = 'desc'
     end
 
-    @currencies = TickerConcern::last_ticker.where('volume_usd_24h > 10000000').order("#{order_name} #{order_direction}").limit(100)
+    @currencies = TickerConcern::last_ticker.where('volume_usd_24h > 10000000').order("tickers.#{order_name} #{order_direction}").limit(100)
 
     col_defs = [
         {name: 'symbol', allow_order: true},
