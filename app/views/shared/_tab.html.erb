@@ -1,14 +1,10 @@
 <% content = local_assigns.fetch(:content)
    id = local_assigns.fetch(:id)
-   kind = local_assigns.fetch(:kind)
-   label = local_assigns.fetch(:label)
    active = local_assigns.key?(:active) ? local_assigns.fetch(:active) : false
 
 %>
 <div id="<%= id %>" role="tabpanel" class="tab-pane<%= ' active' if active %>">
-  <div class="alert alert-<%= kind %> ct-card-title">
-    <%= label %>
+  <div class="ct-card-content">
+    <%= content %>
   </div>
-  <br/>
-  <%= content %>
 </div>

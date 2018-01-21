@@ -1,0 +1,51 @@
+
+.ct-table {
+  table-layout: fixed;
+}
+
+.ct-table th {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.ct-table td {
+  padding: .25rem;
+}
+
+.ct-table-head {
+  margin-bottom: 0;
+}
+
+.ct-table-body-parent {
+  max-height: calc(60vh - 11rem);
+  overflow-y: auto;
+  margin-bottom: 0.5rem;
+}
+
+
+.ct-table-cell-chip {
+  padding: .25rem;
+  text-align: center;
+  margin: 0;
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.ct-table-cell-deco {
+  display: none;
+}
+
+.ct-table-btn {
+  padding: .25rem 1.25rem;
+}
+
+@include media-breakpoint-up(sm) {
+  .ct-table-cell-deco {
+    display: inline-block;
+  }
+}

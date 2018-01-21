@@ -1,8 +1,8 @@
 <div id="ledger">
-  <div class="card border-dark ct-card">
+  <div class="card border-dark ct-card ct-ledger-update">
     <div class="card-body text-light bg-dark">
 
-      <ul class="nav nav-pills nav-fill" role="tablist">
+      <ul class="nav nav-pills" role="tablist">
         <!--
         <li class="nav-item">
           <a class="nav-link text-white active" data-toggle="tab" href="#tabEdit" role="tab">
@@ -16,7 +16,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <%= link_to 'Cancel', ledger_index_url, class: 'nav-link text-white' %>
+          <%= link_to 'Cancel', ledger_url, class: 'nav-link text-white' %>
         </li>
       </ul>
 
@@ -24,8 +24,7 @@
       <div class="tab-content">
         <% #= render 'shared/tab', active: true, label: 'Edit', id: 'tabEdit', kind: 'primary', content: '' %>
         <% del_content = render 'shared/delete', url: ledger_destroy_path(id: @entry.id) %>
-        <%= render 'shared/tab', active:true, label: 'Delete', id: 'tabDel', kind: 'danger', content: del_content %>
-
+        <%= render 'shared/tab', active: true, id: 'tabDel', content: del_content %>
       </div>
 
     </div>

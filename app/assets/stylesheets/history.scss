@@ -1,3 +1,45 @@
 // Place all the styles related to the history controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.ct-history-index .nav-pills .nav-item:nth-child(1) .nav-link.active {
+  background-color: theme-color('secondary');
+}
+
+.ct-history-update .nav-pills .nav-item:nth-child(1) .nav-link.active {
+  background-color: theme-color('info');
+}
+
+.ct-history-update .nav-pills .nav-item:nth-child(2) .nav-link.active {
+  background-color: theme-color('danger');
+}
+
+
+.ct-table-history th:nth-child(4),
+.ct-table-history td:nth-child(4),
+.ct-table-history th:nth-child(5),
+.ct-table-history td:nth-child(5),
+.ct-table-history th:nth-child(6),
+.ct-table-history td:nth-child(6),
+.ct-table-history th:nth-child(7),
+.ct-table-history td:nth-child(7),
+.ct-table-history th:nth-child(8),
+.ct-table-history td:nth-child(8) {
+  display: none;
+}
+
+@include media-breakpoint-up(xl) {
+
+  .ct-table-history th:nth-child(4),
+  .ct-table-history td:nth-child(4),
+  .ct-table-history th:nth-child(5),
+  .ct-table-history td:nth-child(5),
+  .ct-table-history th:nth-child(6),
+  .ct-table-history td:nth-child(6),
+  .ct-table-history th:nth-child(7),
+  .ct-table-history td:nth-child(7),
+  .ct-table-history th:nth-child(8),
+  .ct-table-history td:nth-child(8) {
+    display: table-cell;
+  }
+}

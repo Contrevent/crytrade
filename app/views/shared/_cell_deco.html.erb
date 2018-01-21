@@ -20,6 +20,7 @@
      end
    end
 %>
-<div class="ct-chip alert-<%= kind %> text-center">
-  <%= "#{value} #{code}".html_safe %>
+<div class="ct-table-cell-chip alert-<%= kind %> text-center">
+  <%= if value != nil then value else 'n.a.' end %>
+  <span class="ct-table-cell-deco"><%= "#{code}".html_safe %></span>
 </div>

@@ -1,3 +1,47 @@
 // Place all the styles related to the ledger controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.ct-ledger-index .nav-pills .nav-item:nth-child(1) .nav-link.active {
+  background-color: theme-color('secondary');
+}
+
+.ct-ledger-index .nav-pills .nav-item:nth-child(2) .nav-link.active {
+  background-color: theme-color('success');
+}
+
+
+.ct-ledger-index .nav-pills .nav-item:nth-child(3) .nav-link.active {
+  background-color: theme-color('danger');
+}
+
+.ct-ledger-update .nav-pills .nav-item:nth-child(1) .nav-link.active {
+  background-color: theme-color('danger');
+}
+
+.ct-table-ledger th:nth-child(2),
+.ct-table-ledger td:nth-child(2) {
+  width: 20%;
+}
+
+.ct-table-ledger th:nth-child(6),
+.ct-table-ledger td:nth-child(6),
+.ct-table-ledger th:nth-child(7),
+.ct-table-ledger td:nth-child(7),
+.ct-table-ledger th:nth-child(8),
+.ct-table-ledger td:nth-child(8) {
+  display: none;
+}
+
+@include media-breakpoint-up(xl) {
+
+  .ct-table-ledger th:nth-child(6),
+  .ct-table-ledger td:nth-child(6),
+  .ct-table-ledger th:nth-child(7),
+  .ct-table-ledger td:nth-child(7),
+  .ct-table-ledger th:nth-child(8),
+  .ct-table-ledger td:nth-child(8) {
+    display: table-cell;
+  }
+}

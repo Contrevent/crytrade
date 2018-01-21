@@ -1,0 +1,25 @@
+
+.ct-card-title {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1rem;
+  padding: .3rem 1.25rem;
+  margin-bottom: 0;
+}
+
+.ct-card-content {
+  max-height: 30vh;
+  overflow-y: auto;
+}
+
+.ct-card-btn-submit {
+  padding: .5rem 1rem;
+}
+
+@include media-breakpoint-up(xl) {
+  .ct-card-content {
+    max-height: none;
+    overflow-y: visible;
+  }
+
+}

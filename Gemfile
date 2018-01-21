@@ -18,6 +18,8 @@ gem 'rest-client'
 gem 'devise'
 # JQuery
 gem 'jquery-rails'
+# Bootstrap 4
+gem 'bootstrap', '~> 4.0.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

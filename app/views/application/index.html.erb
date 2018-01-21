@@ -1,43 +1,45 @@
 <div class="row">
 
   <div class="col">
-    <table class="table table-striped table-dark ct-table ct-table-coins">
+    <table class="table table-striped table-dark ct-table ct-table-coins ct-table-head">
       <thead>
       <tr>
-        <% @columns.each do |col| -%>
-          <th class="text-center index-col-width"><%= col.key?(:label) ? col[:label].html_safe : col[:name].capitalize %></th>
+        <% cache @columns, expires_in: 24.hour do %>
+          <% @columns.each do |col| -%>
+            <th class="text-center index-col-width"><%= col.key?(:label) ? col[:label].html_safe : col[:name].capitalize %></th>
+          <% end %>
         <% end %>
       </tr>
       </thead>
     </table>
-    <div class="ct-coins">
+    <div class="ct-table-coins-parent">
       <table class="table table-striped table-dark ct-table ct-table-coins">
         <tbody>
-        <% cache @currency, expires_in: 4.minutes do
-          @currencies.each do |currency|  -%>
-          <tr>
-            <% @columns.each do |col| -%>
-              <td>
-                <% kind = col.key?(:kind) ? col[:kind].call(currency) : 'empty'
-                   align = col.key?(:align) ? col[:align] : 'right'
-                %>
+        <% cache @currencies, expires_in: 4.minutes do %>
+          <% @currencies.each do |currency| -%>
+            <tr>
+              <% @columns.each do |col| -%>
+                <td>
+                  <% kind = col.key?(:kind) ? col[:kind].call(currency) : 'empty'
+                     align = col.key?(:align) ? col[:align] : 'right'
+                  %>
 
-                <% if col.key?(:link) %>
-                  <div class="d-flex justify-content-center">
-                    <a class='btn btn-sm btn-outline-light ct-btn' target="_blank" href='<%= col[:link].call(currency) %>'>&#128279;</a>
-                  </div>
-                <% elsif col.key?(:deco) && col[:deco] %>
-                  <%= render 'shared/cell_deco', value: col[:get_value].call(currency) %>
-                <% else %>
-                  <div class="ct-chip alert-<%= kind %> alert-<%= align %>">
-                    <%= col.key?(:get_value) ? col[:get_value].call(currency) : currency[col[:name]] %>
-                  </div>
-                <% end %>
-              </td>
-            <% end %>
-          </tr>
-        <% end
-           end -%>
+                  <% if col.key?(:link) %>
+                    <div class="d-flex justify-content-center">
+                      <a class='btn btn-sm btn-outline-light ct-table-btn' target="_blank" href='<%= col[:link].call(currency) %>'>&#128279;</a>
+                    </div>
+                  <% elsif col.key?(:deco) && col[:deco] %>
+                    <%= render 'shared/cell_deco', value: col[:get_value].call(currency) %>
+                  <% else %>
+                    <div class="ct-table-cell-chip alert-<%= kind %> alert-<%= align %>">
+                      <%= col.key?(:get_value) ? col[:get_value].call(currency) : currency[col[:name]] %>
+                    </div>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        <% end %>
         </tbody>
       </table>
     </div>
@@ -45,8 +47,8 @@
 </div>
 <div class="row justify-content-end">
   <div class="col">
-    <% cache @last_update, expires_in: 4.minutes  do %>
-    <small class="text-light">Last update <%= time_ago_in_words(@last_update) %> ago.</small>
+    <% cache @last_update, expires_in: 4.minutes do %>
+      <small class="text-light">Last update <%= time_ago_in_words(@last_update) %> ago.</small>
     <% end %>
   </div>
 </div>

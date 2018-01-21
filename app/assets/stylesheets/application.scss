@@ -2,3 +2,44 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "bootstrap";
+
+body {
+  font-size: 1.1rem;
+  background-color: black;
+  overflow: hidden;
+}
+
+#error_explanation h2 {
+  font-size: 0.9rem;
+  color: red;
+}
+
+@include media-breakpoint-up(sm) {
+  body {
+    font-size: 1.0rem;
+  }
+}
+
+
+@include media-breakpoint-up(md) {
+
+}
+
+@include media-breakpoint-up(lg) {
+  body {
+    font-size: 0.9rem;
+  }
+
+}
+
+@include media-breakpoint-up(xl) {
+
+}
+
+@import "coins";
+@import "table-shared";
+@import "card";
+@import "trade";
+@import "ledger";
+@import "history";

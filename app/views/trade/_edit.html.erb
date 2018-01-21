@@ -13,6 +13,6 @@
   <%= render 'shared/text_row', parent: form, id: 'ct-trailing-usd', symbol: :trailing_stop_usd, label: 'Trailing Stop ($)' %>
 
   <%= form.hidden_field(:id) %>
-  <%= submit_tag("Save", class: 'btn btn-sm btn-primary', id: 'ct-save-btn') %>
+  <%= submit_tag("Save", class: 'btn btn-sm btn-primary ct-card-btn-submit', id: 'ct-save-btn') %>
 
 <% end %>

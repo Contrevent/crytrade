@@ -1,8 +1,8 @@
 <div>
-  <div class="card border-dark ct-card">
+  <div class="card border-dark ct-card ct-history-update">
     <div class="card-body text-light bg-dark">
 
-      <ul class="nav nav-pills nav-fill" role="tablist">
+      <ul class="nav nav-pills" role="tablist">
         <li class="nav-item">
           <a class="nav-link text-white active" data-toggle="tab" href="#tabOpen" role="tab">
             Open
@@ -22,10 +22,10 @@
       <div class="tab-content">
 
         <% open_content = render 'history/open' %>
-        <%= render 'shared/tab', active: true, label: 'Open trade', id: 'tabClose', kind: 'info', content: open_content %>
+        <%= render 'shared/tab', active: true, id: 'tabOpen', content: open_content %>
 
         <% del_content = render 'shared/delete', url: trade_destroy_path(id: @trade.id) %>
-        <%= render 'shared/tab', label: 'Delete trade', id: 'tabDel', kind: 'danger', content: del_content %>
+        <%= render 'shared/tab', id: 'tabDel', content: del_content %>
 
       </div>
 
