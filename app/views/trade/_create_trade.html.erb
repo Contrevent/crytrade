@@ -1,28 +1,12 @@
 <%= form_with scope: :trade, url: trade_create_url, local: true do |form| %>
 
-  <% if @trade.errors.any? %>
-    <div class="alert alert-danger">
-      <ul>
-        <% @trade.errors.full_messages.each do |msg| %>
-          <li>
-            <%= msg %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render 'shared/form_errors', record: @trade %>
 
-  <div class="field form-group">
-    <%= label_tag(:sell_symbol, "Sell") %>
-    <%= form.select(:sell_symbol, options_for_select(@symbols, 'USDT'), {}, {:id => 'ct-sell-select-symbol', :class => 'form-control'}) %>
-  </div>
+  <%= render 'shared/select_symbol', parent: form, id: 'ct-sell-select-symbol', symbol: :sell_symbol, default: 'USDT', label: 'Sell' %>
 
   <%= render 'shared/text_row', parent: form, id: 'ct-start-sell-usd', label: 'Sell Price ($)', symbol: :sell_start_usd %>
 
-  <div class="field form-group">
-    <%= label_tag(:buy_symbol, "Buy") %>
-    <%= form.select(:buy_symbol, options_for_select(@symbols, 'BTC'), {}, {:id => 'ct-select-symbol', :class => 'form-control'}) %>
-  </div>
+  <%= render 'shared/select_symbol', parent: form, id: 'ct-select-symbol', symbol: :buy_symbol, default: 'BTC', label: 'Buy' %>
 
   <%= render 'shared/text_row', parent: form, id: 'ct-new-count', label: 'Buy Count', symbol: :count %>
 

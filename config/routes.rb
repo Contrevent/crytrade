@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   }
 
   get 'application', to: 'application#index'
+  get 'about', to: 'application#about'
   get 'application/refresh'
   get 'application/ticker'
 

@@ -1,10 +1,11 @@
 <% label = local_assigns.fetch(:label)
    symbol = local_assigns.fetch(:symbol)
    id = local_assigns.fetch(:id)
+   value = local_assigns.key?(:value) ? local_assigns.fetch(:value) : ''
 %>
 <div class="field form-group row">
   <%= label_tag(symbol, label, class: 'col-sm-6 col-form-label text-secondary') %>
   <div class='col-sm-6'>
-    <input class="form-control" type="text" id="<%= id %>" readonly>
+    <input class="form-control" type="text" name="<%= symbol.to_s %>" id="<%= id %>" value="<%= value %>" readonly>
   </div>
 </div>

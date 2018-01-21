@@ -3,15 +3,16 @@ class Trade < ApplicationRecord
   include TickerConcern
 
   validates :sell_symbol, presence: true
-  validates :sell_start_usd, numericality:  {greater_than: 0}, presence: true
+  validates :sell_start_usd, numericality: {greater_than: 0}, presence: true
 
   validates :buy_symbol, presence: true
   validates :count, numericality: {greater_than: 0}, presence: true
-  validates :start_usd, numericality:  {greater_than: 0}, presence: true
-  validates :init_stop_usd, numericality:  {greater_than: 0}, presence: true
+  validates :start_usd, numericality: {greater_than: 0}, presence: true
+  validates :init_stop_usd, numericality: {greater_than: 0}, presence: true
 
-  validates :trailing_stop_usd, numericality:  {greater_than: 0}, presence: true
-  validates :stop_usd, numericality:  {greater_than: 0}
+  validates :trailing_stop_usd, numericality: {greater_than: 0}, presence: true
+  validates :stop_usd, numericality: {greater_than: 0}
+  validates :fees_usd, numericality: {greater_than_or_equal_to: 0}, presence: true
   validates :gain_loss_usd, numericality: true
 
 
@@ -24,7 +25,7 @@ class Trade < ApplicationRecord
   end
 
   def sell_count
-     -count * start_usd / sell_start_usd
+    -count * start_usd / sell_start_usd
   end
 
 end

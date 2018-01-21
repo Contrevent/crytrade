@@ -1,13 +1,9 @@
 <%= form_with scope: :trade, url: trade_update_post_url, method: "post" do |form| %>
 
-  <div class="field form-group row">
-    <%= label_tag(:buy_symbol, "Buy", class: 'col-sm-6 col-form-label') %>
-    <div class="col-sm-6">
-      <input class="form-control" type="text" placeholder="<%= @trade.buy_symbol %>" readonly>
-    </div>
-  </div>
+  <%= render 'shared/form_errors', record: @trade %>
 
-  <%= render 'shared/text_row', parent: form, id: 'ct-edit-count', symbol: :count, label: 'Amount' %>
+  <%= render 'shared/readonly_row', id:'ct-buy-symbol-ro', symbol: :buy_symbol, label: 'Buy', value: @trade.buy_symbol %>
+  <%= render 'shared/text_row', parent: form, id: 'ct-edit-count', symbol: :count, label: 'Count' %>
   <%= render 'shared/text_row', parent: form, id: 'ct-start-usd', symbol: :start_usd, label: 'Start Price ($)' %>
   <%= render 'shared/text_row', parent: form, id: 'ct-init-usd', symbol: :init_stop_usd, label: 'Initial Stop ($)' %>
   <%= render 'shared/text_row', parent: form, id: 'ct-trailing-usd', symbol: :trailing_stop_usd, label: 'Trailing Stop ($)' %>

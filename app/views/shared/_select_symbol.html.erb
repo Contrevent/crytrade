@@ -1,0 +1,10 @@
+<% label = local_assigns.fetch(:label)
+   symbol = local_assigns.fetch(:symbol)
+   id = local_assigns.fetch(:id)
+   form = local_assigns.fetch(:parent)
+   default = local_assigns.fetch(:default)
+%>
+<div class="field form-group">
+  <%= label_tag(:buy_symbol, label) %>
+  <%= form.select(symbol, options_for_select(@symbols, default), {}, {:id => id, :class => 'form-control'}) %>
+</div>

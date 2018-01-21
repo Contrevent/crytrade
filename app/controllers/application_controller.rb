@@ -43,6 +43,10 @@ class ApplicationController < ActionController::Base
     @last_update = TickerConcern::last_ticker_update
   end
 
+  def about
+
+  end
+
   def ticker
     if params.key?(:symbol)
       price = TickerConcern::last_price_usd(params[:symbol])

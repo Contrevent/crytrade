@@ -1,17 +1,12 @@
 
 $(function () {
 
-    $.fn.exists = function () {
-        return this.length !== 0;
-    };
-
     var inputCount = $('#ct-new-count');
     if (inputCount.exists()) {
         var selectSymbol = $('#ct-select-symbol');
         var inputStart = $('#ct-start-usd');
         var inputStop = $('#ct-stop-usd');
         var inputRisk = $('#ct-risk');
-        var createButton = $('#ct-create');
 
         function evalRisk() {
             try {
@@ -19,34 +14,17 @@ $(function () {
                 var start = parseFloat(inputStart.val());
                 var stop = parseFloat(inputStop.val());
                 var valid = true;
-                if (isNaN(count)) {
+                if (isNaN(count) || isNaN(start) || isNaN(stop)) {
                     valid = false;
-                    inputCount.addClass('is-invalid');
-                } else {
-                    inputCount.removeClass('is-invalid');
-                }
-                if (isNaN(start)) {
-                    valid = false;
-                    inputStart.addClass('is-invalid');
-                } else {
-                    inputStart.removeClass('is-invalid');
-                }
-                if (isNaN(stop)) {
-                    valid = false;
-                    inputStop.addClass('is-invalid');
-                } else {
-                    inputStop.removeClass('is-invalid');
                 }
                 if (!valid) {
                     inputRisk.val("n.a.");
-                    createButton.attr('disabled', 'disabled');
                 } else {
                     inputRisk.val((start - stop) * count);
-                    createButton.removeAttr('disabled');
                 }
             } catch (e) {
                 inputRisk.val("n.a.");
-                createButton.attr('disabled', 'disabled');
+
             }
         }
 

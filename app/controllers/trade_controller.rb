@@ -34,32 +34,41 @@ class TradeController < ApplicationController
   end
 
   def update_post
-    permitted = edit_params
-    if permitted.permitted?
-      trade = Trade.find(params[:trade][:id])
-      trade.update(permitted)
-      edit_trade(trade)
-      flash[:notice] = "Trade updated."
-      redirect_to action: 'index'
+    @trade = Trade.find(params[:trade][:id])
+    if @trade != nil
+      @trade.update(edit_params)
+      @trade.stop_usd = @trade.trailing_stop_usd
+      if @trade.save
+        edit_trade(@trade)
+        flash[:notice] = "Trade updated."
+        redirect_to action: 'index'
+      else
+        @trades = Trade.where(:user => current_user, :closed => false)
+        render 'update'
+      end
     else
       flash[:error] = "Invalid values."
+      redirect_to action: 'index'
     end
   end
 
   def close
-    trade = Trade.find(params[:trade][:id])
-    if trade != nil
-      trade.closed = true
-      trade.closed_at = DateTime.now
-      trade.stop_usd = params[:trade][:stop_usd]
-      trade.fees_usd = params[:trade][:fees_usd]
-      trade.sell_stop_usd = params[:trade][:sell_stop_usd]
-      trade.gain_loss_usd = (trade.stop_usd - trade.start_usd) * trade.count - trade.fees_usd
-      trade.save
-      close_trade(trade)
-      flash[:notice] = "Trade closed."
-      redirect_to controller: 'history', action: 'update', id: trade.id
+    @trade = Trade.find(params[:trade][:id])
+    if @trade != nil
+      @trade.update(close_params)
+      @trade.closed = true
+      @trade.closed_at = DateTime.now
+      @trade.gain_loss_usd = (@trade.stop_usd - @trade.start_usd) * @trade.count - @trade.fees_usd
+      if @trade.save
+        close_trade(@trade)
+        flash[:notice] = "Trade closed."
+        redirect_to controller: 'history', action: 'update', id: @trade.id
+      else
+        @trades = Trade.where(:user => current_user, :closed => false)
+        render 'update'
+      end
     else
+      flash[:error] = "Invalid values."
       redirect_to action: 'index'
     end
   end
@@ -81,6 +90,10 @@ class TradeController < ApplicationController
 
   def edit_params
     params.require(:trade).permit(:id, :sell_start_usd, :start_usd, :init_stop_usd, :count, :trailing_stop_usd)
+  end
+
+  def close_params
+    params.require(:trade).permit(:id, :stop_usd, :sell_stop_usd, :fees_usd)
   end
 
 end

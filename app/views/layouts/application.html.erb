@@ -6,7 +6,7 @@
 
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= javascript_include_tag 'application', 'jquery3', 'bootstrap.min', 'data-turbolinks-track': 'reload' %>
-
+  <%= javascript_include_tag 'selector_exists' %>
   <%= javascript_include_tag 'flash' %>
   <%= javascript_include_tag 'create_trade' %>
   <%= javascript_include_tag 'update_trade' %>
@@ -38,6 +38,9 @@
           <%= link_to "History", history_url, :class => "nav-link" %>
         </li>
       <% end %>
+      <li class="nav-item<%= ' active' if current_page?('/about')  %>">
+        <%= link_to "About", about_url, :class => "nav-link" %>
+      </li>
     </ul>
     <ul class="navbar-nav ml-auto">
       <% if user_signed_in? %>
@@ -72,7 +75,7 @@
     </div>
   </div>
 
-    <%= yield %>
+  <%= yield %>
 </div>
 </body>
 </html>

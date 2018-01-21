@@ -16,4 +16,5 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+//= require selector_exists
 //= require create_trade
