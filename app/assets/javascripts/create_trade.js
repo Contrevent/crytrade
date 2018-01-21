@@ -60,5 +60,13 @@ $(function () {
         inputCount.on('input', evalRisk);
         inputStart.on('input', evalRisk);
         inputStop.on('input', evalRisk);
+
+        sellSymbol.select2({
+            width: '100%'
+        });
+
+        selectSymbol.select2({
+            width: '100%'
+        });
     }
 });
