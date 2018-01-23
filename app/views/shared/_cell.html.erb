@@ -1,6 +1,16 @@
 <% content = local_assigns.fetch(:content)
-kind = local_assigns.key?(:kind) ? local_assigns.fetch(:kind) : nil
+   kind = local_assigns.key?(:kind) ? local_assigns.fetch(:kind) : nil
+   italic = local_assigns.key?(:italic) ? local_assigns.fetch(:italic) : false
+  align = local_assigns.key?(:align) ? local_assigns.fetch(:align) : 'center'
 %>
-<div class="ct-table-cell-chip<%= kind != nil ? ' alert-' + kind: ''%>">
-  <%= content %>
-</div>
+<% if italic %>
+  <div class="d-flex justify-content-<%= align %> ct-table-cell-chip<%= kind != nil ? ' alert-' + kind : '' %>">
+    <em>
+      <%= content %>
+    </em>
+  </div>
+<% else %>
+  <div class="d-flex justify-content-<%= align %> ct-table-cell-chip<%= kind != nil ? ' alert-' + kind : '' %>">
+    <%= content %>
+  </div>
+<% end %>

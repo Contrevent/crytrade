@@ -9,11 +9,11 @@
 
   <%= javascript_include_tag 'application', 'jquery3', 'bootstrap.min', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'select2-full' %>
-  <%= javascript_include_tag 'selector_exists' %>
   <%= javascript_include_tag 'flash' %>
   <%= javascript_include_tag 'create_trade' %>
   <%= javascript_include_tag 'update_trade' %>
   <%= javascript_include_tag 'select_ledger' %>
+  <%= javascript_include_tag 'screener' %>
 
 </head>
 
@@ -41,6 +41,10 @@
         <%= link_to "Coins", root_url, :class => "nav-link" %>
       </li>
       <% if user_signed_in? %>
+        <li class="nav-item<%= ' active' if (current_page?('/screener') or current_page?('/screener/update') or current_page?('/screener/view') or current_page?('/screener/last')) %>">
+          <%= link_to "Screeners", screener_url, :class => "nav-link" %>
+        </li>
+
         <li class="nav-item<%= ' active' if current_page?('/trade') or current_page?('/trade/update') %>">
           <%= link_to "Trades", trade_url, :class => "nav-link" %>
         </li>

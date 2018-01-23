@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  screener_job: one
+  symbol: MyString
+
+two:
+  screener_job: two
+  symbol: MyString

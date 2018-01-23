@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180117155033) do
+ActiveRecord::Schema.define(version: 20180122081059) do
 
   create_table "fiats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -30,6 +30,46 @@ ActiveRecord::Schema.define(version: 20180117155033) do
     t.datetime "updated_at", null: false
     t.index ["trade_id"], name: "index_ledgers_on_trade_id"
     t.index ["user_id"], name: "index_ledgers_on_user_id"
+  end
+
+  create_table "screener_filters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "screener_id"
+    t.string "field"
+    t.string "type"
+    t.string "operator"
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["screener_id"], name: "index_screener_filters_on_screener_id"
+  end
+
+  create_table "screener_jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "screener_id"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["screener_id"], name: "index_screener_jobs_on_screener_id"
+  end
+
+  create_table "screener_results", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "screener_job_id"
+    t.bigint "ticker_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["screener_job_id"], name: "index_screener_results_on_screener_job_id"
+    t.index ["ticker_id"], name: "index_screener_results_on_ticker_id"
+  end
+
+  create_table "screeners", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.string "name"
+    t.datetime "last_run_at"
+    t.integer "last_run_count"
+    t.integer "last_job_id", default: -1
+    t.boolean "refresh", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_screeners_on_user_id"
   end
 
   create_table "tickers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -91,5 +131,10 @@ ActiveRecord::Schema.define(version: 20180117155033) do
 
   add_foreign_key "ledgers", "trades"
   add_foreign_key "ledgers", "users"
+  add_foreign_key "screener_filters", "screeners"
+  add_foreign_key "screener_jobs", "screeners"
+  add_foreign_key "screener_results", "screener_jobs"
+  add_foreign_key "screener_results", "tickers"
+  add_foreign_key "screeners", "users"
   add_foreign_key "trades", "users"
 end

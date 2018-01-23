@@ -1,0 +1,28 @@
+<table class="table table-striped table-dark ct-table ct-table-head ct-table-screener">
+  <thead>
+  <tr>
+    <th class="text-center">Screener</th>
+    <th></th>
+  </tr>
+  </thead>
+</table>
+<div class="ct-table-body-parent">
+  <table class="table table-striped table-dark ct-table ct-table-screener">
+    <tbody>
+    <% @screeners.each do |screener|
+    -%>
+      <tr>
+        <td><%= render 'shared/cell', content: screener.name %></td>
+        <td>
+          <div class="d-flex justify-content-center">
+            <%= link_to "&#x2699".html_safe, screener_update_path(id: screener.id), class: 'btn btn-sm btn-outline-light ct-table-btn' %>
+          </div>
+        </td>
+      </tr>
+    <% end -%>
+    </tbody>
+  </table>
+</div>
+<% if @screeners.empty? %>
+  <div class="alert alert-secondary" role="alert">No entries to display</div>
+<% end %>

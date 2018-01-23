@@ -1,0 +1,16 @@
+<%= form_with scope: :filter, url: screener_new_filter_url, class: 'form-inline d-flex justify-content-center', method: "post" do |form| %>
+  <%= render 'shared/form_errors', record: @filter %>
+
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+  <%= form.select(:field, options_for_select(@fields), {}, {:class => 'form-control'}) %>
+  </div>
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+  <%= form.select(:operator, options_for_select([%w(> >), %w(>= >=), %w(< <), %w(<= <=), %w(= =)]), {}, {:class => 'form-control'}) %>
+  </div>
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <%= form.text_field(:value, class: 'form-control') %>
+  </div>
+  <%= form.hidden_field(:screener_id) %>
+
+  <%= submit_tag('Create', class: 'btn btn-sm btn-outline-success ct-card-btn-submit', id: 'ct-screener-create-btn') %>
+<% end %>

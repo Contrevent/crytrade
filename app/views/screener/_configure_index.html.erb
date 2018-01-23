@@ -1,0 +1,15 @@
+<div class="ct-screener-configure-create">
+  <ul class="nav nav-pills" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link text-white active" data-toggle="tab" href="#tabCreate" role="tab">
+        New Screener
+      </a>
+    </li>
+  </ul>
+
+  <br/>
+  <div class="tab-content">
+    <% create_content = render 'screener/create_screener' %>
+    <%= render 'shared/tab', active: true, id: 'tabCreate', content: create_content %>
+  </div>
+</div>

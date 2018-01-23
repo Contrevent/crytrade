@@ -1,0 +1,4 @@
+<% job = local_assigns.fetch(:job) %>
+<div class="ct-table-cell-chip">
+  <%= "Queued " + time_ago_in_words(job.created_at) %>
+</div>

@@ -2,7 +2,7 @@
 $(function () {
 
     var inputCount = $('#ct-new-count');
-    if (inputCount.exists()) {
+    if (inputCount.length) {
         var selectSymbol = $('#ct-select-symbol');
         var inputStart = $('#ct-start-usd');
         var inputStop = $('#ct-stop-usd');

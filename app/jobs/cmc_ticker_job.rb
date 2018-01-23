@@ -27,9 +27,14 @@ class CmcTickerJob < ApplicationJob
         Rails.logger.warn("An exception occurred while retrieving coin market cap ticker: #{e.message}")
     end
 
+    begin
+      Screener.where(refresh: true).each do |screener|
+        ScreenerJob.create(screener: screener, status: :queue)
+      end
 
-    Ticker.joins('INNER JOIN (select MAX(last_updated) as last_updated, symbol from tickers group by symbol) grouped_tk on tickers.symbol = grouped_tk.symbol and tickers.last_updated != grouped_tk.last_updated').destroy_all
-    p "Ticker count #{Ticker.count}"
+    rescue Exception => e
+      Rails.logger.warn("An exception occurred while queuing screener jobs: #{e.message}")
+    end
 
   end
 end

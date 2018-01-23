@@ -1,0 +1,17 @@
+
+<%= form_with scope: :entry, url: screener_edit_path(id: @entry.id), method: "post" do |form| %>
+  <%= render 'shared/form_errors', record: @entry %>
+
+  <div class="field form-group">
+    <%= label_tag(:name, "Name") %>
+    <%= form.text_field(:name, class: 'form-control', id: 'ct-screener-name') %>
+  </div>
+
+  <div class="field form-check mb-3">
+    <%= form.check_box(:refresh, class: 'form-check-input') %>
+    <%= label_tag(:refresh, "Auto-refresh", {class: 'form-check-label'}) %>
+
+  </div>
+
+  <%= submit_tag('Save', class: 'btn btn-sm btn-primary ct-card-btn-submit', id: 'ct-screener-create-btn') %>
+<% end %>

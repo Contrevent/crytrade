@@ -1,23 +1,18 @@
 $(function () {
 
-    $.fn.exists = function () {
-        return this.length !== 0;
-    };
-
     var flashNotice = $('#flash-notice');
-
-    if (flashNotice.exists()) {
+    if (flashNotice.length) {
         flashNotice.delay(3000).fadeOut(200);
     }
 
     var flashAlert = $('#flash-alert');
-    if (flashAlert.exists()) {
+    if (flashAlert.length) {
         flashAlert.delay(3000).fadeOut(200);
     }
 
-    var flashAlert = $('#flash-error');
-    if (flashAlert.exists()) {
-        flashAlert.delay(3000).fadeOut(200);
+    var flashError = $('#flash-error');
+    if (flashError.length) {
+        flashError.delay(3000).fadeOut(200);
     }
 
 });

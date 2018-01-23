@@ -1,0 +1,12 @@
+<% job = local_assigns.fetch(:job) %>
+<div class="ct-table-cell-chip">
+  <% if job.queue? %>
+    <span class="badge badge-primary">Queued</span>
+  <% elsif job.running? %>
+    <span class="badge badge-warning">Running</span>
+  <% elsif job.done? %>
+    <span class="badge badge-success">Done</span>
+  <% else %>
+    <span class="badge badge-secondary"><em>Cancelled</em></span>
+  <% end %>
+</div>

@@ -1,0 +1,49 @@
+// Place all the styles related to the screener_controller controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.ct-screener-main .nav-pills .nav-item:nth-child(1) .nav-link.active {
+  background-color: theme-color('success');
+}
+
+.ct-screener-main .nav-pills .nav-item:nth-child(2) .nav-link.active {
+  background-color: theme-color('info');
+}
+
+.ct-screener-configure-create .nav-pills .nav-item:nth-child(1) .nav-link.active {
+  background-color: theme-color('success');
+}
+
+.ct-screener-configure-update .nav-pills .nav-item:nth-child(1) .nav-link.active {
+  background-color: theme-color('info');
+}
+
+.ct-screener-configure-update .nav-pills .nav-item:nth-child(2) .nav-link.active {
+  background-color: theme-color('primary');
+}
+
+.ct-screener-configure-update .nav-pills .nav-item:nth-child(3) .nav-link.active {
+  background-color: theme-color('danger');
+}
+
+.ct-table-screener th:last-child, .ct-table-screener td:last-child {
+  width: 20%
+}
+
+.ct-screener-view .card-body {
+  padding: 0.75rem 1rem;
+
+}
+
+.ct-screener-view .ct-table-coins-parent {
+  max-height: calc(100vh - 14rem);
+}
+
+.ct-screener-content {
+  max-height: calc(100vh - 12rem);
+  overflow-y: auto;
+}
+
+.ct-card-grey {
+  background-color: $gray-900;
+}

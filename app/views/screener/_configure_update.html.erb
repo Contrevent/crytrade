@@ -1,0 +1,36 @@
+<div class="ct-screener-configure-update">
+  <ul class="nav nav-pills" role="tablist">
+
+    <li class="nav-item">
+      <a class="nav-link text-white active" data-toggle="tab" href="#tabFilters" role="tab">
+        Filters
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link text-white" data-toggle="tab" href="#tabUpdate" role="tab">
+        Edit
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link text-white" data-toggle="tab" href="#tabDel" role="tab">
+        Delete
+      </a>
+    </li>
+    <li class="nav-item">
+      <%= link_to 'Cancel', screener_configure_url, class: 'nav-link text-white' %>
+    </li>
+  </ul>
+
+  <br/>
+  <div class="tab-content">
+    <% filters_content = render 'screener/filters' %>
+    <%= render 'shared/tab', active: true, id: 'tabFilters', content: filters_content %>
+    <% #= render 'shared/tab', active: true, label: 'Edit', id: 'tabEdit', kind: 'primary', content: '' %>
+    <% edit_content = render 'screener/update_screener' %>
+    <%= render 'shared/tab', active: false, id: 'tabUpdate', content: edit_content %>
+    <% del_content = render 'shared/delete', url: screener_destroy_path(id: @entry.id) %>
+    <%= render 'shared/tab', active: false, id: 'tabDel', content: del_content %>
+  </div>
+</div>

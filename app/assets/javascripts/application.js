@@ -17,6 +17,6 @@
 //= require select2-full
 //= require turbolinks
 //= require_tree .
-//= require selector_exists
 //= require create_trade
 //= require select_ledger
+//= require screener

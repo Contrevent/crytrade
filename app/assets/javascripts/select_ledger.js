@@ -1,12 +1,12 @@
 $(function () {
 
     var selectDeposit = $('#success-symbol');
-    if (selectDeposit.exists()) {
+    if (selectDeposit.length) {
         selectDeposit.select2({width: '100%'});
     }
 
     var selectWithdraw = $('#danger-symbol');
-    if (selectWithdraw.exists()) {
+    if (selectWithdraw.length) {
         selectWithdraw.select2({width: '100%'});
     }
 

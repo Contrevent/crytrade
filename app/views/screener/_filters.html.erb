@@ -1,0 +1,34 @@
+<table class="table table-dark table-striped">
+  <tbody>
+  <% @filters.each do |filter| p filter %>
+    <tr>
+      <td>
+        <div class="ct-table-cell-chip"><%= filter[:label] %></div>
+      </td>
+      <td>
+        <div class="ct-table-cell-chip"><%= filter['operator'] %></div>
+      </td>
+      <td>
+        <div class="ct-table-cell-chip"><%= filter['value'] %></div>
+      </td>
+      <td>
+        <%= link_to "Edit".html_safe, screener_update_filter_path(id: filter['id'], screener_id: filter['screener_id']),
+                    class: 'btn btn-sm btn-outline-primary ct-table-btn' %>
+        <%= link_to "Del".html_safe, screener_destroy_filter_path(id: filter['id'], screener_id: filter['screener_id']),
+                    class: 'btn btn-sm btn-outline-danger ct-table-btn' %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% if @filters.empty? %>
+  <div class="alert alert-secondary" role="alert">No filters to display</div>
+<% end %>
+<br/>
+
+<% case @filter_action
+     when 'new' %>
+  <%= render 'screener/create_filter' %>
+<% when 'edit' %>
+  <%= render 'screener/update_filter' %>
+<% end %>

@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col ct-screener-view">
+    <div class="card border-dark ct-card">
+      <div class="card-body text-light bg-dark">
+        <div class="d-flex justify-content-between mb-1">
+
+          <div>
+            <% count = @currencies.empty? ? 0 : @currencies.count %>
+            <h5 class="text-light d-inline m-0">
+              <span class="badge badge-<%= (count > 0) ? 'primary' : 'secondary' %>"><%= count %></span>
+              <%= @job.screener.name %>
+            </h5>
+            <small class="text-light"><%= ' ran on ' + @job.updated_at.strftime('%b-%d, at %H:%M') %></small>
+            <span class="badge badge-secondary"><%= time_ago_in_words(@job.updated_at) + ' ago' %></span>
+            <% if current_page?('/screener/last') and @job.screener.refresh %>
+              <span class="badge badge-success">Auto-refresh</span>
+              <%= hidden_field_tag('screener-refresh') %>
+            <% end %>
+          </div>
+
+          <%= link_to 'Back', screener_url, class: 'p-2 text-light' %>
+        </div>
+        <%= render 'screener/coins', screener_id: @job.screener.id %>
+
+      </div>
+    </div>
+  </div>
+</div>
