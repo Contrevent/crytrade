@@ -62,6 +62,10 @@
     <ul class="navbar-nav ml-auto">
 
       <% if user_signed_in? %>
+        <li class="nav-item<%= ' active' if current_page?('/settings') %>">
+          <%= link_to "Settings", settings_url, :class => "nav-link" %>
+        </li>
+
         <li class="nav-item<%= ' active' if current_page?('/users/sign_out') %>">
           <%= link_to "Logout", destroy_user_session_path, :class => "nav-link" %>
         </li>

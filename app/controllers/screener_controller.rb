@@ -121,8 +121,8 @@ class ScreenerController < ApplicationController
     order_name, order_direction = TickerConcern::parse_order params
     @job = ScreenerJob.find(params[:id])
     if @job != nil
-      @columns = TickerConcern::columns(order_name, order_direction,
-                                        lambda {|name, direction| screener_view_path(id: @job.id, col: name, dir: direction)})
+      @columns = tick_columns(order_name, order_direction,
+                              lambda {|name, direction| screener_view_path(id: @job.id, col: name, dir: direction)})
 
       @currencies = sort_result(@job, order_name, order_direction)
     else
@@ -137,8 +137,8 @@ class ScreenerController < ApplicationController
     if screener.last_job_id > -1
       @job = ScreenerJob.find(screener.last_job_id)
       if @job != nil
-        @columns = TickerConcern::columns(order_name, order_direction,
-                                          lambda {|name, direction| screener_last_path(id: screener.id, col: name, dir: direction)})
+        @columns = tick_columns(order_name, order_direction,
+                                lambda {|name, direction| screener_last_path(id: screener.id, col: name, dir: direction)})
         @currencies = sort_result(@job, order_name, order_direction)
         if screener.refresh
           @refresh = true

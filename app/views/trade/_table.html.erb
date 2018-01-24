@@ -4,12 +4,12 @@
     <th class="text-center">Created at</th>
     <th class="text-center">Pair</th>
     <th class="text-center">Buy</th>
-    <th class="text-center">Start ($)</th>
-    <th class="text-center">Current ($)</th>
-    <th class="text-center">&Delta; ($)</th>
-    <th class="text-center">Trailing ($)</th>
-    <th class="text-center">Init ($)</th>
-    <th class="text-center">Risk</th>
+    <th class="text-center">Start (<%= ref_char %>)</th>
+    <th class="text-center">Current (<%= ref_char %>)</th>
+    <th class="text-center">&Delta; (<%= ref_char %>)</th>
+    <th class="text-center">Trailing (<%= ref_char %>)</th>
+    <th class="text-center">Init (<%= ref_char %>)</th>
+    <th class="text-center">Risk (<%= ref_char %>)</th>
     <th></th>
   </tr>
   </thead>
@@ -19,36 +19,37 @@
     <tbody>
 
     <% @trades.each do |trade| -%>
+
       <tr>
         <td><%= render 'shared/cell', content: trade.created_at.strftime('%b-%d %H:%M') %></td>
         <td>
           <%= render 'shared/cell', content: "#{trade.sell_symbol}/#{trade.buy_symbol}" %>
         </td>
         <td>
-          <%= render 'shared/cell', content: "#{trade.count.abs.round(3)} #{trade.buy_symbol}" %>
+          <%= render 'shared/cell', content: "#{num_norm(trade.count)} #{trade.buy_symbol}" %>
         </td>
         <td>
-          <%= render 'shared/cell', content: trade.start_usd %>
+          <%= render 'shared/cell', content: usd_to_ref_fine(trade.start_usd) %>
         </td>
         <td>
-          <%= render 'shared/cell', content: trade.current_usd == -1 ? 'n.a.' : trade.current_usd %>
+          <%= render 'shared/cell', content: trade.current_usd == -1 ? 'n.a.' : usd_to_ref_fine(trade.current_usd) %>
         </td>
         <td>
           <% if trade.current_usd != -1
                current_total = (trade.current_usd - trade.start_usd) * trade.count
           %>
-            <%= render 'shared/cell_deco', value: current_total, red: -100, green: 100 %>
+            <%= render 'shared/cell_deco', value: usd_to_ref_norm(current_total), red: -100, green: 100 %>
           <% end %>
         </td>
         <td>
-          <%= render 'shared/cell', content: trade.trailing_stop_usd %>
+          <%= render 'shared/cell', content: usd_to_ref_fine(trade.trailing_stop_usd) %>
         </td>
         <td>
-          <%= render 'shared/cell', content: trade.init_stop_usd %>
+          <%= render 'shared/cell', content: usd_to_ref_fine(trade.init_stop_usd) %>
         </td>
         <td>
           <% risk = (trade.trailing_stop_usd - trade.start_usd) * trade.count %>
-          <%= render 'shared/cell_deco', value: risk, red: -100, green: 100 %>
+          <%= render 'shared/cell_deco', value: usd_to_ref_norm(risk), red: -100, green: 100 %>
         </td>
         <td>
           <div class="d-flex justify-content-center">

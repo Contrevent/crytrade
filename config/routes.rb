@@ -42,6 +42,8 @@ Rails.application.routes.draw do
   get 'about', to: 'home#about'
   get 'refresh', to: 'home#refresh'
   get 'ticker', to: 'home#ticker'
+  get 'settings', to: 'home#settings'
+  post 'post_settings', to:'home#post_settings'
 
   root 'home#index'
 

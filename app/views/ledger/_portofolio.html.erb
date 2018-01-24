@@ -3,7 +3,7 @@
   <tr>
     <th class="ledger-col-width text-center">Symbol</th>
     <th class="ledger-col-width text-center">Balance</th>
-    <th class="ledger-col-width text-center">Balance ($)</th>
+    <th class="ledger-col-width text-center">Balance (<%= ref_char %>)</th>
 
   </tr>
   </thead>
@@ -13,26 +13,26 @@
   %>
   <% @balance.each do |entry| %>
     <% price_usd = entry.current_usd
-      balance_usd = 'n.a.'
+       balance_usd = 'n.a.'
        if price_usd != -1
          balance_usd = entry.count * price_usd
          total_usd += balance_usd
-         next if balance_usd.abs < 0.1 || entry.count < 0.0001
+         next if balance_usd.abs < 0.1 || entry.count.abs < 0.0001
        end
 
     %>
     <tr>
       <td><%= render 'shared/cell', content: entry.symbol %></td>
-      <td><%= render 'shared/cell', content: entry.count.round(3) %></td>
-      <td><%= render 'shared/cell', content: balance_usd.round(2) %></td>
+      <td><%= render 'shared/cell', content: num_norm(entry.count) %></td>
+      <td><%= render 'shared/cell', content: usd_to_ref_norm(balance_usd) %></td>
     </tr>
   <% end %>
   </tbody>
   <tfoot>
   <tr>
-    <td><%= render 'shared/cell', content:'Total ($)'%></td>
+    <td><%= render 'shared/cell', content: "Total (#{ref_char})" %></td>
     <td></td>
-    <td><%= render 'shared/cell', content:total_usd.round(2) %></td>
+    <td><%= render 'shared/cell', content: usd_to_ref_norm(total_usd) %></td>
   </tr>
   </tfoot>
 </table>

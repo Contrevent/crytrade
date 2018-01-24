@@ -1,0 +1,13 @@
+<%= form_with scope: :user, url: post_settings_url, local: true do |form| %>
+
+  <%= render 'shared/form_errors', record: @user %>
+
+  <%= render 'shared/select_symbol', parent: form, id: 'ct-ref-select-symbol', symbol: :reference_symbol, default: @user.reference_symbol, label: 'Symbol' %>
+
+  <%= render 'shared/text_row', parent: form, id: 'ct-ref-char', label: 'Abbr.', symbol: :reference_character %>
+
+  <%= render 'shared/text_row', parent: form, id: 'ct-ref-pres', label: 'Base precision', symbol: :reference_precision %>
+
+  <%= submit_tag("Save", id: 'ct-create', class: 'btn btn-sm btn-primary ct-card-btn-submit') %>
+
+<% end %>

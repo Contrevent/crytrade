@@ -6,9 +6,9 @@
     <th class="ledger-col-width text-center">Symbol</th>
     <th class="ledger-col-width text-center">Debit</th>
     <th class="ledger-col-width text-center">Credit</th>
-    <th class="ledger-col-width text-center">Dev/$</th>
-    <th class="ledger-col-width text-center">Debit ($)</th>
-    <th class="ledger-col-width text-center">Credit ($)</th>
+    <th class="ledger-col-width text-center">Dev/<%= ref_char %></th>
+    <th class="ledger-col-width text-center">Debit (<%= ref_char %>)</th>
+    <th class="ledger-col-width text-center">Credit (<%= ref_char %>)</th>
     <th class="ledger-col-width text-center"></th>
 
   </tr>
@@ -26,11 +26,11 @@
         <td><%= render 'shared/cell', content: ledger.created_at.strftime('%b-%d %H:%M') %></td>
         <td class="ledger-lg-col-width"><%= render 'shared/cell', content: ledger.description %></td>
         <td><%= render 'shared/cell', content: ledger.symbol %></td>
-        <td><%= render 'shared/cell', content: -amount_dev if ledger.count < 0 %></td>
-        <td><%= render 'shared/cell', content: amount_dev if ledger.count > 0 %></td>
-        <td><%= render 'shared/cell', content: current_usd %></td>
-        <td><%= render 'shared/cell', content: -amount_usd if amount_usd < 0 %></td>
-        <td><%= render 'shared/cell', content: amount_usd if amount_usd > 0 %></td>
+        <td><%= render 'shared/cell', content: -num_norm(amount_dev) if ledger.count < 0 %></td>
+        <td><%= render 'shared/cell', content: num_norm(amount_dev) if ledger.count > 0 %></td>
+        <td><%= render 'shared/cell', content: usd_to_ref_fine(current_usd) %></td>
+        <td><%= render 'shared/cell', content: -usd_to_ref_norm(amount_usd) if amount_usd < 0 %></td>
+        <td><%= render 'shared/cell', content: usd_to_ref_norm(amount_usd) if amount_usd > 0 %></td>
         <td>
           <div class="d-flex justify-content-center">
             <%

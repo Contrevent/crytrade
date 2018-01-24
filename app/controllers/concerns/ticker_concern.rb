@@ -1,5 +1,6 @@
 module TickerConcern
   extend ActiveSupport::Concern
+  include RefConcern
 
   def self.last_ticker
     Rails.cache.fetch('#cry_trade/tickers', expires_in: 1.minute) do
@@ -18,8 +19,8 @@ module TickerConcern
     [order_name, order_direction]
   end
 
-  def self.columns(order_name = 'volume_usd_24h', order_direction = 'desc', order_path)
-    [
+  def tick_columns(order_name = 'volume_usd_24h', order_direction = 'desc', order_path)
+    cols = [
         {name: 'symbol', allow_order: true},
         {name: 'percent_change_1h', allow_order: true, label: '1h &Delta; (%)', deco: true,
          get_value: lambda {|currency| currency.percent_change_1h}
@@ -32,18 +33,25 @@ module TickerConcern
         },
         {name: 'currency_name', allow_order: true, label: 'Name'},
         {name: 'price_usd', allow_order: true, label: 'Price ($)',
-         get_value: lambda {|currency| TickerConcern::present(currency.price_usd, 3)}},
-        {name: 'price_btc', allow_order: true, label: 'Price (BTC)'},
+         get_value: lambda {|currency| num_fine(currency.price_usd)}},
         {name: 'volume_usd_24h', allow_order: true, label: '24h Vol. (M$)',
-         get_value: lambda {|currency| TickerConcern::present((currency.volume_usd_24h / 1000000).round)}},
+         get_value: lambda {|currency| num_norm((currency.volume_usd_24h / 1000000).round)}},
         {name: 'market_cap_usd', allow_order: true, label: 'Market Cap (M$)',
          get_value: lambda {|currency| currency.market_cap_usd != nil ?
-                                           TickerConcern::present((currency.market_cap_usd / 1000000).round) : 'n.a.'}},
+                                           num_norm((currency.market_cap_usd / 1000000).round) : 'n.a.'}},
         {name: 'rank', allow_order: true},
         {name: 'cmc_link', allow_order: false, label: 'Cmc',
          link: lambda {|currency| "https://coinmarketcap.com/currencies/#{currency.currency_id}/"}}
 
-    ].map {|col_def| TickerConcern::decorate_order(col_def, order_name, order_direction, order_path)}
+    ]
+    if ref_coin == 'USD'
+      cols = cols.insert(6, {name: 'price_btc', allow_order: true, label: 'Price (BTC)',
+                             get_value: lambda {|currency| num_fine(currency.price_btc)}})
+    else
+      cols = cols.insert(6, {name: 'price_' + ref_coin, allow_order: true, label: "Price (#{ref_char})",
+                             get_value: lambda {|currency| usd_to_ref_fine(currency.price_usd)}})
+    end
+    cols.map {|col_def| TickerConcern::decorate_order(col_def, order_name, order_direction, order_path)}
   end
 
   def self.last_ticker_update
@@ -69,7 +77,7 @@ module TickerConcern
 
   def self.decorate_order(col_def, order_name, order_direction, order_path)
     if col_def[:name] == order_name
-      return col_def.merge({direction: order_direction, path:order_path.call(col_def[:name], order_direction == 'desc' ? 'asc' : 'desc')})
+      return col_def.merge({direction: order_direction, path: order_path.call(col_def[:name], order_direction == 'desc' ? 'asc' : 'desc')})
     end
     col_def.merge({path: order_path.call(col_def[:name], 'desc')})
   end
@@ -88,17 +96,5 @@ module TickerConcern
       currencies
     end
   end
-
-
-  def self.helper
-    @@helper ||= Class.new do
-      include ActionView::Helpers::NumberHelper
-    end.new
-  end
-
-  def self.present(value, precision = 0)
-    TickerConcern.helper.number_with_delimiter(value, precision: precision, delimiter: ' ')
-  end
-
 
 end

@@ -6,10 +6,10 @@
     <th class="trade-col-width text-center">Pair</th>
     <th class="trade-col-width text-center">Sell</th>
     <th class="trade-col-width text-center">Buy</th>
-    <th class="trade-col-width text-center">Start ($)</th>
-    <th class="trade-col-width text-center">Stop ($)</th>
-    <th class="trade-col-width text-center">Fee ($)</th>
-    <th class="trade-col-width text-center">&Delta; ($)</th>
+    <th class="trade-col-width text-center">Start (<%= ref_char %>)</th>
+    <th class="trade-col-width text-center">Stop (<%= ref_char %>)</th>
+    <th class="trade-col-width text-center">Fee (<%= ref_char %>)</th>
+    <th class="trade-col-width text-center">&Delta; (<%= ref_char %>)</th>
     <th class="trade-col-width text-center"></th>
   </tr>
   </thead>
@@ -30,23 +30,23 @@
           <%= render 'shared/cell', content: "#{trade.sell_symbol}/#{trade.buy_symbol}" %>
         </td>
         <td>
-          <%= render 'shared/cell', content: "#{trade.sell_count.abs.round(3)} #{trade.sell_symbol}" %>
+          <%= render 'shared/cell', content: "#{num_norm(trade.sell_count.abs)} #{trade.sell_symbol}" %>
         </td>
         <td>
-          <%= render 'shared/cell', content: "#{trade.count} #{trade.buy_symbol}" %>
+          <%= render 'shared/cell', content: "#{num_norm(trade.count)} #{trade.buy_symbol}" %>
         </td>
         <td>
-          <%= render 'shared/cell', content: trade.start_usd * trade.count %>
+          <%= render 'shared/cell', content: usd_to_ref_norm(trade.start_usd * trade.count) %>
         </td>
         <td>
-          <%= render 'shared/cell', content: trade.stop_usd * trade.count %>
+          <%= render 'shared/cell', content: usd_to_ref_norm(trade.stop_usd * trade.count) %>
         </td>
         <td>
-          <%= render 'shared/cell', content: trade.fees_usd %>
+          <%= render 'shared/cell', content: usd_to_ref_norm(trade.fees_usd) %>
         </td>
         <td>
           <% current_total = (trade.stop_usd - trade.start_usd) * trade.count - trade.fees_usd %>
-          <%= render 'shared/cell_deco', value: current_total, red: -100, green: 100 %>
+          <%= render 'shared/cell_deco', value: usd_to_ref_norm(current_total), red: -100, green: 100 %>
         </td>
         <td>
           <div class="d-flex justify-content-center">
