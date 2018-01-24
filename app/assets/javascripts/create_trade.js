@@ -42,7 +42,7 @@ $(function () {
 
         function loadSellTicker() {
             sellStart.val(0);
-            $.get("/application/ticker?symbol=" + sellSymbol.val(), function (result) {
+            $.get("/ticker?symbol=" + sellSymbol.val(), function (result) {
                 var price = result && result.price;
                 if (price) {
                     sellStart.val(price);
@@ -55,7 +55,7 @@ $(function () {
 
         function loadTicker() {
             inputCount.val(0);
-            $.get("/application/ticker?symbol=" + selectSymbol.val(), function (result) {
+            $.get("/ticker?symbol=" + selectSymbol.val(), function (result) {
                 var price = result && result.price;
                 if (price) {
                     inputStart.val(price);

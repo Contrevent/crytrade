@@ -36,12 +36,45 @@
 }
 
 .ct-screener-view .ct-table-coins-parent {
-  max-height: calc(100vh - 14rem);
+  max-height: calc(100vh - 18rem);
 }
 
-.ct-screener-content {
-  max-height: calc(100vh - 12rem);
-  overflow-y: auto;
+.ct-screener-content .ct-card-content{
+  max-height: calc(100vh - 16.5rem);
+}
+
+.ct-screener-content .ct-table-body-parent {
+  max-height: none;
+}
+
+@include media-breakpoint-up(sm) {
+  .ct-screener-view .ct-table-coins-parent {
+    max-height: calc(100vh - 16.5rem);
+  }
+
+  .ct-screener-content .ct-card-content {
+    max-height: calc(100vh - 15.5rem);
+    overflow-y: auto;
+  }
+
+  .ct-screener-content .ct-table-body-parent {
+    max-height: none;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .ct-screener-view .ct-table-coins-parent {
+    max-height: calc(100vh - 16rem);
+  }
+
+  .ct-screener-content .ct-card-content {
+    max-height: calc(100vh - 14.8rem);
+    overflow-y: auto;
+  }
+
+  .ct-screener-content .ct-table-body-parent {
+    max-height: none;
+  }
 }
 
 .ct-card-grey {

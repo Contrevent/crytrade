@@ -36,7 +36,7 @@ module TickerConcern
   end
 
   def self.last_ticker_update
-    Rails.cache.fetch('#cry_trade/tickers_update', expires_in: 4.minute) do
+    Rails.cache.fetch('#cry_trade/tickers_update', expires_in: 30.seconds) do
       Ticker.maximum(:updated_at)
     end
   end

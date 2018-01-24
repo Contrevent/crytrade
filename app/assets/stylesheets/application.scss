@@ -23,6 +23,30 @@ body {
   margin-bottom: 0;
 }
 
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  line-height: 1.5;
+}
+
+.footer a.nav-link {
+  color: gray('500');
+}
+
+.footer li.active a.nav-link {
+  color: gray('100');
+}
+
+.footer mark {
+  background-color: inherit;
+  color: gray('100');
+}
+
+.footer .navbar {
+  padding: 0;
+}
+
 
 @include media-breakpoint-up(sm) {
   body {

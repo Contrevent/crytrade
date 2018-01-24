@@ -1,7 +1,7 @@
 
 
 .ct-table-coins-parent {
-  max-height: calc(100vh - 11rem);
+  max-height: calc(100vh - 13rem);
   overflow-y: auto;
 }
 
@@ -33,7 +33,7 @@
   }
 
   .ct-table-coins-parent {
-    max-height: calc(100vh - 10rem);
+    max-height: calc(100vh - 12.5rem);
   }
 }
 
@@ -48,7 +48,7 @@
 
 @include media-breakpoint-up(lg) {
   .ct-table-coins-parent {
-    max-height: calc(100vh - 10rem);
+    max-height: calc(100vh - 12rem);
   }
 
   // Cmc link

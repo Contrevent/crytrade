@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get 'screener', to: 'screener#index'
   post 'screener/new'
   get 'screener/configure'
@@ -37,12 +38,12 @@ Rails.application.routes.draw do
       registrations: 'users/registrations'
   }
 
-  get 'application', to: 'application#index'
-  get 'about', to: 'application#about'
-  get 'application/refresh'
-  get 'application/ticker'
+  get 'home', to: 'home#index'
+  get 'about', to: 'home#about'
+  get 'refresh', to: 'home#refresh'
+  get 'ticker', to: 'home#ticker'
 
-  root 'application#index'
+  root 'home#index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
