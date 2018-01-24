@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
     @currencies = TickerConcern::last_ticker.where('volume_usd_24h > 10000000').order("tickers.#{order_name} #{order_direction}").limit(100)
     @columns = TickerConcern::columns(order_name, order_direction, lambda {|name, direction| root_path(col: name, dir:direction)})
     @last_update = TickerConcern::last_ticker_update
+    @refresh = true
   end
 
   def about

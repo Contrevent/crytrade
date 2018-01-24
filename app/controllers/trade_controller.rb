@@ -7,6 +7,7 @@ class TradeController < ApplicationController
     @symbols = TickerConcern.symbols
     @trade = Trade.new
     @balance = balance
+    @refresh = true
   end
 
   def create

@@ -19,4 +19,4 @@
 //= require_tree .
 //= require create_trade
 //= require select_ledger
-//= require screener
+//= require refresh.js

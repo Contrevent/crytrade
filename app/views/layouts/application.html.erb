@@ -13,7 +13,7 @@
   <%= javascript_include_tag 'create_trade' %>
   <%= javascript_include_tag 'update_trade' %>
   <%= javascript_include_tag 'select_ledger' %>
-  <%= javascript_include_tag 'screener' %>
+  <%= javascript_include_tag 'refresh' %>
 
 </head>
 
@@ -62,6 +62,7 @@
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
+
       <% if user_signed_in? %>
         <li class="nav-item<%= ' active' if current_page?('/users/sign_out') %>">
           <%= link_to "Logout", destroy_user_session_path, :class => "nav-link" %>
@@ -73,6 +74,9 @@
         <li class="nav-item<%= ' active' if current_page?('/users/sign_in') %>">
           <%= link_to "Login", new_user_session_path, :class => "nav-link" %>
         </li>
+      <% end %>
+      <% if defined? @refresh %>
+        <%= render 'shared/refresh' %>
       <% end %>
     </ul>
   </div>

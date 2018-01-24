@@ -150,6 +150,9 @@ class ScreenerController < ApplicationController
         @columns = TickerConcern::columns(order_name, order_direction,
                                           lambda {|name, direction| screener_last_path(id: screener.id, col: name, dir: direction)})
         @currencies = sort_result(@job, order_name, order_direction)
+        if screener.refresh
+          @refresh = true
+        end
         render 'view'
       else
         redirect_to action: 'index'
