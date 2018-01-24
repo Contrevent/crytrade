@@ -20,18 +20,18 @@ class CmcTickerJob < ApplicationJob
                          :last_updated => currency['last_updated'])
           update_count += 1
         end
-          total_count += 1
+        total_count += 1
       end
       p "Tickers updated #{update_count} out of #{total_count}"
     rescue Exception => e
-        Rails.logger.warn("An exception occurred while retrieving coin market cap ticker: #{e.message}")
+      Rails.logger.warn("An exception occurred while retrieving coin market cap ticker: #{e.message}")
     end
 
     begin
       Screener.where(refresh: true).each do |screener|
         ScreenerJob.create(screener: screener, status: :queue)
       end
-
+      ScreenerMainJob.perform_later
     rescue Exception => e
       Rails.logger.warn("An exception occurred while queuing screener jobs: #{e.message}")
     end
