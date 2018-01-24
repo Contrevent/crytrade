@@ -2,13 +2,24 @@ module TickerConcern
   extend ActiveSupport::Concern
 
   def self.last_ticker
-    Rails.cache.fetch('#cry_trade/tickers', expires_in: 4.minute) do
+    Rails.cache.fetch('#cry_trade/tickers', expires_in: 1.minute) do
       Ticker.joins('INNER JOIN (select MAX(last_updated) as last_updated, symbol from tickers group by symbol) grouped_tk on tickers.symbol = grouped_tk.symbol and tickers.last_updated = grouped_tk.last_updated')
     end
   end
 
+  def self.parse_order(params)
+    if params.key? (:col) and params.key? (:dir)
+      order_name = params[:col]
+      order_direction = params[:dir] == 'asc' ? 'asc' : 'desc'
+    else
+      order_name = 'volume_usd_24h'
+      order_direction = 'desc'
+    end
+    [order_name, order_direction]
+  end
+
   def self.columns(order_name = 'volume_usd_24h', order_direction = 'desc', order_path)
-    col_defs = [
+    [
         {name: 'symbol', allow_order: true},
         {name: 'percent_change_1h', allow_order: true, label: '1h &Delta; (%)', deco: true,
          get_value: lambda {|currency| currency.percent_change_1h}

@@ -1,4 +1,6 @@
 class ScreenerController < ApplicationController
+  include TickerConcern
+
   def index
     @screeners = Screener.where(user: current_user)
     @entry = Screener.new
@@ -116,13 +118,7 @@ class ScreenerController < ApplicationController
   end
 
   def view
-    if params.key? (:col) and params.key? (:dir)
-      order_name = params[:col]
-      order_direction = params[:dir] == 'asc' ? 'asc' : 'desc'
-    else
-      order_name = 'volume_usd_24h'
-      order_direction = 'desc'
-    end
+    order_name, order_direction = TickerConcern::parse_order params
     @job = ScreenerJob.find(params[:id])
     if @job != nil
       @columns = TickerConcern::columns(order_name, order_direction,
@@ -136,13 +132,7 @@ class ScreenerController < ApplicationController
 
   def last
     ScreenerMainJob.perform_later
-    if params.key? (:col) and params.key? (:dir)
-      order_name = params[:col]
-      order_direction = params[:dir] == 'asc' ? 'asc' : 'desc'
-    else
-      order_name = 'volume_usd_24h'
-      order_direction = 'desc'
-    end
+    order_name, order_direction = TickerConcern::parse_order params
     screener = Screener.find(params[:id])
     if screener.last_job_id > -1
       @job = ScreenerJob.find(screener.last_job_id)
