@@ -215,7 +215,8 @@ class ScreenerController < ApplicationController
   end
 
   def sort_result(job, col, dir)
-    result = ScreenerResult.where(screener_job: job).map {|result| result.ticker}.sort_by {|ticker| ticker[col]}
+    result = ScreenerResult.where(screener_job: job).map {|result| result.ticker}
+                 .sort_by {|ticker| ticker[col] != nil ? ticker[col] : -1}
     if dir == 'desc'
       result.reverse!
     else
