@@ -1,5 +1,6 @@
 class ScreenerController < ApplicationController
   include TickerConcern
+  before_action :authenticate_user!
 
   def index
     @screeners = Screener.where(user: current_user)

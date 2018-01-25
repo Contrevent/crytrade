@@ -1,6 +1,7 @@
 class HistoryController < ApplicationController
   include TickerConcern
   include LedgerConcern
+  before_action :authenticate_user!
 
   def index
     @trades = Trade.where(:user => current_user, :closed => true)

@@ -1,5 +1,6 @@
 class LedgerController < ApplicationController
   include LedgerConcern
+  before_action :authenticate_user!
 
   def index
     @entries = Ledger.where(:user => current_user).order('created_at desc')
