@@ -1,0 +1,8 @@
+<%
+  one = local_assigns.fetch(:one)
+  two = local_assigns.fetch(:two)
+%>
+<%= render 'shared/ly_row', class: 'justify-content-around', cols: [
+    {view: one},
+    {view: two}
+] %>

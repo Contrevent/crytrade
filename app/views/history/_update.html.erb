@@ -1,34 +1,5 @@
-<div>
-  <div class="card border-dark ct-card ct-history-update">
-    <div class="card-body text-light bg-dark">
-
-      <ul class="nav nav-pills" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link text-white active" data-toggle="tab" href="#tabOpen" role="tab">
-            Open
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" data-toggle="tab" href="#tabDel" role="tab">
-            Delete
-          </a>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'Cancel', history_url, class: 'nav-link text-light' %>
-        </li>
-      </ul>
-
-      <br/>
-      <div class="tab-content">
-
-        <% open_content = render 'history/open' %>
-        <%= render 'shared/tab', active: true, id: 'tabOpen', content: open_content %>
-
-        <% del_content = render 'shared/delete', url: trade_destroy_path(id: @trade.id) %>
-        <%= render 'shared/tab', id: 'tabDel', content: del_content %>
-
-      </div>
-
-    </div>
-  </div>
-</div>
+<%= render 'shared/container', class: 'ct-history-update', tabs: [
+    {id: 'tabOpen', active: true, view: 'history/open', label: 'Open'},
+    {id: 'tabDel', view: 'shared/delete', locals: {url: trade_destroy_path(id: @trade.id)}, label: 'Delete'},
+    {label: 'Cancel', path: history_url}
+] %>

@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :last_ticker
   helper_method :ref_char
+  helper_method :ref_coin
   helper_method :usd_to_ref_norm
   helper_method :usd_to_ref_fine
   helper_method :num_norm

@@ -1,8 +1,12 @@
-<% record = local_assigns.fetch(:record) %>
+<% record = local_assigns.fetch(:record)
+p record.errors.any?
+%>
 <% if record.errors.any? %>
   <div class="alert alert-danger">
     <ul>
-      <% record.errors.full_messages.each do |msg| %>
+      <%
+        p  record.errors.full_messages
+        record.errors.full_messages.each do |msg| %>
         <li>
           <%= msg %>
         </li>

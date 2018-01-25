@@ -2,6 +2,10 @@ module LedgerConcern
   extend ActiveSupport::Concern
   include TickerConcern
 
+  def entries
+    Ledger.where(:user => current_user).order('created_at desc')
+  end
+
   def balance
     Ledger.select('symbol, sum(count) as count').group(:symbol).where(:user => current_user)
   end

@@ -1,0 +1,8 @@
+<% content = local_assigns.fetch(:content)
+   id = local_assigns.fetch(:id)
+   active = local_assigns.fetch(:active) %>
+<div id="<%= id %>" role="tabpanel" class="tab-pane <%= 'active' if active %>">
+  <div class="ct-card-content">
+    <%= content %>
+  </div>
+</div>

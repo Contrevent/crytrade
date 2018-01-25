@@ -3,18 +3,18 @@
    kind = local_assigns.fetch(:kind)
    prefix = local_assigns.fetch(:kind)
 %>
-<%= form_with scope: :entry, url: url, method: "post" do |form| %>
+<%= form_with scope: :entry, url: url, local: true, method: "post" do |form| %>
   <%= render 'shared/form_errors', record: @entry %>
-
   <div class="field form-group">
-    <%= label_tag(:symbol, "Coin") %>
-    <%= form.select(:symbol, options_for_select(@symbols, 'USDT'), {}, {:id => prefix + '-symbol', :class => 'form-control'}) %>
+    <%= label_tag(:symbol, "Currency") %>
+    <%= form.select(:symbol, options_for_select(@symbols, ref_coin), {}, {:id => prefix + '-symbol', :class => 'form-control'}) %>
   </div>
 
   <div class="field form-group">
     <%= label_tag(:count, "Count") %>
     <%= form.text_field(:count, class: 'form-control', id: prefix + '-count') %>
   </div>
+
   <div class="field form-group">
     <%= label_tag(:description, "Label") %>
     <%= form.text_field(:description, class: 'form-control', id: prefix + '-label') %>

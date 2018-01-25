@@ -1,52 +1,14 @@
-<!--suppress HtmlUnknownAnchorTarget -->
-<div class="ct-trade-update">
-  <div class="card border-dark ct-card">
-    <div class="card-body text-light bg-dark">
-
-      <% close_active = true
-         if @trade.errors.any?
-           unless @trade.errors[:sell_stop_usd].any? or @trade.errors[:sell_stop_usd].any? or @trade.errors[:fees_usd].any?
-             close_active = false
-           end
-         end
-      %>
-
-      <ul class="nav nav-pills" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link text-white
-            <%= ' active' if close_active %>" data-toggle="tab" href="#tabClose" role="tab">
-            Close
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white
-            <%= ' active' unless close_active %>" data-toggle="tab" href="#tabEdit" role="tab">
-            Edit
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" data-toggle="tab" href="#tabDel" role="tab">
-            Delete
-          </a>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'Cancel', trade_url, class: 'nav-link text-light' %>
-        </li>
-      </ul>
-
-      <br/>
-      <div class="tab-content">
-        <% close_content = render 'trade/close' %>
-        <%= render 'shared/tab', active: close_active, id: 'tabClose', content: close_content %>
-
-        <% edit_content = render 'trade/edit' %>
-        <%= render 'shared/tab', active: !close_active, id: 'tabEdit', content: edit_content %>
-
-        <% del_content = render 'shared/delete', url: trade_destroy_path(id: @trade.id) %>
-        <%= render 'shared/tab', id: 'tabDel', content: del_content %>
-
-      </div>
-
-    </div>
-  </div>
-</div>
+<% close_active = true
+   if @trade.errors.any?
+     unless @trade.errors[:sell_stop_usd].any? or @trade.errors[:sell_stop_usd].any? or @trade.errors[:fees_usd].any?
+       close_active = false
+     end
+   end
+%>
+<%= render 'shared/container', class: 'ct-trade-update', tabs: [
+    {id: 'tabClose', active: close_active, view: 'trade/close', label: 'Close'},
+    {id: 'tabEdit', active: !close_active, view: 'trade/edit', label: 'Edit'},
+    {id: 'tabDel', view: 'shared/delete', label: 'Delete',
+     locals: {url: trade_destroy_path(id: @trade.id)}},
+    {label: 'Cancel', path: trade_url}
+] %>

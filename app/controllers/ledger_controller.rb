@@ -3,15 +3,13 @@ class LedgerController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @entries = Ledger.where(:user => current_user).order('created_at desc')
-    @symbols = TickerConcern.symbols
+    define_locals_index
     @entry = Ledger.new
-    @balance = balance
     @tab = 'index'
   end
 
   def update
-    @entries = Ledger.where(:user => current_user).order('created_at desc')
+    define_locals
     @entry = Ledger.find(params[:id])
   end
 
@@ -22,9 +20,8 @@ class LedgerController < ApplicationController
       flash[:notice] = "Deposit created."
       redirect_to action: 'index'
     else
-      @entries = Ledger.where(:user => current_user).order('created_at desc')
-      @symbols = TickerConcern.symbols
-      @balance = balance
+      p "#{@entry.errors.count} Error while creating deposit"
+      define_locals_index
       @tab = 'deposit'
       render 'index'
     end
@@ -35,12 +32,10 @@ class LedgerController < ApplicationController
     @entry.count = -@entry.count
     @entry.user = current_user
     if @entry.save
-      flash[:notice] = "Deposit created."
+      flash[:notice] = "Withdraw created."
       redirect_to action: 'index'
     else
-      @entries = Ledger.where(:user => current_user).order('created_at desc')
-      @symbols = TickerConcern.symbols
-      @balance = balance
+      define_locals_index
       @tab = 'withdraw'
       render 'index'
     end
@@ -58,5 +53,15 @@ class LedgerController < ApplicationController
   private
   def ledger_params
     params.require(:entry).permit(:symbol, :count, :description)
+  end
+
+  def define_locals
+    @entries = entries
+  end
+
+  def define_locals_index
+    define_locals
+    @symbols = TickerConcern.symbols
+    @balance = balance
   end
 end

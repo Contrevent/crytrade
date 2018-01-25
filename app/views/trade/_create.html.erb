@@ -1,31 +1,5 @@
-<div class="ct-trade-index">
-  <div class="card border-dark ct-card">
-    <div class="card-body text-light bg-dark">
-      <% new_active = @trade.errors.any? %>
-
-      <ul class="nav nav-pills" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link text-white <%= 'active' unless new_active %>" data-toggle="tab" href="#tabFun" role="tab">
-            Funds
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white <%= 'active' if new_active %>" data-toggle="tab" href="#tabNew" role="tab">
-            New Trade
-          </a>
-        </li>
-      </ul>
-
-      <br/>
-      <div class="tab-content">
-        <% port_content = render 'ledger/portofolio' %>
-        <%= render 'shared/tab', active: !new_active, id: 'tabFun', content: port_content %>
-
-        <% dep_content = render 'trade/create_trade' %>
-        <%= render 'shared/tab', active: new_active, id: 'tabNew', content: dep_content %>
-
-       </div>
-
-    </div>
-  </div>
-</div>
+<% new_active = @trade.errors.any? %>
+<%= render 'shared/container', class: 'ct-trade-index', tabs: [
+    {id: 'ct-funds', active: !new_active, view: 'ledger/funds', label: 'Funds'},
+    {id: 'tabNew', active: new_active, view: 'trade/create_trade', label: 'New Trade'}
+] %>

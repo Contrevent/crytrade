@@ -1,21 +1,3 @@
-<div>
-  <div class="card border-dark ct-card ct-history-index">
-    <div class="card-body text-light bg-dark">
-
-      <ul class="nav nav-pills" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link text-white active" data-toggle="tab" href="#tabFun" role="tab">
-            Funds
-          </a>
-        </li>
-      </ul>
-
-      <br/>
-      <div class="tab-content">
-        <% port_content = render 'ledger/portofolio' %>
-        <%= render 'shared/tab', active: true, id: 'tabFun', content: port_content %>
-      </div>
-
-    </div>
-  </div>
-</div>
+<%= render 'shared/container', class: 'ct-history-index', tabs: [
+    {id: 'ct-funds', active: true, view: 'ledger/funds', label: 'Funds'}
+] %>
