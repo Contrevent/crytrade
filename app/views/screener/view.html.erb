@@ -1,27 +1,35 @@
-<div class="row">
-  <div class="col ct-screener-view">
-    <div class="card border-dark ct-card">
-      <div class="card-body text-light bg-dark">
-        <div class="d-flex justify-content-between mb-1">
+<% vm = find_vm_by_kind(@view)
+   count = (vm[:model].key? :data) ? vm[:model][:data].count : 0
+   job = (vm[:model].key? :job) ? vm[:model][:job] : nil
 
-          <div>
-            <% count = @currencies.empty? ? 0 : @currencies.count %>
-            <h5 class="text-light d-inline m-0">
-              <span class="badge badge-<%= (count > 0) ? 'primary' : 'secondary' %>"><%= count %></span>
-              <%= @job.screener.name %>
-            </h5>
-            <small class="text-light"><%= ' ran on ' + @job.updated_at.strftime('%b-%d, at %H:%M') %></small>
-            <span class="badge badge-secondary"><%= time_ago_in_words(@job.updated_at) + ' ago' %></span>
+   if job == nil
+%>
+  <div class="row">
+    <div class="col ct-screener-view">
+      <div class="alert alert-warning">Nothing to display</div>
+    </div>
+  </div>
+<% else %>
+  <div class="row">
+    <div class="col ct-screener-view">
+      <div class="card border-dark ct-card">
+        <div class="card-body text-light bg-dark">
+          <div class="d-flex justify-content-between mb-1">
+            <div>
+              <h5 class="text-light d-inline m-0">
+                <span class="badge badge-<%= (count > 0) ? 'primary' : 'secondary' %>"><%= count %></span>
+                <%= job.screener.name %>
+              </h5>
+              <small class="text-light"><%= ' ran on ' + job.updated_at.strftime('%b-%d, at %H:%M') %></small>
+              <span class="badge badge-secondary"><%= time_ago_in_words(job.updated_at) + ' ago' %></span>
+            </div>
+            <div>
+              <%= link_to 'Back', screener_url, class: 'btn btn-sm btn-outline-secondary ml-2' %>
+            </div>
           </div>
-
-          <div>
-            <%= link_to 'Back', screener_url, class: 'btn btn-sm btn-outline-secondary ml-2' %>
-          </div>
-
+          <%= render 'shared/widget', view: vm[:view], class: vm[:class], locals: populate_locals(vm) %>
         </div>
-        <%= render 'screener/coins', screener_id: @job.screener.id %>
-
       </div>
     </div>
   </div>
-</div>
+<% end %>

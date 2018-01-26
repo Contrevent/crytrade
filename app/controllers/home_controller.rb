@@ -1,10 +1,11 @@
 class HomeController < ApplicationController
   include TickerConcern
-
+  include ScreenerConcern
+  include ViewModelConcern
+  
   def index
     order_name, order_direction = TickerConcern::parse_order params
-    @currencies = TickerConcern::last_ticker.where('volume_usd_24h > 10000000').order("tickers.#{order_name} #{order_direction}").limit(100)
-    @columns = tick_columns(order_name, order_direction, lambda {|name, direction| root_path(col: name, dir: direction)})
+    populate coins_def(order_name, order_direction)
     @refresh = true
   end
 

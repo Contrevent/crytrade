@@ -1,3 +1,4 @@
+<% data = local_assigns.fetch(:model) %>
 <table class="table table-striped table-dark ct-table ct-table-history ct-table-head">
   <thead>
   <tr>
@@ -18,7 +19,7 @@
   <table class="table table-striped table-dark ct-table ct-table-history">
     <tbody>
 
-    <% @trades.each do |trade| -%>
+    <% data.each do |trade| -%>
       <tr>
         <td>
           <%= render 'shared/cell', content: trade.created_at.strftime('%b-%d %H:%M') %>
@@ -58,6 +59,6 @@
     </tbody>
   </table>
 </div>
-<% if @trades.empty? %>
+<% if data.empty? %>
   <div class="alert alert-secondary" role="alert">No trades to display</div>
 <% end %>

@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include TickerConcern
   include RefConcern
+  include ViewModelConcern
 
   def last_ticker
     TickerConcern::last_ticker_update
@@ -14,6 +15,7 @@ class ApplicationController < ActionController::Base
   helper_method :usd_to_ref_fine
   helper_method :num_norm
   helper_method :num_fine
-
+  helper_method :find_vm_by_kind
+  helper_method :populate_locals
 
 end

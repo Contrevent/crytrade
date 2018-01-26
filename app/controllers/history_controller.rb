@@ -1,18 +1,18 @@
 class HistoryController < ApplicationController
+  include ViewModelConcern
   include TickerConcern
+  include HistoryConcern
   include LedgerConcern
   before_action :authenticate_user!
 
   def index
-    @trades = Trade.where(:user => current_user, :closed => true)
+    populate history_def, funds_def
     @symbols = TickerConcern.symbols
     @trade = Trade.new
-    @balance = balance
-
   end
 
   def update
-    @trades = Trade.where(:user => current_user, :closed => true)
+    populate history_def
     @trade = Trade.find(params[:id])
   end
 

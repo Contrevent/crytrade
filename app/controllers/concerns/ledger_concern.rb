@@ -1,6 +1,11 @@
 module LedgerConcern
   extend ActiveSupport::Concern
   include TickerConcern
+  include ViewModelConcern
+
+  def funds_def(width = 3)
+    create_vm :funds, 'ledger/funds', width, balance
+  end
 
   def entries
     Ledger.where(:user => current_user).order('created_at desc')

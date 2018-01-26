@@ -1,72 +1,76 @@
-<% screener_id = local_assigns.key?(:screener_id) ? local_assigns.fetch(:screener_id) : nil %>
-
-<table class="table table-striped table-dark ct-table ct-table-coins ct-table-head">
-  <thead>
-  <tr>
-    <% @columns.each do |col| -%>
-      <th class="text-center index-col-width">
-        <% label = col.key?(:label) ? col[:label].html_safe : col[:name].capitalize %>
-        <% if col.key?(:direction)
-             direction = col[:direction]
-             up_code = "&#9650;"
-             down_code = "&#9660;"
-             code = direction == 'asc' ? up_code : down_code
-             kind = direction == 'asc' ? 'info' : 'warning'
-        %>
-          <div class="ct-table-cell-chip alert-<%= kind %>">
-            <a class="alert-<%= kind %>" href="<%= col[:path] %>">
-              <%= label %>
-              <span class="ct-table-cell-deco">
-                    <%= code.html_safe %>
-                  </span>
-            </a>
-          </div>
-        <% else %>
-          <div class="ct-table-cell-chip">
-            <% if col[:allow_order] %>
-              <%= link_to label, col[:path], class: 'text-white' %>
-            <% else %>
-              <%= label %>
-            <% end %>
-          </div>
-        <% end %>
-      </th>
-    <% end %>
-  </tr>
-  </thead>
-</table>
-<div class="ct-table-coins-parent">
-  <table class="table table-striped table-dark ct-table ct-table-coins">
-    <tbody>
-    <% @currencies.each do |currency| -%>
-      <tr>
-        <% @columns.each do |col| -%>
-          <td>
-            <% kind = col.key?(:kind) ? col[:kind].call(currency) : 'empty'
-               align = col.key?(:align) ? col[:align] : 'right'
-            %>
-
-            <% if col.key?(:link) %>
-              <div class="d-flex justify-content-center">
-                <a class='btn btn-sm btn-outline-light ct-table-btn' target="_blank" href='<%= col[:link].call(currency) %>'>&#128279;</a>
-              </div>
-            <% elsif col.key?(:deco) && col[:deco] %>
-              <%= render 'shared/cell_deco', value: col[:get_value].call(currency) %>
-            <% else %>
-              <div class="ct-table-cell-chip alert-<%= kind %> alert-<%= align %>">
-                <%= col.key?(:get_value) ? col[:get_value].call(currency) : currency[col[:name]] %>
-              </div>
-            <% end %>
-          </td>
-        <% end %>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-</div>
-
-<% if @currencies.empty? %>
+<%
+   model = local_assigns.fetch(:model)
+  p "Coins Model #{model}"
+   cols = model.key?(:cols) ? model[:cols] : nil
+   data = model.key?(:data) ? model[:data] : nil
+%>
+<% if data == nil or data.empty? %>
   <div class="alert alert-dark">
     No currencies to display.
+  </div>
+<% else %>
+  <table class="table table-striped table-dark ct-table ct-table-coins ct-table-head">
+    <thead>
+    <tr>
+      <% cols.each do |col| -%>
+        <th class="text-center index-col-width">
+          <% label = col.key?(:label) ? col[:label].html_safe : col[:name].capitalize %>
+          <% if col.key?(:direction)
+               direction = col[:direction]
+               up_code = "&#9650;"
+               down_code = "&#9660;"
+               code = direction == 'asc' ? up_code : down_code
+               kind = direction == 'asc' ? 'info' : 'warning'
+          %>
+            <div class="ct-table-cell-chip alert-<%= kind %>">
+              <a class="alert-<%= kind %>" href="<%= col[:path] %>">
+                <%= label %>
+                <span class="ct-table-cell-deco">
+                    <%= code.html_safe %>
+                  </span>
+              </a>
+            </div>
+          <% else %>
+            <div class="ct-table-cell-chip">
+              <% if col[:allow_order] %>
+                <%= link_to label, col[:path], class: 'text-white' %>
+              <% else %>
+                <%= label %>
+              <% end %>
+            </div>
+          <% end %>
+        </th>
+      <% end %>
+    </tr>
+    </thead>
+  </table>
+  <div class="ct-table-coins-parent">
+    <table class="table table-striped table-dark ct-table ct-table-coins">
+      <tbody>
+      <% data.each do |currency| -%>
+        <tr>
+          <% cols.each do |col| -%>
+            <td>
+              <% kind = col.key?(:kind) ? col[:kind].call(currency) : 'empty'
+                 align = col.key?(:align) ? col[:align] : 'right'
+              %>
+
+              <% if col.key?(:link) %>
+                <div class="d-flex justify-content-center">
+                  <a class='btn btn-sm btn-outline-light ct-table-btn' target="_blank" href='<%= col[:link].call(currency) %>'>&#128279;</a>
+                </div>
+              <% elsif col.key?(:deco) && col[:deco] %>
+                <%= render 'shared/cell_deco', value: col[:get_value].call(currency) %>
+              <% else %>
+                <div class="ct-table-cell-chip alert-<%= kind %> alert-<%= align %>">
+                  <%= col.key?(:get_value) ? col[:get_value].call(currency) : currency[col[:name]] %>
+                </div>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
   </div>
 <% end %>

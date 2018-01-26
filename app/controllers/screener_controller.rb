@@ -1,5 +1,7 @@
 class ScreenerController < ApplicationController
   include TickerConcern
+  include ScreenerConcern
+  include ViewModelConcern
   before_action :authenticate_user!
 
   def index
@@ -120,37 +122,16 @@ class ScreenerController < ApplicationController
 
   def view
     order_name, order_direction = TickerConcern::parse_order params
-    @job = ScreenerJob.find(params[:id])
-    if @job != nil
-      @columns = tick_columns(order_name, order_direction,
-                              lambda {|name, direction| screener_view_path(id: @job.id, col: name, dir: direction)})
-
-      @currencies = sort_result(@job, order_name, order_direction)
-    else
-      redirect_to action: 'index'
-    end
+    populate screener_view_def(params[:id], order_name, order_direction)
+    @view = :screener_view
   end
 
   def last
     ScreenerMainJob.perform_later
     order_name, order_direction = TickerConcern::parse_order params
-    screener = Screener.find(params[:id])
-    if screener.last_job_id > -1
-      @job = ScreenerJob.find(screener.last_job_id)
-      if @job != nil
-        @columns = tick_columns(order_name, order_direction,
-                                lambda {|name, direction| screener_last_path(id: screener.id, col: name, dir: direction)})
-        @currencies = sort_result(@job, order_name, order_direction)
-        if screener.refresh
-          @refresh = true
-        end
-        render 'view'
-      else
-        redirect_to action: 'index'
-      end
-    else
-      redirect_to action: 'index'
-    end
+    populate screener_last_def(params[:id], order_name, order_direction)
+    @view = :screener_last
+    render 'view'
   end
 
   protected
@@ -213,16 +194,6 @@ class ScreenerController < ApplicationController
 
   def edit_filter_params
     params.require(:filter).permit(:screener_id, :field, :operator, :value)
-  end
-
-  def sort_result(job, col, dir)
-    result = ScreenerResult.where(screener_job: job).map {|result| result.ticker}
-                 .sort_by {|ticker| ticker[col] != nil ? ticker[col] : -1}
-    if dir == 'desc'
-      result.reverse!
-    else
-      result
-    end
   end
 
 end

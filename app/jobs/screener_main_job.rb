@@ -31,8 +31,12 @@ class ScreenerMainJob < ApplicationJob
             job.status = :running
             job.save
             tickers = TickerConcern::last_ticker.where(where_clause)
+            consumed_symbols = []
             tickers.each do |ticker|
-              ScreenerResult.create(screener_job: job, ticker: ticker)
+              unless consumed_symbols.include? ticker.symbol
+                ScreenerResult.create(screener_job: job, ticker: ticker)
+                consumed_symbols.push(ticker.symbol)
+              end
             end
 
             count = tickers.any? ? tickers.count : 0
@@ -43,7 +47,7 @@ class ScreenerMainJob < ApplicationJob
             Rails.logger.warn "Exception running where clause '#{where_clause}'"
           end
         end
-        count +=1
+        count += 1
       end
     end
     p "ScreenMainJob finished: #{count} processed."

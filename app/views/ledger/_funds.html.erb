@@ -1,3 +1,4 @@
+<% balances = local_assigns.fetch(:model) %>
 <table class="table table-striped table-dark ct-table">
   <thead>
   <tr>
@@ -11,7 +12,7 @@
   <%
     total_usd = 0
   %>
-  <% @balance.each do |entry| %>
+  <% balances.each do |entry| %>
     <% price_usd = entry.current_usd
        balance_usd = 'n.a.'
        if price_usd != -1

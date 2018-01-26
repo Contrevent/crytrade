@@ -1,5 +1,5 @@
 <%= render 'shared/container', class: 'ct-ledger-index', tabs: [
-    {id: 'tabFun', active: @tab == 'index', label: 'Funds', view: 'ledger/funds'},
+    find_vm_by_kind(:funds).merge({id: 'tabFun', active: @tab == 'index', label: 'Funds'}),
     {id: 'tabDep', active: @tab == 'deposit', label: 'Deposit', view: 'ledger/create_transac',
      locals: {url: ledger_deposit_url, prefix: 'ct-dep', kind: 'success', label: 'Deposit'}},
     {id: 'tabWit', active: @tab == 'withdraw', label: 'Withdraw', view: 'ledger/create_transac',

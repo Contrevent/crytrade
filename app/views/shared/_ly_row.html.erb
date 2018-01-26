@@ -1,20 +1,9 @@
 <% cols = local_assigns.fetch(:cols)
    row_class = (local_assigns.key? :class) ? local_assigns.fetch(:class) : ''
-   cols_class = ["col-xl-9", "col-xl-3 col-lg-6 col-md-9"]
 %>
 <div class="row <%= row_class %>">
-  <%
-    index = 0
-    cols.each do |col|
-      col_class = (col.key? :class) ? col[:class] : cols_class[index]
-      locals = (col.key? :locals) ? col[:locals]: {}
-  %>
-    <div class="<%= col_class %>">
-      <%= render col[:view], locals %>
-    </div>
-
-  <% index += 1
-     end %>
-
+  <% cols.each do |col| %>
+    <%= render 'shared/widget', view: col[:view], class: col[:class], locals: populate_locals(col) %>
+  <% end %>
 </div>
 

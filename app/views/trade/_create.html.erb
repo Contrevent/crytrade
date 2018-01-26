@@ -1,5 +1,5 @@
 <% new_active = @trade.errors.any? %>
 <%= render 'shared/container', class: 'ct-trade-index', tabs: [
-    {id: 'ct-funds', active: !new_active, view: 'ledger/funds', label: 'Funds'},
+    find_vm_by_kind(:funds).merge({id: 'tabFun', active:!new_active, label: 'Funds'}),
     {id: 'tabNew', active: new_active, view: 'trade/create_trade', label: 'New Trade'}
 ] %>

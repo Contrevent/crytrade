@@ -1,1 +1,3 @@
-<%= render 'shared/two_cols', one: 'history/table', two: 'history/create' %>
+<%= render 'shared/two_cols',
+           one: find_vm_by_kind(:history),
+           two: 'history/create' %>

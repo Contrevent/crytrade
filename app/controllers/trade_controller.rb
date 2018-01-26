@@ -1,13 +1,14 @@
 class TradeController < ApplicationController
   include TickerConcern
   include LedgerConcern
+  include TradeConcern
+  include ViewModelConcern
   before_action :authenticate_user!
 
   def index
-    @trades = Trade.where(:user => current_user, :closed => false)
+    populate funds_def, trade_def
     @symbols = TickerConcern.symbols
     @trade = Trade.new
-    @balance = balance
     @refresh = true
   end
 
@@ -21,7 +22,7 @@ class TradeController < ApplicationController
       flash[:notice] = "Trade created."
       redirect_to action: 'index'
     else
-      @trades = Trade.where(:user => current_user, :closed => false)
+      populate trade_def
       @symbols = TickerConcern.symbols
       @balance = balance
       render 'index'
@@ -29,7 +30,7 @@ class TradeController < ApplicationController
   end
 
   def update
-    @trades = Trade.where(:user => current_user, :closed => false)
+    populate trade_def
     @trade = Trade.find(params[:id])
     @trade.stop_usd = @trade.trailing_stop_usd
     @trade.sell_stop_usd = TickerConcern::last_price_usd(@trade.sell_symbol)
@@ -45,7 +46,7 @@ class TradeController < ApplicationController
         flash[:notice] = "Trade updated."
         redirect_to action: 'index'
       else
-        @trades = Trade.where(:user => current_user, :closed => false)
+        populate trade_def
         render 'update'
       end
     else
@@ -66,7 +67,7 @@ class TradeController < ApplicationController
         flash[:notice] = "Trade closed."
         redirect_to controller: 'history', action: 'update', id: @trade.id
       else
-        @trades = Trade.where(:user => current_user, :closed => false)
+        populate trade_def
         render 'update'
       end
     else

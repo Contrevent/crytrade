@@ -1,5 +1,6 @@
 <div class="row">
   <div class="col">
-    <%= render 'screener/coins' %>
+    <% vm = find_vm_by_kind(:coins) %>
+    <%= render 'shared/widget', view: vm[:view], class: vm[:class], locals: populate_locals(vm) %>
   </div>
 </div>

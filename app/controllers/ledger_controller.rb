@@ -1,5 +1,7 @@
 class LedgerController < ApplicationController
   include LedgerConcern
+  include ViewModelConcern
+
   before_action :authenticate_user!
 
   def index
@@ -62,6 +64,6 @@ class LedgerController < ApplicationController
   def define_locals_index
     define_locals
     @symbols = TickerConcern.symbols
-    @balance = balance
+    populate funds_def
   end
 end

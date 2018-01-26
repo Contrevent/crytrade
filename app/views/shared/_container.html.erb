@@ -19,8 +19,7 @@
     <br/>
     <div class="tab-content">
       <% tabs.select {|item| item.key? :view}.each do |tab|
-        locals = (tab.key? :locals) ? tab[:locals] : {}
-        tab_content = render tab[:view], locals %>
+        tab_content = render tab[:view], populate_locals(tab)  %>
         <%= render 'shared/content', id: tab[:id], active: (tab.key? :active and tab[:active]), content: tab_content %>
       <% end %>
     </div>

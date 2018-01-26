@@ -1,0 +1,6 @@
+<% view = local_assigns.fetch(:view)
+   classes = local_assigns.fetch(:class)
+   locals = local_assigns.fetch(:locals) %>
+<div class="<%= classes %>">
+  <%= render view, locals %>
+</div>
