@@ -98,10 +98,12 @@
 </div>
 <footer class="footer bg-dark">
   <ul class="nav justify-content-center">
-    <li class="nav-item text-secondary p-2">
-      Tickers updated
-      <mark> <%= time_ago_in_words(last_ticker) %></mark>
-      ago.
+    <li class="nav-item">
+      <a href="<%= refresh_path(c: controller.controller_name, a: controller.action_name) %>" class="nav-link">
+        Tickers updated
+        <mark> <%= time_ago_in_words(last_ticker) %></mark>
+        ago.
+      </a>
     </li>
     <li class="nav-item <%= "active" if current_page?('/about') %>">
       <%= link_to "About", about_url, class: "nav-link" %>

@@ -24,7 +24,11 @@ class HomeController < ApplicationController
 
   def refresh
     CmcTickerJob.perform_now
-    redirect_to action: 'index'
+    if params.key? :c and params.key? :a
+      redirect_to controller: params[:c], action: params[:a]
+    else
+      redirect_to action: 'index'
+    end
   end
 
 

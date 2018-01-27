@@ -127,7 +127,6 @@ class ScreenerController < ApplicationController
   end
 
   def last
-    ScreenerMainJob.perform_later
     order_name, order_direction = TickerConcern::parse_order params
     populate screener_last_def(params[:id], order_name, order_direction)
     @view = :screener_last

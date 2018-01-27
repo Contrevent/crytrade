@@ -31,7 +31,7 @@ class CmcTickerJob < ApplicationJob
       Screener.where(refresh: true).each do |screener|
         ScreenerJob.create(screener: screener, status: :queue)
       end
-      ScreenerMainJob.perform_later
+      ScreenerMainJob.perform_now
     rescue Exception => e
       Rails.logger.warn("An exception occurred while queuing screener jobs: #{e.message}")
     end
