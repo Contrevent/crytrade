@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180126091229) do
+ActiveRecord::Schema.define(version: 20180127174505) do
 
   create_table "fiats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20180126091229) do
     t.decimal "price_usd", precision: 15, scale: 7
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["symbol"], name: "index_fiats_on_symbol"
   end
 
   create_table "ledgers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -28,6 +29,7 @@ ActiveRecord::Schema.define(version: 20180126091229) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["symbol"], name: "index_ledgers_on_symbol"
     t.index ["trade_id"], name: "index_ledgers_on_trade_id"
     t.index ["user_id"], name: "index_ledgers_on_user_id"
   end
@@ -90,6 +92,8 @@ ActiveRecord::Schema.define(version: 20180126091229) do
     t.integer "last_updated"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["last_updated"], name: "index_tickers_on_last_updated"
+    t.index ["symbol"], name: "index_tickers_on_symbol"
   end
 
   create_table "tiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -121,6 +125,8 @@ ActiveRecord::Schema.define(version: 20180126091229) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["buy_symbol"], name: "index_trades_on_buy_symbol"
+    t.index ["sell_symbol"], name: "index_trades_on_sell_symbol"
     t.index ["user_id"], name: "index_trades_on_user_id"
   end
 
