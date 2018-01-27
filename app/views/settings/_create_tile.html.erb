@@ -4,9 +4,6 @@
 
   <div class="field form-group">
     <%= label_tag(:kind, "Tile") %>
-    <% kind_options = Tile.kinds.map {|kind| [Tile.kinds[kind], kind]}.map {|value| value[1].reverse}
-       p kind_options
-    %>
     <%= form.select(:kind, options_for_select(kind_options, is_update ? @tile.kind : 'screener_last'), {}, {:id => 'ct-tile-select', :class => 'form-control'}) %>
   </div>
 

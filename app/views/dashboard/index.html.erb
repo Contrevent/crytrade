@@ -1,6 +1,5 @@
 <div id="ct-dashboard" class="row">
-  <% p @view_model %>
   <% @view_model.each do |vm| %>
-    <%= render 'shared/widget', view: vm[:view], class: vm[:class] + ' ct-tile', locals: populate_locals(vm) %>
+    <%= render 'shared/widget', view: vm[:view], class: vm[:class] + ' ct-tile', title:vm[:title], locals: populate_locals(vm) %>
   <% end %>
 </div>

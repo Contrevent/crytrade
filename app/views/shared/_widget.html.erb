@@ -1,6 +1,14 @@
 <% view = local_assigns.fetch(:view)
    classes = local_assigns.fetch(:class)
-   locals = local_assigns.fetch(:locals) %>
+   locals = local_assigns.fetch(:locals)
+   title = (local_assigns.key? :title) ? local_assigns.fetch(:title) : nil
+%>
 <div class="<%= classes %>">
+  <% if title != nil %>
+    <div class="d-flex flex-row">
+      <span class="ct-dash-title text-light bg-secondary p-1 pl-3 pr-3"><%= title %></span>
+    </div>
+  <% end %>
+
   <%= render view, locals %>
 </div>

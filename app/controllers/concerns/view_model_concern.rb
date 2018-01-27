@@ -13,6 +13,13 @@ module ViewModelConcern
     @view_model.select {|vm| vm[:kind] == kind}.first
   end
 
+  def kind_options
+    p Tile.kinds
+    Tile.kinds
+  end
+
+
+
   def populate_locals(vm)
     locals = {}
     if vm.key? :model
@@ -26,7 +33,8 @@ module ViewModelConcern
   end
 
   def create_vm(kind, view, width, height, model)
-    {kind: kind, view: view, class: (get_col_class width, height), model: model}
+    title = kind_options[kind]
+    {kind: kind, view: view, class: (get_col_class width, height), model: model, title: title}
   end
 
   private

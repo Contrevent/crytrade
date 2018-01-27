@@ -23,8 +23,7 @@ $cur-height: 20;
   margin-bottom: 1rem;
 }
 
-
-$cur-width : 1;
+$cur-width: 1;
 @while $cur-width <= 6 {
   #ct-dashboard .col-#{$cur-width} .ct-table-coins th:nth-child(5),
   #ct-dashboard .col-#{$cur-width} .ct-table-coins td:nth-child(5),
@@ -48,5 +47,9 @@ $cur-width : 1;
 
   $cur-width: $cur-width + 1;
 
+}
+
+.ct-dash-title {
+  border-radius: 0.4rem 0.4rem 0 0;
 }
 

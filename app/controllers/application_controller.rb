@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :dash_on
+  helper_method :kind_options
   helper_method :last_ticker
   helper_method :ref_char
   helper_method :ref_coin
