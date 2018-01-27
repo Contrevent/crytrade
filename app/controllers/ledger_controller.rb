@@ -43,6 +43,24 @@ class LedgerController < ApplicationController
     end
   end
 
+  def regul
+    @entry = Ledger.create(ledger_params)
+    @entry.user = current_user
+    input_count = @entry.count
+    current_balance = Ledger.where(user: current_user, symbol: @entry.symbol).sum(:count)
+    diff = input_count - current_balance
+    @entry.count = diff
+    if @entry.save
+      flash[:notice] = "Regulation created."
+      redirect_to action: 'index'
+    else
+      define_locals_index
+      @entry.count = input_count
+      @tab = 'regul'
+      render 'index'
+    end
+  end
+
   def destroy
     trade = Ledger.find(params[:id])
     if trade != nil

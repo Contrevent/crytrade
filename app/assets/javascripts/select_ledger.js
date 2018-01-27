@@ -10,4 +10,9 @@ $(function () {
         selectWithdraw.select2({width: '100%'});
     }
 
+    var selectRegul = $('#regul-symbol');
+    if (selectRegul.length) {
+        selectRegul.select2({width: '100%'});
+    }
+
 });

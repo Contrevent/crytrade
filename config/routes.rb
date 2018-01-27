@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get 'ledger', to: 'ledger#index'
   post 'ledger/deposit'
   post 'ledger/withdraw'
+  post 'ledger/regul'
   get 'ledger/update'
   get 'ledger/destroy'
 

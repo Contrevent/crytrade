@@ -3,5 +3,6 @@
     {id: 'tabDep', active: @tab == 'deposit', label: 'Deposit', view: 'ledger/create_transac',
      locals: {url: ledger_deposit_url, prefix: 'ct-dep', kind: 'success', label: 'Deposit'}},
     {id: 'tabWit', active: @tab == 'withdraw', label: 'Withdraw', view: 'ledger/create_transac',
-     locals: {url: ledger_withdraw_url, prefix: 'ct-wit', kind: 'danger', label: 'Withdraw'}}
+     locals: {url: ledger_withdraw_url, prefix: 'ct-wit', kind: 'danger', label: 'Withdraw'}},
+    {id: 'tabReg', active: @tab == 'regul', label: 'Regulation', view: 'ledger/regul'}
 ] %>

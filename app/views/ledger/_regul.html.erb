@@ -1,0 +1,19 @@
+<%= form_with scope: :entry, url: ledger_regul_url, local: true, method: "post" do |form| %>
+  <%= render 'shared/form_errors', record: @entry %>
+  <div class="field form-group">
+    <%= label_tag(:symbol, "Currency") %>
+    <%= form.select(:symbol, options_for_select(@symbols, ref_coin), {}, {class: 'form-control', id: 'regul-symbol'}) %>
+  </div>
+
+  <div class="field form-group">
+    <%= label_tag(:count, "Current Balance") %>
+    <%= form.text_field(:count, class: 'form-control') %>
+  </div>
+
+  <div class="field form-group">
+    <%= label_tag(:description, "Label") %>
+    <%= form.text_field(:description, class: 'form-control') %>
+  </div>
+
+  <%= submit_tag('Regulation', class: 'btn btn-sm btn-info ct-card-btn-submit') %>
+<% end %>
