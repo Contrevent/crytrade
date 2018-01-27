@@ -12,22 +12,18 @@
   <table class="table table-striped table-dark ct-table">
     <tbody>
     <%
-      total_usd = 0
-    %>
-    <% balances.each do |entry| %>
-      <% price_usd = entry.current_usd
-         balance_usd = 'n.a.'
-         if price_usd != -1
-           balance_usd = entry.count * price_usd
-           total_usd += balance_usd
-           next if balance_usd.abs < 0.1 || entry.count.abs < 0.0001
-         end
-
-      %>
+      total_ref = 0
+      balances.each do |entry|
+        balance_ref = entry[:count_ref]
+           if balance_ref.is_a? Numeric
+             total_ref += balance_ref
+             next if balance_ref.abs < 0.1 || entry.count.abs < 0.0001
+           end
+ %>
       <tr>
-        <td><%= render 'shared/cell', content: entry.symbol %></td>
-        <td><%= render 'shared/cell', content: num_norm(entry.count) %></td>
-        <td><%= render 'shared/cell', content: usd_to_ref_norm(balance_usd) %></td>
+        <td><%= render 'shared/cell', content: entry[:symbol] %></td>
+        <td><%= render 'shared/cell', content: num_norm(entry[:count]) %></td>
+        <td><%= render 'shared/cell', content: entry[:count_ref] %></td>
       </tr>
     <% end %>
     </tbody>
@@ -38,7 +34,7 @@
   <tr>
     <td><%= render 'shared/cell', content: "Total (#{ref_char})" %></td>
     <td></td>
-    <td><%= render 'shared/cell', kind: total_usd > 0 ? 'info' : 'warning', content: usd_to_ref_norm(total_usd) %></td>
+    <td><%= render 'shared/cell', kind: total_ref > 0 ? 'info' : 'warning', content: total_ref %></td>
   </tr>
   </tfoot>
 </table>
