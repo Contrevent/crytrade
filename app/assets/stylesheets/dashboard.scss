@@ -23,3 +23,30 @@ $cur-height: 20;
   margin-bottom: 1rem;
 }
 
+
+$cur-width : 1;
+@while $cur-width <= 6 {
+  #ct-dashboard .col-#{$cur-width} .ct-table-coins th:nth-child(5),
+  #ct-dashboard .col-#{$cur-width} .ct-table-coins td:nth-child(5),
+    // Price BTC
+  #ct-dashboard .col-#{$cur-width} .ct-table-coins th:nth-child(7),
+  #ct-dashboard .col-#{$cur-width} .ct-table-coins td:nth-child(7),
+    // 24h Vol.
+  #ct-dashboard .col-#{$cur-width} .ct-table-coins th:nth-child(8),
+  #ct-dashboard .col-#{$cur-width} .ct-table-coins td:nth-child(8),
+    // Market cap
+  #ct-dashboard .col-#{$cur-width} .ct-table-coins th:nth-child(9),
+  #ct-dashboard .col-#{$cur-width} .ct-table-coins td:nth-child(9),
+    // Rank
+  #ct-dashboard .col-#{$cur-width} .ct-table-coins th:nth-child(10),
+  #ct-dashboard .col-#{$cur-width} .ct-table-coins td:nth-child(10),
+    // Cmc link
+  #ct-dashboard .col-#{$cur-width} .ct-table-coins th:nth-child(11),
+  #ct-dashboard .col-#{$cur-width} .ct-table-coins td:nth-child(11) {
+    display: none;
+  }
+
+  $cur-width: $cur-width + 1;
+
+}
+
