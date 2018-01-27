@@ -5,6 +5,10 @@ module ViewModelConcern
     @view_model = view_models
   end
 
+  def populate_by_array(vms)
+    @view_model = vms
+  end
+
   def find_vm_by_kind(kind)
     @view_model.select {|vm| vm[:kind] == kind}.first
   end
@@ -21,14 +25,14 @@ module ViewModelConcern
     locals
   end
 
-  def create_vm(kind, view, width, model)
-    {kind: kind, view: view, class: (get_col_class width), model: model}
+  def create_vm(kind, view, width, height, model)
+    {kind: kind, view: view, class: (get_col_class width, height), model: model}
   end
 
   private
 
-  def get_col_class(width)
-    "col-xl-#{width}"
+  def get_col_class(width, height)
+    "col-#{width} ct-h-#{height}"
   end
 
 end

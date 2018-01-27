@@ -1,0 +1,8 @@
+<%= render 'shared/ly_row', class: 'justify-content-center', cols: [
+    {view: 'shared/container', class: 'col-12',
+     locals: {class: 'ct-settings', tabs: [
+         {label: 'Settings', path: settings_url},
+         {id: 'ct-dash', label: 'Dashboard', active: true, view: 'settings/dash'}
+     ]}
+    }
+] %>

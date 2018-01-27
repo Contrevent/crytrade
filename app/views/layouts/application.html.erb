@@ -14,7 +14,7 @@
   <%= javascript_include_tag 'update_trade' %>
   <%= javascript_include_tag 'select_ledger' %>
   <%= javascript_include_tag 'refresh' %>
-
+  <%= javascript_include_tag 'dashboard' %>
 </head>
 
 <body>
@@ -37,9 +37,16 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+      <% if dash_on %>
+        <li class="nav-item<%= ' active' if current_page?('/dash') %>">
+          <%= link_to "Dashboard", dash_url, :class => "nav-link" %>
+        </li>
+      <% end %>
+
       <li class="nav-item<%= ' active' if current_page?('/') %>">
         <%= link_to "Coins", root_url, :class => "nav-link" %>
       </li>
+
       <% if user_signed_in? %>
         <li class="nav-item<%= ' active' if (current_page?('/screener') or current_page?('/screener/update') or current_page?('/screener/view') or current_page?('/screener/last')) %>">
           <%= link_to "Screeners", screener_url, :class => "nav-link" %>
@@ -62,7 +69,7 @@
     <ul class="navbar-nav ml-auto">
 
       <% if user_signed_in? %>
-        <li class="nav-item<%= ' active' if current_page?('/settings') %>">
+        <li class="nav-item<%= ' active' if current_page?('/settings') or current_page?('/settings/dashboard') %>">
           <%= link_to "Settings", settings_url, :class => "nav-link" %>
         </li>
 

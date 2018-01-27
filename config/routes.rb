@@ -44,7 +44,14 @@ Rails.application.routes.draw do
   get 'ticker', to: 'home#ticker'
 
   get 'settings', to: 'settings#settings'
-  post 'post_settings', to:'settings#post_settings'
+  post 'post_settings', to: 'settings#post_settings'
+  get 'settings/dashboard'
+  post 'settings/new_tile'
+  post 'settings/update_tile'
+  get 'settings/destroy_tile'
+  get 'settings/move_tile'
+
+  get 'dash', to: 'dashboard#index'
 
   root 'home#index'
 

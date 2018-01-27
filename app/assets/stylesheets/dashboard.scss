@@ -1,0 +1,25 @@
+// Place all the styles related to the dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$cur-height: 20;
+@while $cur-height <= 80 {
+
+  #ct-dashboard .ct-h-#{$cur-height} .ct-table-body-parent, #ct-dashboard .ct-h-#{$cur-height} .ct-table-coins-parent {
+    min-height: 5rem;
+    overflow-y: auto;
+    max-height: calc(#{$cur-height}vh - 2.5rem);
+  }
+
+  #ct-dashboard .ct-h-#{$cur-height} .ct-table-body-parent-footer {
+    min-height: 2.5rem;
+    overflow-y: auto;
+    max-height: calc(#{$cur-height}vh - 5rem);
+  }
+  $cur-height: $cur-height + 5;
+}
+
+.ct-tile {
+  margin-bottom: 1rem;
+}
+

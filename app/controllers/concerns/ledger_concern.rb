@@ -3,8 +3,8 @@ module LedgerConcern
   include TickerConcern
   include ViewModelConcern
 
-  def funds_def(width = 3)
-    create_vm :funds, 'ledger/funds', width, balance
+  def funds_def(width = 3, height = 25)
+    create_vm :funds, 'ledger/funds', width, height, balance
   end
 
   def entries

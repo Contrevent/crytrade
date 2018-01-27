@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180124142825) do
+ActiveRecord::Schema.define(version: 20180126091229) do
 
   create_table "fiats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -92,6 +92,18 @@ ActiveRecord::Schema.define(version: 20180124142825) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.string "kind"
+    t.integer "ref_id"
+    t.integer "width"
+    t.integer "height"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tiles_on_user_id"
+  end
+
   create_table "trades", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "sell_symbol"
     t.string "buy_symbol"
@@ -139,5 +151,6 @@ ActiveRecord::Schema.define(version: 20180124142825) do
   add_foreign_key "screener_results", "screener_jobs"
   add_foreign_key "screener_results", "tickers"
   add_foreign_key "screeners", "users"
+  add_foreign_key "tiles", "users"
   add_foreign_key "trades", "users"
 end

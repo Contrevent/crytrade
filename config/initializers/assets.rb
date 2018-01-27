@@ -15,6 +15,6 @@ Rails.application.config.assets.precompile += %w( jquery3.js )
 Rails.application.config.assets.precompile += %w( bootstrap.min.js )
 Rails.application.config.assets.precompile += %w( application.js )
 Rails.application.config.assets.precompile += %w( select2.css select2-full.js )
-Rails.application.config.assets.precompile += %w( flash.js create_trade.js update_trade.js select_ledger.js refresh.js )
+Rails.application.config.assets.precompile += %w( flash.js create_trade.js update_trade.js select_ledger.js refresh.js dashboard.js )
 
 Rails.application.config.assets.precompile += %w( favicon.ico )

@@ -1,0 +1,41 @@
+<% if @tiles.empty? %>
+  <div class="alert alert-info">
+    No widgets in dashboard
+  </div>
+<% else %>
+  <table class="table table-dark table-striped ct-table">
+    <thead>
+    <tr>
+      <th><%= render 'shared/cell', content: 'Tile' %></th>
+      <th><%= render 'shared/cell', content: 'Width (twelfth)' %></th>
+      <th><%= render 'shared/cell', content: 'Height (%)' %></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @tiles.each do |tile| %>
+      <tr>
+        <td><%= render 'shared/cell', align: 'left', content: (tile.read_attribute_before_type_cast(:kind) + screener_name(tile)) %></td>
+        <td><%= render 'shared/cell', content: tile.width %></td>
+        <td><%= render 'shared/cell', content: tile.height %></td>
+        <td>
+          <div class="d-flex justify-content-center">
+            <% if tile != @tiles.first %>
+              <%= link_to "&#8593;".html_safe, settings_move_tile_path(id: tile.id, dir:'up'),
+                          class: 'btn btn-sm btn-outline-primary mr-2 ct-table-btn' %>
+            <% end %>
+            <% if tile != @tiles.last %>
+              <%= link_to "&#8595;".html_safe, settings_move_tile_path(id: tile.id, dir: 'down'),
+                          class: 'btn btn-sm btn-outline-primary mr-2 ct-table-btn' %>
+            <% end %>
+            <%= link_to "&#x2699".html_safe, settings_dashboard_path(id: tile.id),
+                        class: 'btn btn-sm btn-outline-light ct-table-btn' %>
+
+
+          </div>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>

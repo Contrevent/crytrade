@@ -3,20 +3,28 @@ module ScreenerConcern
   include TickerConcern
   include ViewModelConcern
 
-  def screener_last_def(screener_id, order_name, order_direction, width = 9)
-    create_vm :screener_last, 'screener/coins', width,
+  def screener_last_def(screener_id, order_name, order_direction, width = 9, height = 25)
+    create_vm :screener_last, 'screener/coins', width, height,
               populate_screener(screener_id, order_name, order_direction)
   end
 
-  def screener_view_def(job_id, order_name, order_direction, width = 9)
-    create_vm :screener_view, 'screener/coins', width,
+  def screener_view_def(job_id, order_name, order_direction, width = 9, height = 25)
+    create_vm :screener_view, 'screener/coins', width, height,
               populate_job(job_id, order_name, order_direction,
                            lambda {|name, direction| screener_view_path(id: job_id, col: name, dir: direction)})
   end
 
-  def coins_def(order_name, order_direction, width = 12)
-    create_vm :coins, 'screener/coins', width,
+  def coins_def(order_name, order_direction, width = 12, height = 25)
+    create_vm :coins, 'screener/coins', width, height,
               populate_coins(order_name, order_direction)
+  end
+
+  def trades_tickers_def(order_name, order_direction, width=12, height=25)
+    trades = Trade.where(user: current_user, closed: false).map{|trade| trade.buy_symbol}
+    create_vm :trade_ticker, 'screener/coins', width, height, {
+        cols: tick_columns(order_name, order_direction, lambda {|name, direction| root_path(col: name, dir: direction)}),
+        data: TickerConcern::last_ticker.where('tickers.symbol in (?)', trades).order("tickers.#{order_name} #{order_direction}").limit(100)
+    }
   end
 
   private

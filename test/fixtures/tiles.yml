@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  kind: MyString
+  ref_id: 1
+  width: 1
+  order: 1
+
+two:
+  user: two
+  kind: MyString
+  ref_id: 1
+  width: 1
+  order: 1

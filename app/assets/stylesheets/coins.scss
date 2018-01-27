@@ -5,6 +5,9 @@
   overflow-y: auto;
 }
 
+.ct-table-coins th {
+  padding: 0.25rem !important;
+}
 
 // Name
 .ct-table-coins th:nth-child(5),

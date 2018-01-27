@@ -1,0 +1,30 @@
+<% is_update = @action == 'update' %>
+
+<%= form_with scope: :tile, url: is_update ? settings_update_tile_path(id: @tile.id) : settings_new_tile_url, local: true do |form| %>
+
+  <div class="field form-group">
+    <%= label_tag(:kind, "Tile") %>
+    <% kind_options = Tile.kinds.map {|kind| [Tile.kinds[kind], kind]}.map {|value| value[1].reverse}
+       p kind_options
+    %>
+    <%= form.select(:kind, options_for_select(kind_options, is_update ? @tile.kind : 'screener_last'), {}, {:id => 'ct-tile-select', :class => 'form-control'}) %>
+  </div>
+
+  <div class="field form-group" id="screener-group">
+    <%= label_tag(:ref_id, "Screener") %>
+    <%= form.select(:ref_id, options_for_select(@screeners), {}, {:class => 'form-control'}) %>
+  </div>
+
+  <div class="field form-group">
+    <%= label_tag(:width, "Width (twelfth)") %>
+    <%= form.select(:width, options_for_select((1..12).to_a.map {|num| [num, num]}, is_update ? @tile.width : '12'), {}, {:class => 'form-control'}) %>
+  </div>
+  <div class="field form-group">
+    <%= label_tag(:height, "Height (%)") %>
+    <%= form.select(:height, options_for_select((4..16).map {|num| num * 5}.map {|num| [num, num]}, is_update ? @tile.height : '20'), {}, {:class => 'form-control'}) %>
+  </div>
+
+  <%= submit_tag(is_update ? "Save" : "Add", id: 'ct-create',
+                 class: "btn btn-sm btn-#{is_update ? 'primary' : 'success'} ct-card-btn-submit") %>
+
+<% end %>
