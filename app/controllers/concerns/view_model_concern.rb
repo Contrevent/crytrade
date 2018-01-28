@@ -14,8 +14,7 @@ module ViewModelConcern
   end
 
   def kind_options
-    p Tile.kinds
-    Tile.kinds
+    Tile.kinds.map {|opt| opt.reverse}
   end
 
 
@@ -33,7 +32,7 @@ module ViewModelConcern
   end
 
   def create_vm(kind, view, width, height, model)
-    title = kind_options[kind]
+    title = Tile.kinds[kind]
     {kind: kind, view: view, class: (get_col_class width, height), model: model, title: title}
   end
 
