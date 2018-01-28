@@ -52,11 +52,13 @@
           <%= link_to "Screeners", screener_url, :class => "nav-link" %>
         </li>
 
-        <li class="nav-item<%= ' active' if current_page?('/trade') or current_page?('/trade/update') %>">
+        <li class="nav-item<%= ' active' if (current_page?('/trade') or
+            current_page?('/trade/update') or current_page?('/trade/ticker')) %>">
           <%= link_to "Trades", trade_url, :class => "nav-link" %>
         </li>
 
-        <li class="nav-item<%= ' active' if current_page?('/ledger') or current_page?('/ledger/update') %>">
+        <li class="nav-item<%= ' active' if (current_page?('/ledger') or
+            current_page?('/ledger/update') or current_page?('/ledger/ticker')) %>">
           <%= link_to "Ledger", ledger_url, :class => "nav-link" %>
         </li>
 

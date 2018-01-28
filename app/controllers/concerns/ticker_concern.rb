@@ -87,14 +87,18 @@ module TickerConcern
       currencies = Hash.new
 
       Ticker.joins('INNER JOIN (select MAX(last_updated) as last_updated, symbol from tickers group by symbol) grouped_tk on tickers.symbol = grouped_tk.symbol and tickers.last_updated = grouped_tk.last_updated').each do |ticker|
-        currencies[ticker.symbol] = {:name => ticker.currency_name, :price_usd => ticker.price_usd}
+        currencies[ticker.symbol] = {:name => ticker.currency_name, :price_usd => ticker.price_usd, :fiat => false}
       end
 
       Fiat.all.each do |fiat|
-        currencies[fiat.symbol] = {:name => fiat.name, :price_usd => fiat.price_usd}
+        currencies[fiat.symbol] = {:name => fiat.name, :price_usd => fiat.price_usd, :fiat => true}
       end
       currencies
     end
+  end
+
+  def self.is_not_fiat(symbol)
+    !TickerConcern::currencies[symbol][:fiat]
   end
 
 end

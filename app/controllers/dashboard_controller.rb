@@ -18,6 +18,8 @@ class DashboardController < ApplicationController
           vms.push(coins_def(order_name, order_direction, tile.width, tile.height))
         when :funds
           vms.push(funds_def(tile.width, tile.height))
+        when :funds_tickers
+          vms.push(funds_tickers_def(order_name, order_direction, tile.width, tile.height))
         when :trade
           vms.push(trade_def(tile.width, tile.height))
         when :trade_ticker

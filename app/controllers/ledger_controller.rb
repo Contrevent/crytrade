@@ -1,5 +1,6 @@
 class LedgerController < ApplicationController
   include LedgerConcern
+  include ScreenerConcern
   include ViewModelConcern
 
   before_action :authenticate_user!
@@ -13,6 +14,11 @@ class LedgerController < ApplicationController
   def update
     define_locals
     @entry = Ledger.find(params[:id])
+  end
+
+  def ticker
+    order_name, order_direction = TickerConcern::parse_order params
+    populate funds_def(3), funds_tickers_def(order_name, order_direction, 9)
   end
 
   def deposit

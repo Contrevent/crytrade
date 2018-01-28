@@ -17,8 +17,6 @@ module ViewModelConcern
     Tile.kinds.map {|opt| opt.reverse}
   end
 
-
-
   def populate_locals(vm)
     locals = {}
     if vm.key? :model

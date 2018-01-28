@@ -2,6 +2,7 @@ class TradeController < ApplicationController
   include TickerConcern
   include LedgerConcern
   include TradeConcern
+  include ScreenerConcern
   include ViewModelConcern
   before_action :authenticate_user!
 
@@ -12,6 +13,10 @@ class TradeController < ApplicationController
     @refresh = true
   end
 
+  def ticker
+    order_name, order_direction = TickerConcern::parse_order params
+    populate trades_tickers_def(order_name, order_direction, 4, 80), trade_def(8, 80)
+  end
   def create
     @trade = Trade.new create_params
     @trade.trailing_stop_usd = @trade.init_stop_usd

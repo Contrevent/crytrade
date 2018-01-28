@@ -4,6 +4,7 @@ class Tile < ApplicationRecord
       screener_last: 'Screener',
       coins: 'Coins',
       funds: 'Funds',
+      funds_tickers: 'Funds (Tickers)',
       trade: 'Trades (Main)',
       trade_ticker: 'Trades (Tickers)',
       history: 'History'

@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   post 'ledger/regul'
   get 'ledger/update'
   get 'ledger/destroy'
+  get 'ledger/ticker'
 
   get 'trade', to: 'trade#index'
   post 'trade/create'
@@ -33,6 +34,7 @@ Rails.application.routes.draw do
   get 'trade/update'
   post 'trade/close'
   get 'trade/destroy'
+  get 'trade/ticker'
 
   devise_for :users, controllers: {
       sessions: 'users/sessions',

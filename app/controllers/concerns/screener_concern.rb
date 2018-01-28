@@ -19,11 +19,20 @@ module ScreenerConcern
               populate_coins(order_name, order_direction)
   end
 
-  def trades_tickers_def(order_name, order_direction, width=12, height=25)
-    trades = Trade.where(user: current_user, closed: false).map{|trade| trade.buy_symbol}
+  def trades_tickers_def(order_name, order_direction, width = 12, height = 25)
+    trades = Trade.where(user: current_user, closed: false).map {|trade| trade.buy_symbol}
     create_vm :trade_ticker, 'screener/coins', width, height, {
-        cols: tick_columns(order_name, order_direction, lambda {|name, direction| root_path(col: name, dir: direction)}),
+        cols: tick_columns(order_name, order_direction, lambda {|name, direction| trade_ticker_path(col: name, dir: direction)}),
         data: TickerConcern::last_ticker.where('tickers.symbol in (?)', trades).order("tickers.#{order_name} #{order_direction}").limit(100)
+    }
+  end
+
+  def funds_tickers_def(order_name, order_direction, width = 12, height = 25)
+    funds = Ledger.select('symbol, sum(count) as count').group(:symbol).where(user: current_user)
+                .select {|entry| entry.count.abs > 0.01 && TickerConcern::is_not_fiat(entry.symbol)}.map {|coin| coin.symbol}
+    create_vm :funds_tickers, 'screener/coins', width, height, {
+        cols: tick_columns(order_name, order_direction, lambda {|name, direction| ledger_ticker_path(col: name, dir: direction)}),
+        data: TickerConcern::last_ticker.where('tickers.symbol in (?)', funds).order("tickers.#{order_name} #{order_direction}").limit(100)
     }
   end
 
