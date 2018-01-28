@@ -26,6 +26,8 @@
             <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
           </div>
 
+          <%= recaptcha_tags %>
+          <br/>
           <div class="actions">
             <%= f.submit "Sign up", :class => 'btn btn-sm btn-primary' %>
           </div>

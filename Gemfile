@@ -15,6 +15,8 @@ gem 'puma', '~> 3.7'
 gem 'rest-client'
 # device
 gem 'devise'
+# recatcha
+gem "recaptcha", require: "recaptcha/rails"
 # JQuery
 gem 'jquery-rails'
 # Bootstrap 4
