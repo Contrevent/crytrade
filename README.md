@@ -8,7 +8,7 @@
 ## Prerequisites
 
 - ruby 2.3
-- mysql server
+- *sql server (deployed production instance is postgresql based, dev currently on mysql)
 
 ## Dev setup
 
