@@ -26,12 +26,22 @@ module LedgerConcern
 
   end
 
-  def balance
-    ref_dol_cent = ref_value(0.01)
+  def balance_too_small_reject(entry)
+    if entry[:count] < 0.01
+      true
+    else
+      ref_dol_cent = ref_value(0.01)
+      if ref_dol_cent.is_a? Numeric and entry[:count_ref].is_a? Numeric and entry[:count_ref].abs < ref_dol_cent
+        true
+      end
+    end
+    false
+  end
 
+  def balance
     Ledger.select('symbol, sum(count) as count').group(:symbol).where(:user => current_user)
         .map {|entry| {symbol: entry.symbol, count: entry.count, count_ref: balance_ref(entry)}}
-        .reject {|entry| (entry[:count_ref].is_a? Numeric) ? entry[:count_ref].abs < ref_dol_cent : false}
+        .reject {|entry| balance_too_small_reject(entry)}
         .sort_by {|entry| (entry[:count_ref].is_a? Numeric) ? -entry[:count_ref] : 1}
   end
 
