@@ -9,6 +9,7 @@
 
 - ruby 2.3
 - *sql server (deployed production instance is postgresql based, dev currently on mysql)
+- node and yarn
 
 ## Dev setup
 
