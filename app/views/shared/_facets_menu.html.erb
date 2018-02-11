@@ -1,0 +1,26 @@
+<% tabs = @facets
+   primary_tab = local_assigns.fetch(:primary)
+%>
+<ul class="nav nav-pills" role="tablist" id="facets-tab">
+  <% tabs.each do |item| %>
+    <% is_primary = (item.key?(:primary) and item[:primary] != false)
+       move_next = ((not primary_tab) and is_primary)
+       next if move_next %>
+    <li class="nav-item">
+      <% if item.key? :vm and item[:vm] != nil %>
+        <%
+
+          classes = []
+          classes.push('active') if item.key?(:active) and item[:active]
+          classes.push('d-lg-none d-xl-none') if is_primary
+        %>
+        <a class="nav-link text-light <%= classes.join(' ') %>"
+           data-toggle="tab" href="<%= "##{item[:sym]}" %>" role="tab">
+          <%= item[:label] %>
+        </a>
+      <% else %>
+        <%= link_to item[:label], item[:path], class: 'nav-link text-light' %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

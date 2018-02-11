@@ -1,4 +1,4 @@
-<%= form_with scope: :filter, url: screener_edit_filter_path(id:@filter.id), class: 'form-inline d-flex justify-content-center', method: "post" do |form| %>
+<%= form_with scope: :filter, url: screener_edit_filter_path(id: @filter.id), class: 'form-inline d-flex justify-content-center', method: "post" do |form| %>
   <%= render 'shared/form_errors', record: @filter %>
 
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
@@ -11,9 +11,11 @@
     <%= form.text_field(:value, class: 'form-control') %>
   </div>
   <%= form.hidden_field(:screener_id) %>
-  <div class="mb-2 mr-sm-2 mb-sm-0">
+  <div class="mb-2 mr-2 mt-lg-2">
 
     <%= submit_tag('Save', class: 'btn btn-sm btn-outline-primary ct-card-btn-submit', id: 'ct-screener-edit-btn') %>
   </div>
-  <%= link_to 'Cancel', screener_update_path(id: @filter.screener.id), class: 'btn btn-sm btn-outline-secondary ct-card-btn-submit' %>
+  <div class="mb-2 mt-lg-2">
+    <%= link_to 'Cancel', screener_update_path(id: @filter.screener.id), class: 'btn btn-sm btn-outline-secondary ct-card-btn-submit' %>
+  </div>
 <% end %>

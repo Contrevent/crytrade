@@ -5,9 +5,10 @@
         New Screener
       </a>
     </li>
+
   </ul>
 
-  <br/>
+  <div class="mb-1"></div>
   <div class="tab-content">
     <% create_content = render 'screener/create_screener' %>
     <%= render 'shared/tab', active: true, id: 'tabCreate', content: create_content %>

@@ -1,11 +1,11 @@
 
-<%= form_with scope: :entry, url: screener_new_url, method: "post" do |form| %>
+<%= form_with scope: :entry, url: screener_new_url, method: "post", class: 'form-inline' do |form| %>
   <%= render 'shared/form_errors', record: @entry %>
 
-  <div class="field form-group">
-    <%= label_tag(:name, "Name") %>
-    <%= form.text_field(:name, class: 'form-control', id: 'ct-screener-name') %>
+  <div class="field form-group m-1">
+    <%= label_tag(:name, "Name", {for: 'ct-screener-name', class:"sr-only"}) %>
+    <%= form.text_field(:name, class: 'form-control', placeholder: 'Screener Name', id: 'ct-screener-name') %>
   </div>
 
-  <%= submit_tag('Create', class: 'btn btn-sm btn-success ct-card-btn-submit', id: 'ct-screener-create-btn') %>
+  <%= submit_tag('Create', class: 'btn btn-sm btn-success ml-1 ct-card-btn-submit', id: 'ct-screener-create-btn') %>
 <% end %>

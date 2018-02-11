@@ -1,5 +1,5 @@
 <% job = local_assigns.fetch(:job) %>
-<div class="ct-table-cell-chip">
+<div class="p-2">
   <% if job.queue? %>
     <span class="badge badge-primary">Queued</span>
   <% elsif job.running? %>

@@ -1,27 +1,29 @@
-$(function () {
+const round = require('lodash/round');
 
-    var inputCount = $('#ct-new-count');
+function createTrade() {
+
+    const inputCount = $('#ct-new-count');
     if (inputCount.length) {
-        var selectSymbol = $('#ct-select-symbol');
-        var inputStart = $('#ct-start-usd');
-        var inputStop = $('#ct-stop-usd');
-        var inputRisk = $('#ct-risk');
-        var init = true;
+        const selectSymbol = $('#ct-select-symbol');
+        const inputStart = $('#ct-start-usd');
+        const inputStop = $('#ct-stop-usd');
+        const inputRisk = $('#ct-risk');
+        let init = true;
 
         setTimeout(function () {
             init = false;
         }, 5000);
 
         function evalRisk() {
-            var refreshBtn = $('#ct-refresh-btn');
+            const refreshBtn = $('#ct-refresh-btn');
             if (!init && refreshBtn.hasClass('btn-outline-danger')) {
                 refreshBtn.click();
             }
             try {
-                var count = parseFloat(inputCount.val());
-                var start = parseFloat(inputStart.val());
-                var stop = parseFloat(inputStop.val());
-                var valid = true;
+                const count = parseFloat(inputCount.val());
+                const start = parseFloat(inputStart.val());
+                const stop = parseFloat(inputStop.val());
+                let valid = true;
                 if (isNaN(count) || isNaN(start) || isNaN(stop)) {
                     valid = false;
                 }
@@ -37,13 +39,13 @@ $(function () {
             }
         }
 
-        var sellStart = $('#ct-start-sell-usd');
-        var sellSymbol = $('#ct-sell-select-symbol');
+        const sellStart = $('#ct-start-sell-usd');
+        const sellSymbol = $('#ct-sell-select-symbol');
 
         function loadSellTicker() {
             sellStart.val(0);
             $.get("/ticker?symbol=" + sellSymbol.val(), function (result) {
-                var price = result && result.price;
+                const price = result && result.price;
                 if (price) {
                     sellStart.val(price);
                 }
@@ -56,10 +58,10 @@ $(function () {
         function loadTicker() {
             inputCount.val(0);
             $.get("/ticker?symbol=" + selectSymbol.val(), function (result) {
-                var price = result && result.price;
+                const price = result && result.price;
                 if (price) {
                     inputStart.val(price);
-                    inputStop.val(price * .75);
+                    inputStop.val(round(price * .75, 4));
                     evalRisk();
                 }
             });
@@ -80,5 +82,6 @@ $(function () {
             width: '100%'
         });
     }
-})
-;
+}
+
+module.exports = createTrade;

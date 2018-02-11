@@ -1,0 +1,14 @@
+<% primary_tab = local_assigns.fetch(:primary)
+%>
+<div class="tab-content text-white">
+  <% @facets.select {|face| face.key? :vm and face[:vm] != nil}.each do |face| %>
+    <% is_primary = (face.key?(:primary) and face[:primary] != false)
+       move_next = ((not primary_tab) and is_primary)
+       next if move_next
+       vm = face[:vm]
+    %>
+    <div id="<%= face[:sym] %>" role="tabpanel" class="tab-pane <%= 'active' if face[:active] %>">
+      <%= render vm[:view], populate_locals(vm) %>
+    </div>
+  <% end %>
+</div>

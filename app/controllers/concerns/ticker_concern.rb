@@ -23,13 +23,13 @@ module TickerConcern
     cols = [
         {name: 'symbol', allow_order: true},
         {name: 'percent_change_1h', allow_order: true, label: '1h &Delta; (%)', deco: true,
-         get_value: lambda {|currency| currency.percent_change_1h}
+         get_value: lambda {|currency| to_float(currency.percent_change_1h)}
         },
         {name: 'percent_change_24h', allow_order: true, label: '24h &Delta; (%)', deco: true,
-         get_value: lambda {|currency| currency.percent_change_24h}
+         get_value: lambda {|currency| to_float(currency.percent_change_24h)}
         },
         {name: 'percent_change_7d', allow_order: true, label: '7d &Delta; (%)', deco: true,
-         get_value: lambda {|currency| currency.percent_change_7d}
+         get_value: lambda {|currency| to_float(currency.percent_change_7d)}
         },
         {name: 'currency_name', allow_order: true, label: 'Name'},
         {name: 'price_usd', allow_order: true, label: 'Price ($)',
@@ -54,6 +54,17 @@ module TickerConcern
     cols.map {|col_def| TickerConcern::decorate_order(col_def, order_name, order_direction, order_path)}
   end
 
+  def col_to_json(col)
+    result = Hash.new
+    allowed_props = [:name, :label, :link, :deco, :allow_order, :red, :green]
+    allowed_props.each do |key|
+      if col.key? key
+        result[key] = col[key]
+      end
+    end
+    result
+  end
+
   def self.last_ticker_update
     Rails.cache.fetch('#cry_trade/tickers_update', expires_in: 30.seconds) do
       Ticker.maximum(:updated_at)
@@ -68,7 +79,7 @@ module TickerConcern
     -1
   end
 
-  def self.symbols
+  def coin_symbols
     TickerConcern::currencies.sort_by {|k, v| v[:name]}
         .map {|elt| ["#{elt[1][:name]} (#{elt[0]})", elt[0]]}
   end

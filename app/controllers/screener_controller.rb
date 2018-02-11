@@ -121,17 +121,36 @@ class ScreenerController < ApplicationController
   end
 
   def view
-    order_name, order_direction = TickerConcern::parse_order params
-    populate screener_view_def(params[:id], order_name, order_direction)
-    @view = :screener_view
+    if request.format == :json
+      job_id = params[:id]
+      react_coins_view job_id
+    else
+      order_name, order_direction = TickerConcern::parse_order params
+      populate screener_view_def(params[:id], order_name, order_direction, 12)
+      @view = :screener_view
+    end
   end
 
   def last
-    order_name, order_direction = TickerConcern::parse_order params
-    populate screener_last_def(params[:id], order_name, order_direction)
-    @view = :screener_last
-    render 'view'
+    if request.format == :json
+      screener_id = params[:id]
+      react_coins_last screener_id
+    else
+      order_name, order_direction = TickerConcern::parse_order params
+      populate screener_last_def(params[:id], order_name, order_direction, 12)
+      @view = :screener_last
+      render 'view'
+    end
   end
+
+  def trades
+    react_coins_trades
+  end
+
+  def funds
+    react_coins_funds
+  end
+
 
   protected
 

@@ -1,14 +1,16 @@
-<%= form_with scope: :trade, local: true, url: trade_close_url, method: "post" do |form| %>
+<% entity = local_assigns.fetch(:model) %>
+<%= form_with scope: :trade, local: true, model: entity,
+              url: trades_close_path(id: entity.id), method: 'post' do |form| %>
+  <%= render 'shared/form_errors', record: entity %>
 
-  <%= render 'shared/form_errors', record: @trade %>
-
-  <%= render 'shared/text_row', parent: form, id: 'ct-sell-stop-usd', symbol: :sell_stop_usd, label: @trade.sell_symbol + ' Price ($)' %>
-
-  <%= render 'shared/text_row', parent: form, id: 'ct-stop-usd', symbol: :stop_usd, label:  @trade.buy_symbol + ' Price ($)' %>
-  <%= render 'shared/text_row', parent: form, id: 'ct-fees-usd', symbol: :fees_usd, label: 'Fees ($)' %>
-
-  <% render 'shared/readonly_row', id: 'ct-gain-loss-usd', symbol: :gain_loss_usd, label: 'Gain/Loss ($)' %>
-
-  <%= form.hidden_field(:id) %>
-  <%= submit_tag("Close Trade", class: 'btn btn-sm btn-info ct-card-btn-submit', id: 'ct-close-btn') %>
+  <%= render 'shared/text_row', parent: form, id: 'ct-sell-stop-usd',
+             symbol: :sell_stop_usd, label: entity.sell_symbol + " Price (#{ref_char})" %>
+  <%= render 'shared/text_row', parent: form, id: 'ct-stop-usd',
+             symbol: :stop_usd, label: entity.buy_symbol + " Price (#{ref_char})" %>
+  <%= render 'shared/text_row', parent: form, id: 'ct-fees-usd',
+             symbol: :fees_usd, label: "Fees (#{ref_char})" %>
+  <%= render 'shared/readonly_row', id: 'ct-gain-loss-usd',
+             symbol: :gain_loss_usd, label: "Gain/Loss (#{ref_char})" %>
+  <%= submit_tag('Close Trade', class: 'btn btn-sm btn-info ct-card-btn-submit', id: 'ct-close-btn') %>
+  <div class="d-none" data-func="update-trade"></div>
 <% end %>

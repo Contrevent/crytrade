@@ -15,3 +15,11 @@
 - Check _config/database.yml_ for the proper password and configuration
 - Execute
 > bin/rake db:create db:migrate db:seed
+
+## Backend Architecture
+
+* Naming:
+   * /api_open/xxx: Unprotected apis (user not auth)
+   * /api_sec_trade/xxx: Protected api
+   
+

@@ -7,7 +7,6 @@ class HistoryController < ApplicationController
 
   def index
     populate history_def, funds_def
-    @symbols = TickerConcern.symbols
     @trade = Trade.new
   end
 

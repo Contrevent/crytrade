@@ -3,7 +3,6 @@ class SettingsController < ApplicationController
   include TickerConcern
 
   def settings
-    @symbols = TickerConcern.symbols
     @user = current_user
   end
 
@@ -14,7 +13,6 @@ class SettingsController < ApplicationController
       flash[:notice] = "Settings save."
       redirect_to action: 'settings'
     else
-      @symbols = TickerConcern.symbols
       render 'settings'
     end
   end

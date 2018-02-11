@@ -1,11 +1,11 @@
-$(function () {
+function dashboardConfig() {
 
-    var tileSelect = $('#ct-tile-select');
+    const tileSelect = $('#ct-tile-select');
     if (tileSelect.length) {
         function toogleGroup() {
-            var screenerGroup = $('#screener-group');
+            const screenerGroup = $('#screener-group');
             if (screenerGroup.length) {
-                var currentTile = tileSelect.val();
+                const currentTile = tileSelect.val();
                 if (currentTile === 'screener_last') {
                     screenerGroup.show();
                 } else {
@@ -19,4 +19,6 @@ $(function () {
     }
 
 
-});
+}
+
+module.exports = dashboardConfig;

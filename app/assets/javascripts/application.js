@@ -17,6 +17,3 @@
 //= require select2-full
 //= require turbolinks
 //= require_tree .
-//= require create_trade
-//= require select_ledger
-//= require refresh.js

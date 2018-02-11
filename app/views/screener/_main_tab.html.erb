@@ -1,33 +1,33 @@
 <% active = local_assigns.fetch(:active) %>
 <div class="row">
-  <div class="col">
-    <div class="card border-dark ct-card ct-screener-main">
-      <div class="card-body text-light bg-dark">
+  <div class="col-12 col-lg-12">
 
-        <ul class="nav nav-pills" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link text-white <%= 'active' if active == 'run' %>"
-               data-toggle="tab" href="#tabRun" role="tab">
-              Run
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white <%= 'active' if active == 'config' %>"
-               data-toggle="tab" href="#tabConfig" role="tab">
-              Configure
-            </a>
-          </li>
-        </ul>
+    <div class="d-none d-sm-block">
+      <ul class="nav nav-pills" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link text-white <%= 'active' if active == 'run' %>"
+             data-toggle="tab" href="#tabRun" role="tab">
+            Run
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white <%= 'active' if active == 'config' %>"
+             data-toggle="tab" href="#tabConfig" role="tab">
+            Configure
+          </a>
+        </li>
+      </ul>
 
-        <br/>
-        <div class="tab-content ct-screener-content">
-          <% run_content = render 'screener/run' %>
-          <%= render 'shared/tab', active: active == 'run', id: 'tabRun', content: run_content %>
-          <% create_content = render 'screener/configure' %>
-          <%= render 'shared/tab', active: active == 'config', id: 'tabConfig', content: create_content %>
+      <div class="w-100 mb-2"></div>
+    </div>
 
-        </div>
-      </div>
+    <div class="tab-content ct-screener-content">
+      <% run_content = render 'screener/run' %>
+      <%= render 'shared/tab', active: active == 'run', id: 'tabRun', content: run_content %>
+      <% create_content = render 'screener/configure' %>
+      <%= render 'shared/tab', active: active == 'config', id: 'tabConfig', content: create_content %>
+
     </div>
   </div>
+
 </div>

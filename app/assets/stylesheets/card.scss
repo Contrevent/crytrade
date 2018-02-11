@@ -8,8 +8,7 @@
 }
 
 .ct-card-content {
-  max-height: 30vh;
-  overflow-y: auto;
+
 }
 
 .ct-card-btn-submit {
@@ -22,4 +21,17 @@
     overflow-y: visible;
   }
 
+}
+
+.ct-page .card-body {
+  max-height: calc(100vh - 11rem);
+  overflow-y: auto;
+}
+
+
+@include media-breakpoint-up(lg) {
+  .ct-page .card-body {
+    max-height: calc(100vh - 12rem);
+    overflow-y: auto;
+  }
 }

@@ -21,12 +21,11 @@ class DashboardController < ApplicationController
         when :funds_tickers
           vms.push(funds_tickers_def(order_name, order_direction, tile.width, tile.height))
         when :trade
-          vms.push(trade_def(tile.width, tile.height))
+          vms.push(trade_dash_def(tile.width, tile.height))
         when :trade_ticker
           vms.push(trades_tickers_def(order_name, order_direction, tile.width, tile.height))
       end
     end
     populate_by_array(vms)
-    @refresh = true
   end
 end

@@ -1,0 +1,16 @@
+<% tabs = local_assigns.fetch(:tabs) %>
+<ul class="nav nav-pills" role="tablist">
+  <% tabs.each do |item| %>
+    <li class="nav-item">
+      <% if item.key? :view %>
+        <a class="nav-link text-light <%= 'active' if item.key? :active and item[:active] %>"
+           data-toggle="tab" href="<%= "##{item[:id]}" %>" role="tab">
+          <%= item[:label] %>
+        </a>
+      <% else %>
+        <%= link_to item[:label], item[:path], class: 'nav-link text-light' %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+<br/>

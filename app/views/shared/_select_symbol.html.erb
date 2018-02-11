@@ -6,6 +6,6 @@
 %>
 <div class="field form-group">
   <%= label_tag(:buy_symbol, label) %>
-    <%= form.select(symbol, options_for_select(@symbols, default), {}, {:id => id, :class => 'form-control'}) %>
+  <%= form.select(symbol, options_for_select(coin_symbols, default), {}, {:id => id, :class => 'form-control'}) %>
 
 </div>

@@ -10,16 +10,11 @@
 
   <%= javascript_include_tag 'application', 'jquery3', 'bootstrap.min', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'select2-full' %>
-  <%= javascript_include_tag 'flash' %>
-  <%= javascript_include_tag 'create_trade' %>
-  <%= javascript_include_tag 'update_trade' %>
-  <%= javascript_include_tag 'select_ledger' %>
-  <%= javascript_include_tag 'refresh' %>
-  <%= javascript_include_tag 'dashboard' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
+
 
   <%= yield(:head) %>
 </head>
-
 <body>
 <div class="ct-notif">
   <% if flash[:notice] %>
@@ -55,9 +50,9 @@
           <%= link_to "Screeners", screener_url, :class => "nav-link" %>
         </li>
 
-        <li class="nav-item<%= ' active' if (current_page?('/trade') or
-            current_page?('/trade/update') or current_page?('/trade/ticker')) %>">
-          <%= link_to "Trades", trade_url, :class => "nav-link" %>
+        <li class="nav-item<%= ' active' if (current_page?(trades_url) or
+            (params.key? :id and current_page?(trades_show_path(id: params[:id])))) %>">
+          <%= link_to "Trades", trades_url, :class => "nav-link" %>
         </li>
 
         <li class="nav-item<%= ' active' if (current_page?('/ledger') or
@@ -72,7 +67,9 @@
 
     </ul>
     <ul class="navbar-nav ml-auto">
-
+      <li class="lg-hide nav-item <%= "active" if current_page?('/about') %>">
+        <%= link_to "About", about_url, class: "nav-link" %>
+      </li>
       <% if user_signed_in? %>
         <li class="nav-item<%= ' active' if current_page?('/settings') or current_page?('/settings/dashboard') %>">
           <%= link_to "Settings", settings_url, :class => "nav-link" %>
@@ -89,31 +86,28 @@
           <%= link_to "Login", new_user_session_path, :class => "nav-link" %>
         </li>
       <% end %>
-      <% if defined? @refresh %>
-        <%= render 'shared/refresh' %>
-      <% end %>
+
     </ul>
+    <div class="d-none" data-func="flash"></div>
   </div>
 
 </nav>
-
-<br/>
-<div class="container-fluid">
+<div class="mt-3 container-fluid <%= (content_for(:main_class).blank?) ? 'ct-content' : (yield :main_class) %>">
   <%= yield %>
 </div>
 <footer class="footer bg-dark">
   <ul class="nav justify-content-center">
-    <li class="nav-item">
-      <a href="<%= refresh_path(c: controller.controller_name, a: controller.action_name) %>" class="nav-link">
-        Tickers updated
-        <mark> <%= time_ago_in_words(last_ticker) %></mark>
-        ago.
-      </a>
-    </li>
-    <li class="nav-item <%= "active" if current_page?('/about') %>">
+    <li class="sm-hide nav-item <%= "active" if current_page?('/about') %>">
       <%= link_to "About", about_url, class: "nav-link" %>
+    </li>
+    <li class="nav-item">
+      <a id="last_update" data-view="<%= api_ticker_update_url %>"
+         href="<%= refresh_path(c: controller.controller_name, a: controller.action_name) %>" class="nav-link">
+        Loading...
+      </a>
     </li>
   </ul>
 </footer>
+
 </body>
 </html>

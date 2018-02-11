@@ -1,11 +1,10 @@
 <% vm = find_vm_by_kind(@view)
-   count = (vm[:model].key? :data) ? vm[:model][:data].count : 0
    job = (vm[:model].key? :job) ? vm[:model][:job] : nil
-
+   count = (vm[:model].key? :count) ? vm[:model][:count] : -1
    if job == nil
 %>
   <div class="row">
-    <div class="col ct-screener-view">
+    <div class="ct-screener-view">
       <div class="alert alert-warning">Nothing to display</div>
     </div>
   </div>

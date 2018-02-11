@@ -1,26 +1,28 @@
-<table class="table table-dark table-striped">
-  <tbody>
-  <% @filters.each do |filter| %>
-    <tr>
-      <td>
-        <div class="ct-table-cell-chip"><%= filter[:label] %></div>
-      </td>
-      <td>
-        <div class="ct-table-cell-chip"><%= filter['operator'] %></div>
-      </td>
-      <td>
-        <div class="ct-table-cell-chip"><%= filter['value'] %></div>
-      </td>
-      <td>
-        <%= link_to "Edit".html_safe, screener_update_filter_path(id: filter['id'], screener_id: filter['screener_id']),
-                    class: 'btn btn-sm btn-outline-primary ct-table-btn' %>
-        <%= link_to "Del".html_safe, screener_destroy_filter_path(id: filter['id'], screener_id: filter['screener_id']),
-                    class: 'btn btn-sm btn-outline-danger ct-table-btn' %>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<div class="ct-filter-parent">
+  <table class="table table-dark table-striped">
+    <tbody>
+    <% @filters.each do |filter| %>
+      <tr>
+        <td>
+          <div class="row">
+            <div class="col-12 col-lg-9">
+              <div class="ct-table-cell-chip text-left"><%= [filter[:label], filter['operator'], filter['value']].join(' ') %></div>
+
+            </div>
+            <div class="col-12 col-lg-3 d-flex flex-row-reverse">
+              <%= link_to "Del".html_safe, screener_destroy_filter_path(id: filter['id'], screener_id: filter['screener_id']),
+                          class: 'btn btn-sm btn-outline-danger ct-table-btn' %>
+              <%= link_to "Edit".html_safe, screener_update_filter_path(id: filter['id'], screener_id: filter['screener_id']),
+                          class: 'btn btn-sm btn-outline-primary mr-2 ct-table-btn' %>
+
+            </div>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
 <% if @filters.empty? %>
   <div class="alert alert-secondary" role="alert">No filters to display</div>
 <% end %>

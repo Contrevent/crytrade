@@ -2,17 +2,40 @@
 .ct-table {
   table-layout: fixed;
   margin-bottom: 0;
+  font-size: 0.925rem;
 }
 
 .ct-table th {
+  text-align: center;
+  text-transform: capitalize;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
 
-.ct-table td {
-  padding: .25rem;
+.ct-table th {
+  padding: .125rem;
 }
+
+.ct-table th .alert {
+  padding: .125rem;
+  margin: 0;
+}
+
+.ct-th {
+  padding: .25rem;
+  margin: 0;
+}
+
+.ct-table td {
+  text-align: center;
+}
+
+.ct-table td div.alert {
+  padding: 0.25rem 0.05rem;
+  margin-bottom: 0;
+}
+
 
 .ct-table-head {
   margin-bottom: 0;
@@ -27,17 +50,20 @@
 }
 
 .ct-table-body-parent {
-  max-height: calc(60vh - 11rem);
+  max-height: calc(80vh - 8.5rem);
   overflow-y: auto;
   margin-bottom: 0.5rem;
 }
 
+.ct-table-react-body {
+  max-height: calc(100vh - 10.5rem);
+  overflow-y: auto;
+}
+
 .ct-table-cell-chip {
-  padding: .25rem;
+  padding: .125rem;
   text-align: center;
   margin: 0;
-  position: relative;
-  border: 1px solid transparent;
   border-radius: .25rem;
   text-overflow: ellipsis;
   white-space: nowrap;

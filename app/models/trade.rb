@@ -1,6 +1,7 @@
 class Trade < ApplicationRecord
   belongs_to :user
   include TickerConcern
+  include ToJsonConcern
 
   validates :sell_symbol, presence: true
   validates :sell_start_usd, numericality: {greater_than: 0}, presence: true

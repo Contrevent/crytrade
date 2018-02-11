@@ -1,14 +1,21 @@
-<%= form_with scope: :trade, local: true, url: trade_update_post_url, method: "post" do |form| %>
+<% entity = local_assigns.fetch(:model) %>
+<%= form_with scope: :trade, local: true, model: entity,
+              url: trades_update_path(id: entity.id), method: "post" do |form| %>
 
-  <%= render 'shared/form_errors', record: @trade %>
+  <%= render 'shared/form_errors', record: entity %>
 
-  <%= render 'shared/readonly_row', id: 'ct-buy-symbol-ro', symbol: :buy_symbol, label: 'Buy', value: @trade.buy_symbol %>
-  <%= render 'shared/text_row', parent: form, id: 'ct-edit-count', symbol: :count, label: 'Count' %>
-  <%= render 'shared/text_row', parent: form, id: 'ct-start-usd', symbol: :start_usd, label: 'Start Price ($)' %>
-  <%= render 'shared/text_row', parent: form, id: 'ct-init-usd', symbol: :init_stop_usd, label: 'Initial Stop ($)' %>
-  <%= render 'shared/text_row', parent: form, id: 'ct-trailing-usd', symbol: :trailing_stop_usd, label: 'Trailing Stop ($)' %>
+  <%= render 'shared/readonly_row', id: 'ct-buy-symbol-ro',
+             symbol: :buy_symbol, label: 'Buy', value: entity.buy_symbol %>
+  <%= render 'shared/text_row', parent: form, id: 'ct-edit-count',
+             symbol: :count, label: 'Count' %>
+  <%= render 'shared/text_row', parent: form, id: 'ct-start-usd',
+             symbol: :start_usd, label: "Start Price (#{ref_char})" %>
+  <%= render 'shared/text_row', parent: form, id: 'ct-init-usd',
+             symbol: :init_stop_usd, label: "Initial Stop (#{ref_char})" %>
+  <%= render 'shared/text_row', parent: form, id: 'ct-trailing-usd',
+             symbol: :trailing_stop_usd, label: "Trailing Stop (#{ref_char})" %>
 
-  <%= form.hidden_field(:id) %>
   <%= submit_tag("Save", class: 'btn btn-sm btn-primary ct-card-btn-submit', id: 'ct-save-btn') %>
+
 
 <% end %>

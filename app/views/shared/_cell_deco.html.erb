@@ -7,7 +7,7 @@
 
    code = up_code
    kind = 'info'
-   if value != nil
+   if value != nil and value.is_a? Numeric
      if value >= green
        code += up_code
        kind = 'success'

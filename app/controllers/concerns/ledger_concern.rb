@@ -4,8 +4,12 @@ module LedgerConcern
   include ViewModelConcern
   include RefConcern
 
-  def funds_def(width = 3, height = 25)
-    create_vm :funds, 'ledger/funds', width, height, balance
+  def funds_def(width = 0, height = 0)
+    create_vm :funds, 'ledger/funds_react', width, height, nil
+  end
+
+  def funds_facet
+    facet(:funds, 'Funds', nil, funds_def)
   end
 
   def entries
@@ -23,8 +27,11 @@ module LedgerConcern
   end
 
   def balance
+    ref_dol_cent = ref_value(0.01)
+
     Ledger.select('symbol, sum(count) as count').group(:symbol).where(:user => current_user)
         .map {|entry| {symbol: entry.symbol, count: entry.count, count_ref: balance_ref(entry)}}
+        .reject {|entry| (entry[:count_ref].is_a? Numeric) ? entry[:count_ref].abs < ref_dol_cent : false}
         .sort_by {|entry| (entry[:count_ref].is_a? Numeric) ? -entry[:count_ref] : 1}
   end
 
@@ -56,6 +63,16 @@ module LedgerConcern
 
   def destroy_trade(trade)
     Ledger.where(user: current_user, trade: trade).delete_all
+  end
+
+  def funds_columns
+    [{name: 'symbol', allow_order: true, label: 'Symbol',
+      get_value: lambda {|balance| balance[:symbol]}},
+     {name: 'count', allow_order: true, label: 'Balance',
+      get_value: lambda {|balance| num_norm(balance[:count])}},
+     {name: 'count_ref', allow_order: true, label: "Balance (#{ref_char})",
+      get_value: lambda {|balance| balance[:count_ref]}}
+    ]
   end
 
 end

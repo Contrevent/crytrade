@@ -38,7 +38,7 @@
                 if ledger.trade.closed
                   target_path = history_update_path(id: ledger.trade.id)
                 else
-                  target_path = trade_update_path(id: ledger.trade.id)
+                  target_path = trades_show_path(id: ledger.trade.id)
                 end
               else
                 target_path = ledger_update_path(id: ledger.id)

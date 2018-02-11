@@ -20,28 +20,19 @@
   background-color: theme-color('danger');
 }
 
+// 1: Date
+// 2: Label
+// 3: Symbol
+// 4: Debit
+// 5: Credit
+// 6: Dev/Ref
+// 7: Debit Ref.
+// 8: Credit Ref.
+// 9: Action
+$adapt-ledger: (1 3)(2 9)(3 1)(4 9)(5 9)(6 9)(7 1)(8 1)(9 1);
+@include adapt-columns($adapt-ledger, 'ct-table-ledger');
+
 .ct-table-ledger th:nth-child(2),
 .ct-table-ledger td:nth-child(2) {
   width: 20%;
-}
-
-.ct-table-ledger th:nth-child(6),
-.ct-table-ledger td:nth-child(6),
-.ct-table-ledger th:nth-child(7),
-.ct-table-ledger td:nth-child(7),
-.ct-table-ledger th:nth-child(8),
-.ct-table-ledger td:nth-child(8) {
-  display: none;
-}
-
-@include media-breakpoint-up(xl) {
-
-  .ct-table-ledger th:nth-child(6),
-  .ct-table-ledger td:nth-child(6),
-  .ct-table-ledger th:nth-child(7),
-  .ct-table-ledger td:nth-child(7),
-  .ct-table-ledger th:nth-child(8),
-  .ct-table-ledger td:nth-child(8) {
-    display: table-cell;
-  }
 }

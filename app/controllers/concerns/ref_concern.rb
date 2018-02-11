@@ -16,17 +16,34 @@ module RefConcern
     unless is_number? usd_value
       return usd_value
     end
-    num_fine(ref_value(usd_value))
+    rate = ref_value(1)
+    if rate > 100 || usd_value.abs < 0.01
+      num_fine(ref_value(usd_value))
+    else
+      num_norm(ref_value(usd_value))
+    end
+  end
+
+  def ref_to_usd(ref_value)
+    unless is_number? ref_value
+      return ref_value
+    end
+    rate = ref_value(1)
+    ref_value / rate
   end
 
 
   def num_norm(value)
-    value.round(reference_precision)
+    value.round(reference_precision).to_f
   end
 
 
   def num_fine(value)
-    value.round(reference_precision + 2)
+    value.round(reference_precision + 2).to_f
+  end
+
+  def to_float(value)
+    value != nil ? value.to_f : 'n.a.'
   end
 
   def ref_coin

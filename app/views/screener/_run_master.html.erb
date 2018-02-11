@@ -1,64 +1,89 @@
-<div class="ct-table-body-parent">
-  <% @screeners.each do |screener| %>
-    <div class="card ct-card-grey mb-3">
-      <div class="mb-0 p-0 pl-2 pr-2 pt-2">
-        <div class="d-flex justify-content-between">
-          <h5 class="text-light d-inline ml-1">
-            <%= screener.name %>
-          </h5>
-          <em class="p-1"><%= screener.last_run_at != nil ? 'ran ' + time_ago_in_words(screener.last_run_at) + ' ago' : 'no run yet' %></em>
+<div class="ct-screener-run">
+  <div class="row">
+    <% @screeners.each do |screener| %>
+      <div class="col-12 col-lg-4">
+        <div class="ct-screener-item card bg-dark p-2 mb-4">
+          <div class="card-title">
+            <div class="float-right">
+              <ul class="nav">
+                <li class="nav-item">
+                  <%= link_to "&#8634;".html_safe, screener_last_path(id: screener.id), class: 'btn btn-sm btn-outline-primary ct-table-btn mr-2' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "&#9658;".html_safe, screener_queue_path(id: screener.id), class: 'btn btn-sm btn-outline-success ct-table-btn mr-2' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "&#x2699".html_safe, screener_update_path(id: screener.id), class: 'btn btn-sm btn-outline-light ct-table-btn mr-2' %>
+                </li>
+              </ul>
 
-          <div class="d-flex justify-content-start">
-            <%= link_to "&#8634;".html_safe, screener_last_path(id: screener.id), class: 'btn btn-sm btn-outline-primary ct-table-btn mr-2' %>
-            <%= link_to "&#9658;".html_safe, screener_queue_path(id: screener.id), class: 'btn btn-sm btn-outline-success ct-table-btn mr-2' %>
-            <%= link_to "&#x2699".html_safe, screener_update_path(id: screener.id), class: 'btn btn-sm btn-outline-light ct-table-btn mr-2' %>
+            </div>
+
+            <h5 class="text-light">
+              <%= screener.name %>
+            </h5>
+            <em class="d-block text-light">
+              <%= screener.last_run_at != nil ? 'ran ' + time_ago_in_words(screener.last_run_at) + ' ago' : 'no run yet' %>
+            </em>
+
+          </div>
+
+          <div class="card-body">
+            <% jobs = run_jobs(screener) %>
+            <table class="w-100 ct-table table table-sm table-dark table-striped p-0 m-0">
+              <tbody>
+              <% jobs.each do |job| %>
+                <% result = run_results(job) %>
+                <tr>
+                  <td>
+                    <div class="row">
+                      <div class="col-12 col-lg-8 d-flex flex-align-between">
+                        <em class="p-2"><%= "##{job.id}" %></em>
+                        <div class="p-2">
+                          <%= if result.any?
+                                "#{result.count} result(s)"
+                              elsif job.queue?
+                                (render 'job_queued', job: job)
+                              end %>
+                        </div>
+
+                        <%= render 'screener/job_status', job: job %>
+
+                      </div>
+
+                      <div class="col-12 col-lg-4 d-flex flex-row-reverse">
+                        <div class="p-2">
+                          <%= if job.queue?
+                                link_to "Cancel".html_safe, screener_cancel_path(id: job.id),
+                                        class: 'btn btn-sm btn-outline-warning ct-table-btn'
+                              elsif job.done?
+                                link_to "View".html_safe, screener_view_path(id: job.id),
+                                        class: 'btn btn-sm btn-outline-primary ct-table-btn'
+                              end %>
+                        </div>
+
+                      </div>
+                    </div>
+                  </td>
+
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
           </div>
         </div>
-
       </div>
+    <% end %>
+    <div class="col-12 col-lg-4">
+      <div class="ct-screener-item card bg-dark p-2 mb-4">
+        <div class="card-body">
 
-      <div class="card-body p-2">
-        <% jobs = run_jobs(screener) %>
-        <table class="w-100 ct-table table table-dark table-striped p-0 m-0">
-          <tbody>
-          <% jobs.each do |job| %>
-            <% result = run_results(job) %>
-            <tr>
-              <td>
-                <div class="d-flex justify-content-start">
-                  <div class="ct-table-cell-chip">
-                    <%= "##{job.id}" %>
-                  </div>
-                  <% result_summary = if result.any?
-                                        (render 'shared/cell', italic: true, content: "#{result.count} result(s)")
-                                      elsif job.queue?
-                                        (render 'job_queued', job: job)
-                                      end %>
-
-                  <%= result_summary %>
-
-                  <%= render 'screener/job_status', job: job %>
-
-                </div>
-              </td>
-              <td>
-                <div class="d-flex justify-content-end">
-                  <%= if job.queue?
-                        link_to "Cancel".html_safe, screener_cancel_path(id: job.id),
-                                class: 'btn btn-sm btn-outline-warning ct-table-btn'
-                      elsif job.done?
-                        link_to "View".html_safe, screener_view_path(id: job.id),
-                                class: 'btn btn-sm btn-outline-primary ct-table-btn'
-                      end %></div>
-              </td>
-            </tr>
-          <% end %>
-          </tbody>
-        </table>
+          <%= render 'screener/create_screener' %>
+        </div>
       </div>
     </div>
+  </div>
+  <% if @screeners.empty? %>
+    <div class="alert alert-secondary" role="alert">No entries to display</div>
   <% end %>
 </div>
-<% if @screeners.empty? %>
-  <div class="alert alert-secondary" role="alert">No entries to display</div>
-<% end %>

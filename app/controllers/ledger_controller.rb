@@ -76,6 +76,15 @@ class LedgerController < ApplicationController
     redirect_to action: 'index'
   end
 
+  def funds
+    order_name = 'count_ref'
+    order_direction = 'desc'
+    cols = funds_columns
+    data = balance.map {|obj| ApplicationHelper::to_json(obj, cols)}
+    react_view 'Funds', {cols: cols.map {|col| col_to_json(col)},
+                         data: data, order: {field: order_name, dir: order_direction}}, 30
+  end
+
   private
   def ledger_params
     params.require(:entry).permit(:symbol, :count, :description)
@@ -87,7 +96,6 @@ class LedgerController < ApplicationController
 
   def define_locals_index
     define_locals
-    @symbols = TickerConcern.symbols
     populate funds_def
   end
 end

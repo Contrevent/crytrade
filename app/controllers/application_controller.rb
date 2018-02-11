@@ -25,5 +25,12 @@ class ApplicationController < ActionController::Base
   helper_method :num_fine
   helper_method :find_vm_by_kind
   helper_method :populate_locals
+  helper_method :coin_symbols
+
+  protected
+
+  def react_view(component, props, interval = 0)
+    render json: {component: component, props: props, interval: interval}
+  end
 
 end

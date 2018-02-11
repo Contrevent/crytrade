@@ -1,6 +1,27 @@
-<% new_active = @trade.errors.any? %>
-<%= render 'shared/container', class: 'ct-trade-index', tabs: [
-    find_vm_by_kind(:funds).merge({id: 'tabFun', active:!new_active, label: 'Funds'}),
-    {id: 'tabNew', active: new_active, view: 'trade/create_trade', label: 'New Trade'},
-    {label: 'Ticker', path: trade_ticker_url}
-] %>
+<% entity = local_assigns.fetch(:model) %>
+<%= form_with scope: :trade, model: entity, url: trades_new_url, local: true do |form| %>
+  
+  <%= render 'shared/form_errors', record: entity %>
+
+  <%= render 'shared/select_symbol', parent: form, id: 'ct-sell-select-symbol',
+             symbol: :sell_symbol, default: 'USDT', label: 'Sell' %>
+  <%= render 'shared/text_row', parent: form, id: 'ct-start-sell-usd', label: "Sell Price (#{ref_char})",
+             symbol: :sell_start_usd %>
+  <%= render 'shared/select_symbol', parent: form, id: 'ct-select-symbol',
+             symbol: :buy_symbol, default: 'BTC', label: 'Buy' %>
+  <%= render 'shared/text_row', parent: form, id: 'ct-new-count', label: 'Buy Count',
+             symbol: :count %>
+  <%= render 'shared/text_row', parent: form, id: 'ct-start-usd', label: "Start Price (#{ref_char})",
+             symbol: :start_usd %>
+  <%= render 'shared/text_row', parent: form, id: 'ct-stop-usd', label: "Initial Stop (#{ref_char})",
+             symbol: :init_stop_usd %>
+  <%= render 'shared/readonly_row', label: 'Risk', id: 'ct-risk',
+             symbol: :risk %>
+
+  <%= submit_tag("Create", id: 'ct-create', class: 'btn btn-sm btn-success ct-card-btn-submit') %>
+
+  <%= link_to 'Reset', trades_url, class: 'btn btn-sm btn-secondary ct-card-btn-submit' %>
+
+  <!-- Trigger create-trade script -->
+  <div class="d-none" data-func="create-trade"></div>
+<% end %>

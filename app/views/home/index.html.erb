@@ -1,6 +1,7 @@
+<% content_for :main_class do %>ct-main-content
+<% end %>
 <div class="row">
-  <div class="col">
-    <% vm = find_vm_by_kind(:coins) %>
-    <%= render 'shared/widget', view: vm[:view], class: vm[:class], locals: populate_locals(vm) %>
+  <div class="col-12 col-lg-12">
+    <%= render 'screener/coins_react', url: api_coins_url %>
   </div>
 </div>

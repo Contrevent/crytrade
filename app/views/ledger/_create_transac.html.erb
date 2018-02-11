@@ -7,7 +7,7 @@
   <%= render 'shared/form_errors', record: @entry %>
   <div class="field form-group">
     <%= label_tag(:symbol, "Currency") %>
-    <%= form.select(:symbol, options_for_select(@symbols, ref_coin), {}, {:id => prefix + '-symbol', :class => 'form-control'}) %>
+    <%= form.select(:symbol, options_for_select(coin_symbols, ref_coin), {}, {:id => prefix + '-symbol', :class => 'form-control'}) %>
   </div>
 
   <div class="field form-group">

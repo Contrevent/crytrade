@@ -1,21 +1,51 @@
 // Place all the styles related to the application controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
 @import "bootstrap";
 
 body {
-  font-size: 1.1rem;
   background-color: black;
+  overflow: hidden;
+}
+
+@keyframes pacman {
+  from {
+    margin-left: 8px;
+    visibility: hidden;
+  }
+  to {
+    visibility: visible;
+    margin-left: calc(100% - 24px);
+  }
+}
+
+.pacman {
+  animation: pacman 5s ease-in-out 2s infinite normal;
+  visibility: hidden;
+}
+
+.ct-content {
+  max-height: calc(100vh - 6rem);
+  overflow-y: auto;
+}
+
+.ct-sm-menu {
+  margin-bottom: 0.25rem;
+}
+
+.ct-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
   overflow: hidden;
 }
 
 .ct-notif {
   z-index: $zindex-popover;
   position: absolute;
-  top:0;
-  left: calc(50vw - 15rem);
-  width: 30rem;
+  text-align: center;
+  top: 0;
+  left: calc(50vw - 10rem);
+  width: 20rem;
   padding: 0.25rem 1.5rem;
 }
 
@@ -27,7 +57,8 @@ body {
   position: absolute;
   bottom: 0;
   width: 100%;
-  line-height: 1.5;
+  max-height: 2.5rem;
+  overflow-y: hidden;
 }
 
 .footer a.nav-link {
@@ -47,29 +78,47 @@ body {
   padding: 0;
 }
 
-
-@include media-breakpoint-up(sm) {
-  body {
-    font-size: 1.0rem;
-  }
+.sm-hide {
+  display: none;
 }
 
+.lg-hide {
+  display: block;
+}
+
+.nav-pills .nav-link {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.95rem;
+}
+
+@include media-breakpoint-up(sm) {
+
+}
 
 @include media-breakpoint-up(md) {
 
 }
 
 @include media-breakpoint-up(lg) {
-  body {
-    font-size: 0.9rem;
+  .nav-pills .nav-link {
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
   }
 
+  .sm-hide {
+    display: block;
+  }
+
+  .lg-hide {
+    display: none;
+  }
 }
 
 @include media-breakpoint-up(xl) {
 
 }
 
+@import "adapt-columns";
 @import "coins";
 @import "table-shared";
 @import "card";

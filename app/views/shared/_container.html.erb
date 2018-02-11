@@ -2,21 +2,7 @@
    css_class = local_assigns.fetch(:class) %>
 <div class="card border-dark ct-card <%= css_class %>">
   <div class="card-body text-light bg-dark">
-    <ul class="nav nav-pills" role="tablist">
-      <% tabs.each do |item| %>
-        <li class="nav-item">
-          <% if item.key? :view %>
-            <a class="nav-link text-light <%= 'active' if item.key? :active and item[:active] %>"
-               data-toggle="tab" href="<%= "##{item[:id]}" %>" role="tab">
-              <%= item[:label] %>
-            </a>
-          <% else %>
-            <%= link_to item[:label], item[:path], class: 'nav-link text-light' %>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
-    <br/>
+    <%= render 'shared/menu', tabs: tabs %>
     <div class="tab-content">
       <% tabs.select {|item| item.key? :view}.each do |tab|
         tab_content = render tab[:view], populate_locals(tab)  %>

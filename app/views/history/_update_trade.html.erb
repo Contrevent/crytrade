@@ -2,7 +2,7 @@
 
   <div class="field form-group">
     <%= label_tag(:sell_symbol, "Sell") %>
-    <%= form.select(:sell_symbol, options_for_select(@symbols, 'USDT'), {}, {:id => 'ct-sell-select-symbol', :class => 'form-control'}) %>
+    <%= form.select(:sell_symbol, options_for_select(coin_symbols, 'USDT'), {}, {:id => 'ct-sell-select-symbol', :class => 'form-control'}) %>
   </div>
 
   <div class="field form-group row">
@@ -14,7 +14,7 @@
 
   <div class="field form-group">
     <%= label_tag(:buy_symbol, "Buy") %>
-    <%= form.select(:buy_symbol, options_for_select(@symbols, 'BTC'), {}, {:id => 'ct-select-symbol', :class => 'form-control'}) %>
+    <%= form.select(:buy_symbol, options_for_select(coin_symbols, 'BTC'), {}, {:id => 'ct-select-symbol', :class => 'form-control'}) %>
   </div>
 
   <div class="field form-group row">
@@ -47,5 +47,5 @@
 
   <%= submit_tag("Create", id: 'ct-create', class: 'btn btn-sm btn-success') %>
 
-  <%= link_to 'Reset', trade_url, class: 'btn btn-sm btn-secondary' %>
+  <%= link_to 'Reset', trades_url, class: 'btn btn-sm btn-secondary' %>
 <% end %>

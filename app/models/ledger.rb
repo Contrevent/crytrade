@@ -1,6 +1,7 @@
 class Ledger < ApplicationRecord
   belongs_to :trade, optional: true
   belongs_to :user
+  include ToJsonConcern
 
   validates :count, numericality: true, presence: true
 
