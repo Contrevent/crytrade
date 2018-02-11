@@ -18,8 +18,6 @@
 
 ## Backend Architecture
 
-* Naming:
-   * /api_open/xxx: Unprotected apis (user not auth)
-   * /api_sec_trade/xxx: Protected api
+   * /api/xxx: Unprotected apis (user not auth)
    
 
