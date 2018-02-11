@@ -27,12 +27,12 @@ module LedgerConcern
   end
 
   def balance_too_small_reject(entry)
-    if entry[:count] < 0.01
-      true
+    if entry[:count].abs < 0.01
+      return true
     else
       ref_dol_cent = ref_value(0.01)
       if ref_dol_cent.is_a? Numeric and entry[:count_ref].is_a? Numeric and entry[:count_ref].abs < ref_dol_cent
-        true
+        return true
       end
     end
     false
