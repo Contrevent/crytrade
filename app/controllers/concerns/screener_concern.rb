@@ -58,7 +58,7 @@ module ScreenerConcern
          get_value: lambda {|currency| currency.market_cap_usd != nil ?
                                            num_norm((currency.market_cap_usd / 1000000).round) : 'n.a.'}},
         {name: 'rank', allow_order: true},
-        {name: 'cmc_link', allow_order: false, label: 'Cmc', link: true,
+        {name: 'cmc_link', allow_order: false, label: 'Cmc', link: true, target:'_blank',
          get_value: lambda {|currency| "https://coinmarketcap.com/currencies/#{currency.currency_id}/"}}
 
     ]

@@ -6,9 +6,13 @@ class LedgerController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    define_locals_index
-    @entry = Ledger.new
-    @tab = 'index'
+    if request.format == :json
+      ledger_entries
+    else
+      define_locals_index
+      @entry = Ledger.new
+      @tab = 'index'
+    end
   end
 
   def update
@@ -86,6 +90,14 @@ class LedgerController < ApplicationController
   end
 
   private
+  def ledger_entries
+    cols = ledger_columns
+    data = entries.map {|obj| ApplicationHelper::to_json(obj, cols)}
+    react_view 'Ledger', {cols: cols.map {|col| col_to_json(col)},
+                          data: data, order: {field: 'date', dir: 'desc'}}, 0
+  end
+
+
   def ledger_params
     params.require(:entry).permit(:symbol, :count, :description)
   end

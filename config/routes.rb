@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   get 'ledger/destroy'
   get 'ledger/ticker'
   get 'ledger/funds'
+  get 'ledger/ledger_entries', as: 'entries'
 
   get 'trades', to: 'trade#index', as: 'trades'
   post 'trades', to: 'trade#create', as: 'trades_new'

@@ -85,4 +85,34 @@ module LedgerConcern
     ]
   end
 
+  def ledger_columns
+    [{name: 'date', allow_order: true, label: 'Date',
+      get_label: lambda {|entry| entry.created_at.strftime('%b-%d %H:%M')},
+      get_value: lambda {|entry| entry.created_at.to_time.to_i}},
+     {name: 'description', label: 'Label'},
+     {name: 'symbol', label: 'Symbol', allow_order: true},
+     {name: 'count', label: 'Deb/Cred', allow_order: true},
+     {name: 'rate_ref', label: "Rate (#{ref_char})",
+      get_value: lambda {|entry| usd_to_ref_fine(entry.current_usd)}},
+     {name: 'count_ref', label: "Deb/Cred #{ref_char}",
+      get_value: lambda {|entry| usd_to_ref_fine(entry.current_usd * entry.count)}},
+     {name: 'edit', label: 'Edit', link: true,
+      get_value: lambda {|entry| get_ledger_action(entry)}
+     }
+    ]
+  end
+
+  def get_ledger_action(ledger)
+    if ledger.trade != nil
+      if ledger.trade.closed
+        target_path = history_update_path(id: ledger.trade.id)
+      else
+        target_path = trades_show_path(id: ledger.trade.id)
+      end
+    else
+      target_path = ledger_update_path(id: ledger.id)
+    end
+    target_path
+  end
+
 end

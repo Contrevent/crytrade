@@ -5,7 +5,7 @@
    default = local_assigns.fetch(:default)
 %>
 <div class="field form-group">
-  <%= label_tag(:buy_symbol, label) %>
-  <%= form.select(symbol, options_for_select(coin_symbols, default), {}, {:id => id, :class => 'form-control'}) %>
+  <%= label_tag(symbol, label) %>
+  <%= form.select(symbol, options_for_select(coin_symbols, default), {}, {:id => id, :class => 'form-control symbols'}) %>
 
 </div>

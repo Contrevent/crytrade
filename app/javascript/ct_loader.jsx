@@ -4,13 +4,14 @@ import TickerUpdate from './ticker_update';
 import Coins from './coins';
 import Trades from './trades';
 import Funds from './funds';
+import Ledger from './ledger';
 import remove from 'lodash/remove';
 import throttle from 'lodash/throttle';
 import utils from './util';
 import createTrade from './forms/create_trade';
 import updateTrade from './forms/update_trade';
 import dashboardConfig from './forms/dashboard';
-import loadLedger from './forms/select_ledger';
+import select from './forms/select';
 import consumeFlash from './flash';
 import primaryUtils from './primary';
 
@@ -50,6 +51,9 @@ class CTLoader {
                     break;
                 case 'Funds':
                     component = <Funds {...result.props} />;
+                    break;
+                case 'Ledger':
+                    component = <Ledger {...result.props} />
                     break;
             }
             if (component) {
@@ -112,8 +116,8 @@ class CTLoader {
                 case 'dashboard-config':
                     dashboardConfig();
                     break;
-                case 'load-ledger':
-                    loadLedger();
+                case 'select':
+                    select();
                     break;
                 case 'primary':
                     primaryUtils.primary();

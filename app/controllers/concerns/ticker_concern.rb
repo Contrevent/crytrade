@@ -19,44 +19,9 @@ module TickerConcern
     [order_name, order_direction]
   end
 
-  def tick_columns(order_name = 'volume_usd_24h', order_direction = 'desc', order_path)
-    cols = [
-        {name: 'symbol', allow_order: true},
-        {name: 'percent_change_1h', allow_order: true, label: '1h &Delta; (%)', deco: true,
-         get_value: lambda {|currency| to_float(currency.percent_change_1h)}
-        },
-        {name: 'percent_change_24h', allow_order: true, label: '24h &Delta; (%)', deco: true,
-         get_value: lambda {|currency| to_float(currency.percent_change_24h)}
-        },
-        {name: 'percent_change_7d', allow_order: true, label: '7d &Delta; (%)', deco: true,
-         get_value: lambda {|currency| to_float(currency.percent_change_7d)}
-        },
-        {name: 'currency_name', allow_order: true, label: 'Name'},
-        {name: 'price_usd', allow_order: true, label: 'Price ($)',
-         get_value: lambda {|currency| num_fine(currency.price_usd)}},
-        {name: 'volume_usd_24h', allow_order: true, label: '24h Vol. (M$)',
-         get_value: lambda {|currency| num_norm((currency.volume_usd_24h / 1000000).round)}},
-        {name: 'market_cap_usd', allow_order: true, label: 'Market Cap (M$)',
-         get_value: lambda {|currency| currency.market_cap_usd != nil ?
-                                           num_norm((currency.market_cap_usd / 1000000).round) : 'n.a.'}},
-        {name: 'rank', allow_order: true},
-        {name: 'cmc_link', allow_order: false, label: 'Cmc',
-         link: lambda {|currency| "https://coinmarketcap.com/currencies/#{currency.currency_id}/"}}
-
-    ]
-    if ref_coin == 'USD'
-      cols = cols.insert(6, {name: 'price_btc', allow_order: true, label: 'Price (BTC)',
-                             get_value: lambda {|currency| num_fine(currency.price_btc)}})
-    else
-      cols = cols.insert(6, {name: 'price_' + ref_coin, allow_order: true, label: "Price (#{ref_char})",
-                             get_value: lambda {|currency| usd_to_ref_fine(currency.price_usd)}})
-    end
-    cols.map {|col_def| TickerConcern::decorate_order(col_def, order_name, order_direction, order_path)}
-  end
-
   def col_to_json(col)
     result = Hash.new
-    allowed_props = [:name, :label, :link, :deco, :allow_order, :red, :green]
+    allowed_props = [:name, :label, :link, :target, :deco, :allow_order, :red, :green]
     allowed_props.each do |key|
       if col.key? key
         result[key] = col[key]
