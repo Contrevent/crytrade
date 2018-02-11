@@ -1,0 +1,35 @@
+@keyframes pacman {
+  from {
+    left: -98%;
+  }
+  to {
+    left: calc(-2% - 24px);
+  }
+}
+
+.scene {
+  clip-path: polygon(2% 2%, 98% 2%, 98% 98%, 2% 98%);
+  overflow: hidden;
+  height: calc(24px + 0.25rem);
+  min-height: calc(24px + 0.25rem);
+  max-height: calc(24px + 0.25rem);
+}
+
+.pacman {
+  position: relative;
+  top: 0;
+  left: -98%;
+  z-index: $zindex-tooltip;
+  width: calc(100% + 24px);
+  text-align: right;
+  animation: pacman 5s ease-in-out 0s infinite normal;
+}
+
+.food {
+  position: relative;
+  top: calc(-24px - 0.25rem);
+  left: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: clip;
+}

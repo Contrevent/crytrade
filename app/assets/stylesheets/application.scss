@@ -2,27 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "bootstrap";
+@import "pacman";
 
 body {
   background-color: black;
   overflow: hidden;
 }
 
-@keyframes pacman {
-  from {
-    margin-left: 8px;
-    visibility: hidden;
-  }
-  to {
-    visibility: visible;
-    margin-left: calc(100% - 24px);
-  }
-}
-
-.pacman {
-  animation: pacman 5s ease-in-out 2s infinite normal;
-  visibility: hidden;
-}
 
 .ct-content {
   max-height: calc(100vh - 6rem);
