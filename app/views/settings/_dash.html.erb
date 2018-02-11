@@ -1,5 +1,5 @@
 <% is_update = @action == 'update'
-   two = {view: 'shared/container', class: 'col-4'}
+   two = {view: 'shared/container', class: 'col-12 col-lg-4'}
    if is_update
      two[:locals] = {class: 'ct-settings-dash-update', tabs: [
          {id: 'ct-dash-create', label: 'Update tile', active: true, view: 'settings/create_tile'},
@@ -16,5 +16,5 @@
 %>
 
 
-<%= render 'shared/two_cols', one: {view: 'settings/tiles', class: 'col-8'},
+<%= render 'shared/two_cols', one: {view: 'settings/tiles', class: 'col-12 col-lg-8'},
            two: two %>
