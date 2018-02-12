@@ -105,7 +105,7 @@ module LedgerConcern
   def get_ledger_action(ledger)
     if ledger.trade != nil
       if ledger.trade.closed
-        target_path = history_update_path(id: ledger.trade.id)
+        target_path = history_show_path(id: ledger.trade.id)
       else
         target_path = trades_show_path(id: ledger.trade.id)
       end

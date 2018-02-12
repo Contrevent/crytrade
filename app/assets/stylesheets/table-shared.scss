@@ -1,39 +1,30 @@
 
 .ct-table {
-  table-layout: fixed;
-  margin-bottom: 0;
   font-size: 0.925rem;
+  margin-bottom: 0;
+  table-layout: fixed;
 }
 
 .ct-table th {
-  text-align: center;
-  text-transform: capitalize;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   overflow: hidden;
-}
-
-.ct-table th {
-  padding: .125rem;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: capitalize;
+  white-space: nowrap;
 }
 
 .ct-table th .alert {
-  padding: .125rem;
   margin: 0;
-}
-
-.ct-th {
-  padding: .25rem;
-  margin: 0;
+  padding: 0.125rem;
 }
 
 .ct-table td {
   text-align: center;
 }
 
-.ct-table td div.alert {
-  padding: 0.25rem 0.05rem;
+.ct-table td .alert {
   margin-bottom: 0;
+  padding: 0.25rem 0.05rem;
 }
 
 
@@ -50,9 +41,9 @@
 }
 
 .ct-table-body-parent {
+  margin-bottom: 0.5rem;
   max-height: calc(80vh - 8.5rem);
   overflow-y: auto;
-  margin-bottom: 0.5rem;
 }
 
 .ct-table-react-body {
@@ -61,13 +52,13 @@
 }
 
 .ct-table-cell-chip {
-  padding: .125rem;
-  text-align: center;
+  border-radius: 0.25rem;
   margin: 0;
-  border-radius: .25rem;
+  overflow: hidden;
+  padding: 0.125rem;
+  text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
 }
 
 .ct-table-cell-deco {
@@ -75,7 +66,7 @@
 }
 
 .ct-table-btn {
-  padding: .25rem 1.25rem;
+  padding: 0.25rem 1.25rem;
 }
 
 @include media-breakpoint-up(sm) {

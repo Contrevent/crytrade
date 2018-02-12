@@ -1,4 +1,5 @@
-<%= form_with scope: :trade, url: history_open_url, method: "post" do |form| %>
+<% entry = local_assigns.fetch(:model) %>
+<%= form_with scope: :trade, model:entry, url: history_open_url do |form| %>
   <p>Re-open trade ?</p>
   <%= form.hidden_field(:id) %>
   <%= submit_tag("Open", class: 'btn btn-sm btn-info ct-card-btn-submit', id: 'ct-close-btn') %>

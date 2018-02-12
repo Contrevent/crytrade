@@ -10,6 +10,10 @@
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
+    "stylelint": "^8.4.0",
+    "stylelint-config-sass-guidelines": "^4.1.0",
+    "stylelint-order": "^0.8.0",
+    "stylelint-scss": "^2.3.0",
     "webpack-dev-server": "^2.11.1"
   }
 }

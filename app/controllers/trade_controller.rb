@@ -167,15 +167,11 @@ class TradeController < ApplicationController
   end
 
   def close_trade_facet(trade)
-    facet(:close_trade, 'Close', nil, close_trade_def(trade))
+    facet(:close_trade, 'Close', nil, close_trade_def(trade), false, 'info')
   end
 
   def edit_trade_facet(trade)
-    facet(:edit_trade, 'Edit', nil, edit_trade_def(trade))
-  end
-
-  def destroy_trade_facet(trade)
-    facet(:destroy_trade, 'Delete', nil, destroy_trade_def(trade))
+    facet(:edit_trade, 'Edit', nil, edit_trade_def(trade), false, 'primary')
   end
 
   def back_facet
@@ -190,10 +186,6 @@ class TradeController < ApplicationController
     item_vm :edit_trade, 'trade/edit', trade
   end
 
-  def destroy_trade_def(trade)
-    create_vm :destroy_trade, 'shared/delete', 0, 0, nil,
-                    {url: trades_destroy_path(id: trade.id)}
-  end
 
   def item_vm(symbol, view, trade)
     create_vm symbol, view, 0, 0, trade

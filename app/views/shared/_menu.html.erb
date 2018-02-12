@@ -3,7 +3,8 @@
   <% tabs.each do |item| %>
     <li class="nav-item">
       <% if item.key? :view %>
-        <a class="nav-link text-light <%= 'active' if item.key? :active and item[:active] %>"
+        <a class="nav-link text-light <%= "ct-bg-tab-#{item[:active_bg]} " if item.key? :active_bg %>
+                                          <%= 'active' if item.key? :active and item[:active] %>"
            data-toggle="tab" href="<%= "##{item[:id]}" %>" role="tab">
           <%= item[:label] %>
         </a>

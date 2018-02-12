@@ -26,8 +26,8 @@ Rails.application.routes.draw do
   get '/screeners/funds', to: 'screener#funds', as: 'screeners_funds'
 
   get 'history', to: 'history#index'
-  get 'history/update'
   post 'history/open'
+  get 'history/:id', to: 'history#show', as: 'history_show'
 
   get 'ledger', to: 'ledger#index'
   post 'ledger/deposit'

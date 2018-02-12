@@ -1,8 +1,8 @@
 module FacetsConcern
   extend ActiveSupport::Concern
 
-  def facet(symbol, label, path = nil, vm = nil, primary = false)
-    {sym: symbol, label: label, vm: vm, path: path, active: false, primary: primary}
+  def facet(symbol, label, path = nil, vm = nil, primary = false, active_bg = 'secondary')
+    {sym: symbol, label: label, vm: vm, path: path, active: false, primary: primary, active_bg: active_bg}
   end
 
   def activate(facet_symbol, *facets)

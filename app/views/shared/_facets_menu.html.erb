@@ -9,12 +9,11 @@
     <li class="nav-item">
       <% if item.key? :vm and item[:vm] != nil %>
         <%
-
-          classes = []
+          classes = ["ct-bg-tab-#{item[:active_bg]}", 'nav-link', 'text-light']
           classes.push('active') if item.key?(:active) and item[:active]
           classes.push('d-lg-none d-xl-none') if is_primary
         %>
-        <a class="nav-link text-light <%= classes.join(' ') %>"
+        <a class="<%= classes.join(' ') %>"
            data-toggle="tab" href="<%= "##{item[:sym]}" %>" role="tab">
           <%= item[:label] %>
         </a>

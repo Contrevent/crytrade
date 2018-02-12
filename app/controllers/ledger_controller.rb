@@ -77,7 +77,7 @@ class LedgerController < ApplicationController
   end
 
   def deposit_facet(entry = nil)
-    facet(:deposit, 'Deposit', nil, deposit_def(entry))
+    facet(:deposit, 'Deposit', nil, deposit_def(entry), false, 'success')
   end
 
   def deposit_def(entry = nil)
@@ -86,7 +86,7 @@ class LedgerController < ApplicationController
   end
 
   def withdraw_facet(entry = nil)
-    facet(:withdraw, 'Withdraw', nil, withdraw_def(entry))
+    facet(:withdraw, 'Withdraw', nil, withdraw_def(entry), false, 'danger')
   end
 
   def withdraw_def(entry = nil)
@@ -95,7 +95,7 @@ class LedgerController < ApplicationController
   end
 
   def regul_facet(entry = nil)
-    facet(:regul, 'Regulation', nil, regul_def(entry))
+    facet(:regul, 'Regulation', nil, regul_def(entry), false, 'info')
   end
 
   def regul_def(entry = nil)
@@ -103,7 +103,7 @@ class LedgerController < ApplicationController
   end
 
   def ledger_facet
-    facet(:ledger, 'Ledger', nil, ledger_def, true)
+    facet(:ledger, 'Ledger', nil, ledger_def, true, 'primary')
   end
 
   def ledger_def
@@ -115,7 +115,7 @@ class LedgerController < ApplicationController
   end
 
   def destroy_ledger_facet(entry)
-    facet(:destroy_ledger, 'Delete', nil, destroy_ledger_def(entry))
+    facet(:destroy_ledger, 'Delete', nil, destroy_ledger_def(entry), false, 'danger')
   end
 
   def destroy_ledger_def(entry)

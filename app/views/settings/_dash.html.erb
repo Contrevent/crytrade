@@ -3,13 +3,13 @@
    if is_update
      two[:locals] = {class: 'ct-settings-dash-update', tabs: [
          {id: 'ct-dash-create', label: 'Update tile', active: true, view: 'settings/create_tile'},
-         {id: 'tabDel', view: 'shared/delete', label: 'Delete',
+         {id: 'tabDel', view: 'shared/delete', label: 'Delete', active_bg: 'danger',
           locals: {url: settings_destroy_tile_path(id: @tile.id)}},
          {label: 'Cancel', path: settings_dashboard_url},
      ]}
    else
      two[:locals] = {class: 'ct-settings-dash-create', tabs: [
-         {id: 'ct-dash-create', label: 'Add tile', active: true, view: 'settings/create_tile'}
+         {id: 'ct-dash-create', label: 'Add tile', active: true, view: 'settings/create_tile', active_bg: 'success'}
      ]}
    end
 

@@ -8,18 +8,6 @@
   max-height: calc(100vh - 20rem);
 }
 
-.ct-settings-dash-create .nav-pills .nav-item:nth-child(1) .nav-link.active {
-  background-color: theme-color('success');
-}
-
-.ct-settings-dash-update .nav-pills .nav-item:nth-child(1) .nav-link.active {
-  background-color: theme-color('primary');
-}
-
-.ct-settings-dash-update .nav-pills .nav-item:nth-child(2) .nav-link.active {
-  background-color: theme-color('danger');
-}
-
 #ct-dash .card-body {
   padding: 0;
 }

@@ -2,32 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.ct-screener-main .nav-pills .nav-item:nth-child(1) .nav-link.active {
-  background-color: theme-color('success');
-}
 
-.ct-screener-main .nav-pills .nav-item:nth-child(2) .nav-link.active {
-  background-color: theme-color('info');
-}
-
-.ct-screener-configure-create .nav-pills .nav-item:nth-child(1) .nav-link.active {
-  background-color: theme-color('success');
-}
-
-.ct-screener-configure-update .nav-pills .nav-item:nth-child(1) .nav-link.active {
-  background-color: theme-color('info');
-}
-
-.ct-screener-configure-update .nav-pills .nav-item:nth-child(2) .nav-link.active {
-  background-color: theme-color('primary');
-}
-
-.ct-screener-configure-update .nav-pills .nav-item:nth-child(3) .nav-link.active {
-  background-color: theme-color('danger');
-}
-
-.ct-table-screener th:last-child, .ct-table-screener td:last-child {
-  width: 20%
+.ct-table-screener th:last-child,
+.ct-table-screener td:last-child {
+  width: 20%;
 }
 
 .ct-screener-view .card-body {
@@ -36,15 +14,15 @@
 }
 
 .ct-filter-parent {
-  overflow: auto;
   max-height: calc(100vh - 26rem);
+  overflow: auto;
 }
 
 .ct-screener-view .ct-table-coins-parent {
   max-height: calc(100vh - 19rem);
 }
 
-.ct-screener-content .ct-card-content{
+.ct-screener-content .ct-card-content {
   overflow: hidden;
 }
 

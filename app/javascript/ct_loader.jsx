@@ -5,6 +5,7 @@ import Coins from './coins';
 import Trades from './trades';
 import Funds from './funds';
 import Ledger from './ledger';
+import History from "./history";
 import remove from 'lodash/remove';
 import throttle from 'lodash/throttle';
 import utils from './util';
@@ -53,8 +54,10 @@ class CTLoader {
                     component = <Funds {...result.props} />;
                     break;
                 case 'Ledger':
-                    component = <Ledger {...result.props} />
+                    component = <Ledger {...result.props} />;
                     break;
+                case 'History':
+                    component = <History {...result.props} />;
             }
             if (component) {
                 ReactDOM.render(component, elt);

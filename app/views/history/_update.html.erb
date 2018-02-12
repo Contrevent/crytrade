@@ -1,5 +1,0 @@
-<%= render 'shared/container', class: 'ct-history-update', tabs: [
-    {id: 'tabOpen', active: true, view: 'history/open', label: 'Open'},
-    {id: 'tabDel', view: 'shared/delete', locals: {url: trades_destroy_path(id: @trade.id)}, label: 'Delete'},
-    {label: 'Cancel', path: history_url}
-] %>

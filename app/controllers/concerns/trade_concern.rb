@@ -16,11 +16,11 @@ module TradeConcern
   end
 
   def trade_facet
-    facet(:trades, 'Trades', nil, trade_def, true)
+    facet(:trades, 'Trades', nil, trade_def, true, 'primary')
   end
 
   def new_trade_facet(trade = nil)
-    facet(:new_trade, 'New Trade', nil, new_trade_def(trade))
+    facet(:new_trade, 'New Trade', nil, new_trade_def(trade), false, 'success')
   end
 
   def trade_columns
@@ -47,6 +47,15 @@ module TradeConcern
         {name: 'action', link: true, label: 'Edit',
          get_value: lambda {|trade| trades_show_path(id: trade.id)}}
     ]
+  end
+
+  def destroy_trade_facet(trade)
+    facet(:destroy_trade, 'Delete', nil, destroy_trade_def(trade), false, 'danger')
+  end
+
+  def destroy_trade_def(trade)
+    create_vm :destroy_trade, 'shared/delete', 0, 0, nil,
+              {url: trades_destroy_path(id: trade.id)}
   end
 
   private
