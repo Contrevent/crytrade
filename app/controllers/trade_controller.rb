@@ -131,9 +131,6 @@ class TradeController < ApplicationController
     redirect_to action: 'index'
   end
 
-  helper_method :select_primary
-  helper_method :select_active
-
   private
 
   def trades_api
@@ -194,9 +191,8 @@ class TradeController < ApplicationController
   end
 
   def destroy_trade_def(trade)
-    dvm = create_vm :destroy_trade, 'shared/delete', 0, 0, nil
-    dvm[:locals] = {url: trades_destroy_path(id: trade.id)}
-    dvm
+    create_vm :destroy_trade, 'shared/delete', 0, 0, nil,
+                    {url: trades_destroy_path(id: trade.id)}
   end
 
   def item_vm(symbol, view, trade)

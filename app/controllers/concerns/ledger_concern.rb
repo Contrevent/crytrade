@@ -5,7 +5,7 @@ module LedgerConcern
   include RefConcern
 
   def funds_def(width = 0, height = 0)
-    create_vm :funds, 'ledger/funds_react', width, height, nil
+    create_vm :funds, 'ledger/funds', width, height, nil
   end
 
   def funds_facet
@@ -110,7 +110,7 @@ module LedgerConcern
         target_path = trades_show_path(id: ledger.trade.id)
       end
     else
-      target_path = ledger_update_path(id: ledger.id)
+      target_path = ledger_show_path(id: ledger.id)
     end
     target_path
   end

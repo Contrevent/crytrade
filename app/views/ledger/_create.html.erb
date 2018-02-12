@@ -1,9 +1,23 @@
-<%= render 'shared/container', class: 'ct-ledger-index', tabs: [
-    find_vm_by_kind(:funds).merge({id: 'tabFun', active: @tab == 'index', label: 'Funds'}),
-    {id: 'tabDep', active: @tab == 'deposit', label: 'Deposit', view: 'ledger/create_transac',
-     locals: {url: ledger_deposit_url, prefix: 'ct-dep', kind: 'success', label: 'Deposit'}},
-    {id: 'tabWit', active: @tab == 'withdraw', label: 'Withdraw', view: 'ledger/create_transac',
-     locals: {url: ledger_withdraw_url, prefix: 'ct-wit', kind: 'danger', label: 'Withdraw'}},
-    {id: 'tabReg', active: @tab == 'regul', label: 'Regulation', view: 'ledger/regul'},
-    {label: 'Ticker', path: ledger_ticker_url}
-] %>
+<% url = local_assigns.fetch(:url)
+   label = local_assigns.fetch(:label)
+   kind = local_assigns.fetch(:kind)
+   prefix = local_assigns.fetch(:kind)
+   entry = local_assigns.fetch(:model)
+%>
+<%= form_with scope: :entry, model: entry, url: url, local: true do |form| %>
+  <%= render 'shared/form_errors', record: entry %>
+
+  <%= render 'shared/select_symbol', symbol: :symbol, id: prefix + '-symbol', parent: form, default: ref_coin, label: 'Currency' %>
+
+  <div class="field form-group">
+    <%= label_tag(:count, "Count") %>
+    <%= form.text_field(:count, class: 'form-control', id: prefix + '-count') %>
+  </div>
+
+  <div class="field form-group">
+    <%= label_tag(:description, "Label") %>
+    <%= form.text_field(:description, class: 'form-control', id: prefix + '-label') %>
+  </div>
+
+  <%= submit_tag(label, class: 'btn btn-sm btn-' + kind + ' ct-card-btn-submit', id: prefix + '-btn') %>
+<% end %>

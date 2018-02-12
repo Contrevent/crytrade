@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   include TickerConcern
   include RefConcern
   include ViewModelConcern
+  include FacetsConcern
 
   def last_ticker
     TickerConcern::last_ticker_update
@@ -26,6 +27,9 @@ class ApplicationController < ActionController::Base
   helper_method :find_vm_by_kind
   helper_method :populate_locals
   helper_method :coin_symbols
+
+  helper_method :select_primary
+  helper_method :select_active
 
   protected
 

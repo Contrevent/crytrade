@@ -33,11 +33,10 @@ Rails.application.routes.draw do
   post 'ledger/deposit'
   post 'ledger/withdraw'
   post 'ledger/regul'
-  get 'ledger/update'
   get 'ledger/destroy'
-  get 'ledger/ticker'
   get 'ledger/funds'
-  get 'ledger/ledger_entries', as: 'entries'
+  get '/ledger/:id', to: 'ledger#show', as: 'ledger_show'
+
 
   get 'trades', to: 'trade#index', as: 'trades'
   post 'trades', to: 'trade#create', as: 'trades_new'

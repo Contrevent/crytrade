@@ -3,17 +3,21 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-.ct-ledger-index .nav-pills .nav-item:nth-child(1) .nav-link.active {
+.ct-ledger-index .nav-pills .nav-item:nth-child(2) .nav-link.active {
   background-color: theme-color('secondary');
 }
 
-.ct-ledger-index .nav-pills .nav-item:nth-child(2) .nav-link.active {
+.ct-ledger-index .nav-pills .nav-item:nth-child(3) .nav-link.active {
   background-color: theme-color('success');
 }
 
 
-.ct-ledger-index .nav-pills .nav-item:nth-child(3) .nav-link.active {
+.ct-ledger-index .nav-pills .nav-item:nth-child(4) .nav-link.active {
   background-color: theme-color('danger');
+}
+
+.ct-ledger-index .nav-pills .nav-item:nth-child(5) .nav-link.active {
+  background-color: theme-color('info');
 }
 
 .ct-ledger-update .nav-pills .nav-item:nth-child(1) .nav-link.active {
