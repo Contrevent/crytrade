@@ -13,7 +13,9 @@ module ScreenerConcern
         count = ScreenerResult.where(screener_job: job).count
       end
     end
-    create_vm :screener_last, 'screener/coins_react', width, height, {job: job, count: count}, {url: screeners_last_path(id: screener_id)}
+    vm = create_vm :screener_last, 'screener/coins_react', width, height, {screener: screener, job: job, count: count}, {url: screeners_last_path(id: screener_id)}
+    vm[:title] = screener.name
+    vm
   end
 
   def screener_view_def(job_id, order_name, order_direction, width = 9, height = 25)
