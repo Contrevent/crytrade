@@ -1,13 +1,31 @@
-$cur-height: 20;
-@while $cur-height <= 80 {
-  .ct-dashboard .ct-h-#{$cur-height} .ct-table-react-body {
-    max-height: calc(#{$cur-height}vh - 2.5rem);
-    min-height: 2.5rem;
-    overflow-y: auto;
-  }
 
-  $cur-height: $cur-height + 5;
+
+.ct-table-react-body {
+  max-height: calc(100vh - 10.5rem);
+  overflow-y: auto;
 }
+
+.ct-react-funds .ct-table-react-body {
+  max-height: calc(100vh - 13rem);
+  overflow-y: auto;
+}
+
+@mixin dash-height($table-class, $offset-height) {
+  $cur-height: 20;
+  @while $cur-height <= 80 {
+    .ct-dashboard .ct-h-#{$cur-height} #{$table-class} {
+      max-height: calc(#{$cur-height}vh - #{$offset-height});
+      min-height: #{$offset-height};
+      overflow-y: auto;
+    }
+
+    $cur-height: $cur-height + 5;
+  }
+}
+
+@include dash-height('.ct-table-react-body', '2.5rem');
+@include dash-height('.ct-react-funds .ct-table-react-body', '5rem');
+
 
 .ct-tile {
   margin-bottom: 1rem;
