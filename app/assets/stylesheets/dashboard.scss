@@ -1,14 +1,7 @@
 $cur-height: 20;
 @while $cur-height <= 80 {
-  .ct-dashboard .ct-h-#{$cur-height} .ct-table-body-parent,
-  .ct-dashboard .ct-h-#{$cur-height} .ct-table-coins-parent {
+  .ct-dashboard .ct-h-#{$cur-height} .ct-table-react-body {
     max-height: calc(#{$cur-height}vh - 2.5rem);
-    min-height: 2.5rem;
-    overflow-y: auto;
-  }
-
-  .ct-dashboard .ct-h-#{$cur-height} .ct-table-body-parent-footer {
-    max-height: calc(#{$cur-height}vh - 5rem);
     min-height: 2.5rem;
     overflow-y: auto;
   }
