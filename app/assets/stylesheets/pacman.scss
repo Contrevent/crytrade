@@ -11,27 +11,26 @@
 .scene {
   clip-path: polygon(2% 2%, 98% 2%, 98% 98%, 2% 98%);
   height: calc(24px + 0.25rem);
-  min-height: calc(24px + 0.25rem);
   max-height: calc(24px + 0.25rem);
+  min-height: calc(24px + 0.25rem);
   overflow: hidden;
 }
 
 .pacman {
-  position: relative;
+  animation: pacman 5s ease-in-out 0s infinite normal;
   left: -98%;
+  position: relative;
+  text-align: right;
   top: 0;
   width: calc(100% + 24px);
   z-index: $zindex-tooltip;
-  animation: pacman 5s ease-in-out 0s infinite normal;
-  text-align: right;
 }
 
 .food {
-  position: relative;
   left: 0;
-  top: calc(-24px - 0.25rem);
   overflow: hidden;
+  position: relative;
   text-overflow: clip;
+  top: calc(-24px - 0.25rem);
   white-space: nowrap;
-
 }

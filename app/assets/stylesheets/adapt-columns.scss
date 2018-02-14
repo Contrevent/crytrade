@@ -3,12 +3,6 @@
   @each $adapt-col, $col-num in $adapt-cols {
 
     @if ($col-num != 1) {
-      // Phones
-      .col-12 .#{$table-class} th:nth-child(#{$adapt-col}),
-      .col-12 .#{$table-class} td:nth-child(#{$adapt-col}) {
-        display: none;
-      }
-
       @include media-breakpoint-up(lg) {
         $col-index: $col-num;
         @while ($col-index <= 12) {
@@ -20,6 +14,13 @@
           $col-index: $col-index + 1;
         }
       }
+
+      // Phones
+      .col-12 .#{$table-class} th:nth-child(#{$adapt-col}),
+      .col-12 .#{$table-class} td:nth-child(#{$adapt-col}) {
+        display: none;
+      }
+
     }
 
   }
