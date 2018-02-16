@@ -42,7 +42,7 @@ export default class Coins extends React.Component {
         const order = this.state;
         const sortedData = orderBy(data, [order.field], [order.dir]);
         if (!data.length) {
-            return <div className='alert alert-info'>Nothing to display</div>
+            return <div className='ct-nothing alert alert-info'>Nothing to display</div>
         }
         return <div className={className}>
             <TableHead>
