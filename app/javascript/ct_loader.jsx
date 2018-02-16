@@ -11,6 +11,7 @@ import throttle from 'lodash/throttle';
 import utils from './util';
 import createTrade from './forms/create_trade';
 import updateTrade from './forms/update_trade';
+import convert from './forms/ct_convert';
 import dashboardConfig from './forms/dashboard';
 import select from './forms/select';
 import consumeFlash from './flash';
@@ -124,6 +125,9 @@ class CTLoader {
                     break;
                 case 'primary':
                     primaryUtils.primary();
+                    break;
+                case 'ct-converter':
+                    convert();
                     break;
             }
         });

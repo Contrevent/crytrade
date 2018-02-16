@@ -1,0 +1,19 @@
+<%= form_with scope: :convert, url: '', local: true do |form| %>
+
+  <%= render 'shared/text_row', parent: form, id: 'ct-from-count', label: 'Count',
+             symbol: :from_count %>
+  <%= render 'shared/select_symbol', parent: form, id: 'ct-from-symbol',
+             symbol: :from_symbol, default: 'BTC', label: 'From' %>
+  <%= render 'shared/text_row', parent: form, id: 'ct-from-rate', label: "Rate (#{ref_char})",
+             symbol: :from_rate %>
+
+  <%= render 'shared/select_symbol', parent: form, id: 'ct-to-symbol',
+             symbol: :to_symbol, default: ref_coin, label: 'To' %>
+  <%= render 'shared/text_row', parent: form, id: 'ct-to-rate', label: "Rate (#{ref_char})",
+             symbol: :to_rate %>
+  <%= render 'shared/readonly_row', label: '=', id: 'ct-to-count',
+             symbol: :to_count %>
+
+  <!-- Trigger create-trade script -->
+  <div class="d-none" data-func="ct-converter"></div>
+<% end %>

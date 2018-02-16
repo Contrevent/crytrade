@@ -11,6 +11,10 @@ module TradeConcern
     create_vm :trade, 'trade/dash', width, height, nil
   end
 
+  def converter_def(width = 0, height = 0)
+    create_vm :converter, 'home/convert_dash', width, height, nil
+  end
+
   def new_trade_def(trade = nil)
     create_vm :new_trade, 'trade/create', 0, 0, (trade != nil ? trade : Trade.new)
   end

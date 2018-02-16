@@ -24,6 +24,8 @@ class DashboardController < ApplicationController
           vms.push(trade_dash_def(tile.width, tile.height))
         when :trade_ticker
           vms.push(trades_tickers_def(order_name, order_direction, tile.width, tile.height))
+        when :converter
+          vms.push(converter_def(tile.width, tile.height))
       end
     end
     populate_by_array(vms)

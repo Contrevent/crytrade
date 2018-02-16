@@ -6,9 +6,14 @@ class ApiController < ApplicationController
 
   def ticker_price
     if params.key?(:symbol)
-      price_usd = TickerConcern::last_price_usd(params[:symbol])
-      price = price_usd != -1 ? ref_value(price_usd) : 0
-      render json: {'price': num_fine(price), 'currency': ref_coin}
+      req_symbol = params[:symbol]
+      if req_symbol == ref_coin
+        render json: {'price': 1, 'currency': ref_coin}
+      else
+        price_usd = TickerConcern::last_price_usd(params[:symbol])
+        price = price_usd != -1 ? ref_value(price_usd) : 0
+        render json: {'price': num_fine(price), 'currency': ref_coin}
+      end
     else
       render text: "Bad Request", status: 400
     end

@@ -51,6 +51,8 @@ Rails.application.routes.draw do
   }
 
   get 'home', to: 'home#index'
+  get 'converter', to: 'home#convert', as: 'convert'
+
   get 'about', to: 'home#about'
   get 'refresh', to: 'home#refresh'
 

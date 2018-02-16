@@ -11,6 +11,10 @@ class HomeController < ApplicationController
 
   end
 
+  def convert
+
+  end
+
   def refresh
     CmcTickerJob.perform_now
     if params.key? :c and params.key? :a

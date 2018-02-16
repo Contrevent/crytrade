@@ -49,6 +49,8 @@
         <%= link_to "Coins", root_url, :class => "nav-link" %>
       </li>
 
+
+
       <% if user_signed_in? %>
         <li class="nav-item<%= ' active' if (current_page?('/screener') or current_page?('/screener/update') or current_page?('/screener/view') or current_page?('/screener/last')) %>">
           <%= link_to "Screeners", screener_url, :class => "nav-link" %>
@@ -68,7 +70,9 @@
           <%= link_to "History", history_url, :class => "nav-link" %>
         </li>
       <% end %>
-
+      <li class="nav-item<%= ' active' if current_page?('/converter') %>">
+        <%= link_to "Converter", convert_url, :class => "nav-link" %>
+      </li>
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="lg-hide nav-item <%= "active" if current_page?('/about') %>">
