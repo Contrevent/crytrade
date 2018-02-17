@@ -104,7 +104,7 @@ class TradeController < ApplicationController
       if trade.save
         close_trade(trade)
         flash[:notice] = "Trade closed."
-        redirect_to controller: 'history', action: 'update', id: trade.id
+        redirect_to controller: 'history', action: 'show', id: trade.id
       else
         if ref_coin != 'USD'
           # :stop_usd, :sell_stop_usd, :fees_usd
