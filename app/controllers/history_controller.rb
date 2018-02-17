@@ -24,7 +24,7 @@ class HistoryController < ApplicationController
   end
 
   def open
-    trade = Trade.find(params[:trade][:id])
+    trade = Trade.find(params[:id])
     trade.closed = false
     trade.save
     open_trade(trade)
