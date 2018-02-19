@@ -56,11 +56,23 @@
 
 .ct-panel {
   height: calc(100vh - 10rem);
-  max-height: calc(100vh - 10rem);
+  overflow-y: hidden;
+}
+
+.ct-panel .ct-table-react-body {
+  max-height: calc(100vh - 14.1rem);
   overflow-y: auto;
 }
 
+.ct-panel .ct-react-funds .ct-table-react-body {
+  max-height: calc(100vh - 17rem);
+  overflow-y: auto;
+}
 
+.ct-panel .ct-convert-body {
+  max-height: calc(100vh - 14rem);
+  overflow-y: auto;
+}
 
 .ct-dashboard-xs .nav-link {
   color: theme-color('secondary');
