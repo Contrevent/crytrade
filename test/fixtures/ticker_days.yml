@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  symbol: MyString
+  min: 9.99
+  max: 9.99
+  price: 9.99
+  24h_vol: 9.99
+
+two:
+  symbol: MyString
+  min: 9.99
+  max: 9.99
+  price: 9.99
+  24h_vol: 9.99

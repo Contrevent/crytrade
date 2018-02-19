@@ -8,4 +8,8 @@ namespace :crytrade do
     FiatTickerJob.perform_now
   end
 
+  task archive: :environment do
+    TickerArchiveJob.perform_now
+  end
+
 end

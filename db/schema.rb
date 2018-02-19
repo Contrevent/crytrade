@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180127174505) do
+ActiveRecord::Schema.define(version: 20180219105329) do
 
   create_table "fiats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -72,6 +72,17 @@ ActiveRecord::Schema.define(version: 20180127174505) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_screeners_on_user_id"
+  end
+
+  create_table "ticker_days", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "symbol"
+    t.decimal "min", precision: 15, scale: 7
+    t.decimal "max", precision: 15, scale: 7
+    t.decimal "price", precision: 15, scale: 7
+    t.decimal "vol_24h", precision: 15, scale: 1
+    t.datetime "last_ticker_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tickers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -146,6 +157,11 @@ ActiveRecord::Schema.define(version: 20180127174505) do
     t.string "reference_symbol", default: "USD"
     t.string "reference_character", default: "$"
     t.integer "reference_precision", default: 2
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -155,7 +171,7 @@ ActiveRecord::Schema.define(version: 20180127174505) do
   add_foreign_key "screener_filters", "screeners"
   add_foreign_key "screener_jobs", "screeners"
   add_foreign_key "screener_results", "screener_jobs"
-  add_foreign_key "screener_results", "tickers"
+  add_foreign_key "screener_results", "tickers", on_delete: :cascade
   add_foreign_key "screeners", "users"
   add_foreign_key "tiles", "users"
   add_foreign_key "trades", "users"
