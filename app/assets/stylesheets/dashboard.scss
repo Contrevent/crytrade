@@ -48,3 +48,33 @@
   max-height: calc(100vh - 8rem);
   overflow-y: auto;
 }
+
+.ct-dashboard-xs {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.ct-panel {
+  height: calc(100vh - 10rem);
+  max-height: calc(100vh - 10rem);
+  overflow-y: auto;
+}
+
+
+
+.ct-dashboard-xs .nav-link {
+  color: theme-color('secondary');
+  padding: 0.5rem 0.75rem;
+}
+
+.ct-dashboard-xs .nav-link.active {
+  color: #fff;
+}
+
+.ct-dashboard-xs .nav-action {
+  font-size: 1.2rem;
+  padding: 0.3rem 0.75rem;
+  transform: scale(1, 1.5);
+}
+
+

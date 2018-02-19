@@ -1,6 +1,35 @@
-<div class="ct-dashboard row justify-content-center">
-
-  <% @view_model.each do |vm| %>
-    <%= render 'shared/widget', view: vm[:view], class: vm[:class] + ' ct-tile', title:vm[:title], locals: populate_locals(vm) %>
-  <% end %>
+<div class="d-none d-lg-block">
+  <div class="ct-dashboard row justify-content-center">
+    <% @view_model.each do |vm| %>
+      <%= render 'shared/widget', view: vm[:view], class: vm[:class] + ' ct-tile', title: vm[:title], locals: populate_locals(vm, {primary: true}) %>
+    <% end %>
+  </div>
 </div>
+
+<div class="ct-dashboard-xs d-lg-none">
+  <div class="ct-panel tab-content" id="dash-tabContent">
+    <% index = 1 %>
+    <% @view_model.each do |vm|
+    %>
+      <div id="<%= "ct-dash-tile-#{index}" %>" data-index="<%= index %>" role="tabpanel" class="tab-pane <%= 'active' if index == 1 %>">
+        <%= render 'shared/widget', view: vm[:view], class: vm[:class] + ' ct-tile', title: vm[:title], locals: populate_locals(vm, {primary: false}) %>
+      </div>
+    <%
+      index += 1
+      end %>
+  </div>
+  <div class="d-flex flex-row justify-content-between">
+    <a class="nav-action btn-previous text-white">&lt;</a>
+    <ul class="nav justify-content-center" role="tablist" id="dash-tab">
+      <% (1..@view_model.size).each do |index| %>
+        <li class="nav-item">
+          <a class="nav-link<%= ' active' if index == 1 %>" href="#<%= "ct-dash-tile-#{index}" %>"
+             data-toggle="tab" role="tab" data-turbolinks="false">&#9679;</a>
+        </li>
+      <% end %>
+    </ul>
+    <a class="nav-action btn-next text-white">&gt;</a>
+    <div class="d-none" data-func="nav-action"></div>
+  </div>
+</div>
+

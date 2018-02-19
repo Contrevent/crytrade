@@ -1,3 +1,4 @@
-<div data-view="<%= ledger_funds_url %>">
+<% primary = local_assigns.key?(:primary) ? local_assigns.fetch(:primary) : nil; %>
+<div data-view="<%= ledger_funds_url %>" <%= primary != nil ? "data-primary=#{primary}" : '' %>>
   <%= render 'shared/big_loading' %>
 </div>

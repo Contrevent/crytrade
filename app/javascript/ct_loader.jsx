@@ -16,6 +16,7 @@ import dashboardConfig from './forms/dashboard';
 import select from './forms/select';
 import consumeFlash from './flash';
 import primaryUtils from './primary';
+import navAction from './nav-action';
 
 
 class CTLoader {
@@ -128,6 +129,9 @@ class CTLoader {
                     break;
                 case 'ct-converter':
                     convert();
+                    break;
+                case 'nav-action':
+                    navAction();
                     break;
             }
         });

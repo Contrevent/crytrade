@@ -1,4 +1,6 @@
-<% url = local_assigns.fetch(:url) %>
-<div data-view="<%= url %>">
+<% url = local_assigns.fetch(:url)
+primary = local_assigns.key?(:primary) ? local_assigns.fetch(:primary) : nil;
+%>
+<div data-view="<%= url %>" <%= primary != nil ? "data-primary=#{primary}" : ''  %>>
   <%= render 'shared/big_loading' %>
 </div>
