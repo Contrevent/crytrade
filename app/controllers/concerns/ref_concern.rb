@@ -1,6 +1,10 @@
 module RefConcern
   extend ActiveSupport::Concern
 
+  def is_number? string
+    true if Float(string) rescue false
+  end
+
   def ref_char
     current_user != nil ? current_user.reference_character : '$'
   end

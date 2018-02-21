@@ -1,16 +1,18 @@
 function updateTrade() {
 
-    const inputCount = $('#ct-edit-count');
+    const inputCount = $('#ct-buy-count');
     if (inputCount.length) {
         //var selectSymbol = $('#ct-select-symbol');
         const inputStart = $('#ct-start-usd');
         const inputStop = $('#ct-stop-usd');
         const inputGL = $('#ct-gain-loss-usd');
         const inputFees = $('#ct-fees-usd');
+        const inputCloseCount = $('#ct-close-count');
+        inputCloseCount.val(inputCount.val());
 
         function evalGainLoss() {
             try {
-                const count = parseFloat(inputCount.val());
+                const count = parseFloat(inputCloseCount.val());
                 const start = parseFloat(inputStart.val());
                 const stop = parseFloat(inputStop.val());
                 const fees = parseFloat(inputFees.val());

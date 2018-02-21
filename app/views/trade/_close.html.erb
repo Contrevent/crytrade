@@ -3,6 +3,10 @@
               url: trades_close_path(id: entity.id), method: 'post' do |form| %>
   <%= render 'shared/form_errors', record: entity %>
 
+  <%= render 'shared/readonly_row', id: 'ct-buy-count',
+             symbol: :count, label: 'Buy count', value: entity.count %>
+  <%= render 'shared/text_row', parent: form, id: 'ct-close-count',
+             symbol: :count, label: 'Close count' %>
   <%= render 'shared/text_row', parent: form, id: 'ct-sell-stop-usd',
              symbol: :sell_stop_usd, label: entity.sell_symbol + " Price (#{ref_char})" %>
   <%= render 'shared/text_row', parent: form, id: 'ct-stop-usd',

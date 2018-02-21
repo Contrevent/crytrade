@@ -91,6 +91,20 @@ class TradeController < ApplicationController
   def close
     trade = Trade.find(params[:id])
     if trade != nil
+      old_count = trade.count
+      new_count_param = params[:trade][:count]
+      is_partial = false
+      if is_number? new_count_param
+        new_count = BigDecimal.new(new_count_param)
+        is_partial = old_count != new_count
+      end
+      p "Partial: #{old_count} #{new_count_param} #{new_count} #{is_partial}"
+      if is_partial
+        new_trade = trade.dup
+        new_trade.count = trade.count - new_count
+        new_trade.save
+        start_trade new_trade
+      end
       trade.update(close_params)
       if ref_coin != 'USD'
         # :stop_usd, :sell_stop_usd, :fees_usd
@@ -98,6 +112,7 @@ class TradeController < ApplicationController
         trade.sell_stop_usd = ref_to_usd trade.sell_stop_usd
         trade.fees_usd = ref_to_usd trade.fees_usd
       end
+
       trade.closed = true
       trade.closed_at = DateTime.now
       trade.gain_loss_usd = (trade.stop_usd - trade.start_usd) * trade.count - trade.fees_usd
@@ -154,7 +169,7 @@ class TradeController < ApplicationController
   end
 
   def close_params
-    params.require(:trade).permit(:id, :stop_usd, :sell_stop_usd, :fees_usd)
+    params.require(:trade).permit(:id, :count, :stop_usd, :sell_stop_usd, :fees_usd)
   end
 
   def item_facets(active, trade)
