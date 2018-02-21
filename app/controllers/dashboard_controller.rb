@@ -30,9 +30,6 @@ class DashboardController < ApplicationController
         when :trade_ticker
           # Primary support OK
           vms.push(trades_tickers_def(order_name, order_direction, tile.width, tile.height))
-        when :converter
-          # Primary support TODO
-          vms.push(converter_def(tile.width, tile.height))
       end
     end
     populate_by_array(vms)

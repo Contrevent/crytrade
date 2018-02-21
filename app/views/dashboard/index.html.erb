@@ -7,6 +7,7 @@
 </div>
 
 <div class="ct-dashboard-xs d-lg-none">
+  <% count = @view_model.size %>
   <div class="ct-panel tab-content" id="dash-tabContent">
     <% index = 1 %>
     <% @view_model.each do |vm|
@@ -21,7 +22,7 @@
   <div class="d-flex flex-row justify-content-between">
     <a class="nav-action btn-previous text-white">&lt;</a>
     <ul class="nav justify-content-center" role="tablist" id="dash-tab">
-      <% (1..@view_model.size).each do |index| %>
+      <% (1..count).each do |index| %>
         <li class="nav-item">
           <a class="nav-link<%= ' active' if index == 1 %>" href="#<%= "ct-dash-tile-#{index}" %>"
              data-toggle="tab" role="tab" data-turbolinks="false">&#9679;</a>

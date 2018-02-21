@@ -7,7 +7,6 @@ class Tile < ApplicationRecord
       funds_tickers: 'Funds (Tickers)',
       trade: 'Trades (Main)',
       trade_ticker: 'Trades (Tickers)',
-      history: 'History',
-      converter: 'Converter'
+      history: 'History'
   }
 end
